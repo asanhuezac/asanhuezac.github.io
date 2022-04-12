@@ -5,16 +5,16 @@ output:
     highlight: textmate
 ---
 
-More about this website.
+![](Imagenes/Foto.png){width=30%}
 
 ## Área Académica
 
 Licenciado en Ciencias Económicas en la Univerdad de Chile. Actualmente cursando el Magister en Análisis Económico. 
 
 ## CV
-
+[Versión en Español](archivos/CV_Agustin_Sanhueza.pdf)
 
 ## Datos de contacto
 
--Correo: <asanhuezac@fen.uchile.cl>
--Número: +56982349505
+- Correo: <asanhuezac@fen.uchile.cl>
+- Número: +56982349505

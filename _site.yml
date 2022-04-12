@@ -7,5 +7,6 @@ navbar:
       href: index.html
     - text: "Sobre mi"
       href: about.html
-      
+    - text: "Material"
+      href: materiales.html      
   
