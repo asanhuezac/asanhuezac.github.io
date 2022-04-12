@@ -5,3 +5,30 @@ output:
     highlight: textmate
 ---
 
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+library(vembedr)
+
+```
+
+# Stata 
+
+### Parte 1
+
+```{r echo=FALSE}
+embed_youtube("XOkuIJNZojc")
+```
+
+### Parte 2
+
+```{r echo=FALSE}
+embed_youtube("Nlhg333-L9g")
+```
+
+
+### Parte 3
+
+```{r echo=FALSE}
+embed_youtube("Y89jBKEHp04")
+```
+
+
