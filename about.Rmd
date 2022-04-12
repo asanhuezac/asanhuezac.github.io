@@ -1,5 +1,20 @@
 ---
-title: "About This Website"
+title: "Sobre mi"
+output: 
+  html_document:
+    highlight: textmate
 ---
 
 More about this website.
+
+## Área Académica
+
+Licenciado en Ciencias Económicas en la Univerdad de Chile. Actualmente cursando el Magister en Análisis Económico. 
+
+## CV
+
+
+## Datos de contacto
+
+-Correo: <asanhuezac@fen.uchile.cl>
+-Número: +56982349505

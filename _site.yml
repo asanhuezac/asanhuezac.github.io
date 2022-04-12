@@ -1,8 +1,11 @@
-name: "my-website"
+name: "Página web"
+output_dir: "."
 navbar:
-  title: "My Website"
+  title: "Página web"
   left:
     - text: "Home"
       href: index.html
-    - text: "About"
+    - text: "Sobre mi"
       href: about.html
+      
+  
