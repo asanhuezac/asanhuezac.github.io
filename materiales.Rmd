@@ -1,5 +1,5 @@
 ---
-title: "Materiales"
+title: "Material"
 output: 
   html_document:
     highlight: textmate
@@ -32,3 +32,16 @@ embed_youtube("Y89jBKEHp04")
 ```
 
 
+# Portafolio y CAPM
+
+### Parte 1
+
+```{r echo=FALSE}
+embed_youtube("UrmVJR5SsfM&t=3s")
+```
+
+### Parte 2
+
+```{r echo=FALSE}
+embed_youtube("nZ2IRaWlTb4")
+```
