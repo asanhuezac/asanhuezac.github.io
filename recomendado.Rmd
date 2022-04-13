@@ -12,20 +12,26 @@ library(vembedr)
 # Econometría 
 
 [Joshua Angrist - Marginal Revolution University](https://www.youtube.com/playlist?list=PL-uRhZ_p-BM5ovNRg-G6hDib27OCvcyW8)
+
 [Rómulo Chumacero](https://www.youtube.com/playlist?list=PL09ENlvHqN-8jhVrnsgrfi_fyf4RygjgA)
 
 
 # Macroeconomía
 
 [Economía y Desarrollo](https://www.youtube.com/playlist?list=PLa1CmC-O00yYQ0WpzZ_y9H2w_MtxIcxR0)
+
 [Marginal Revolution University](https://www.youtube.com/playlist?list=PL-uRhZ_p-BM52EbMG1NR1ZfG9tEvcxE4u)
+
 [Fenvid](https://www.youtube.com/playlist?list=PLuWahU49hzjeSgihNzmv0IYroWjpouZyA)
+
 [Rómulo Chumacero](https://www.youtube.com/playlist?list=PL09ENlvHqN-9DNDha4lgbh_NjpTrzHcQl)
 
 
 # Microeconomía
 
 [Economía y Desarrollo](https://www.youtube.com/playlist?list=PLa1CmC-O00ybeV_NBTPBuE63sTtqkpjaA)
+
 [Marginal Revolution University](https://www.youtube.com/playlist?list=PL-uRhZ_p-BM4XnKSe3BJa23-XKJs_k4KY)
+
 [Fenvid](https://www.youtube.com/playlist?list=PLuWahU49hzjdj1zWjScl_jVR_TDwgOhqt)
 

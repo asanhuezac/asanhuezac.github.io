@@ -6,8 +6,7 @@ output:
 
 ![](Imagenes/Foto.png){width=30%}
 
-Estudiante del Magister en Análisis Económico de la Universidad de Chile. 
-Licenciado en Ciencias Económicas. 
+Estudiante del Magister en Análisis Económico de la Universidad de Chile.
 
 ## CV
 [Versión en Español](archivos/CV_Agustin_Sanhueza.pdf)
