@@ -4,11 +4,18 @@ output:
     highlight: textmate
 ---
 
+# Planilla de Códigos
+
+- [Stata](archivos/Planilla_Stata.do)
+- [R](archivos/Planilla_R.R)
+
+
 # Trabajos Universitarios
 
 - [Efecto del Hacinamiento en el desarrollo de los niños](archivos/Hacinamiento.pdf)
 - [Modelo CAPM en Chile 2010-2021](archivos/Capm.pdf)
 - [Efecto de la capacitación en la productividad de las empresas en 2017](archivos/Capacitaciones.pdf)
 
+# Apuntes 
 
-
+Próximamente
