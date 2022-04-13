@@ -1,0 +1,34 @@
+---
+output: 
+  html_document:
+    highlight: textmate
+---
+
+```{r echo=FALSE, message=FALSE, warning=FALSE, paged.print=FALSE}
+library(vembedr)
+
+```
+
+# Econometría 
+
+```{r echo=FALSE}
+embed_youtube("PL-uRhZ_p-BM5ovNRg-G6hDib27OCvcyW8")
+embed_youtube("PL09ENlvHqN-8jhVrnsgrfi_fyf4RygjgA")
+
+```
+
+# Macroeconomía
+
+```{r echo=FALSE}
+embed_youtube("PLa1CmC-O00yYQ0WpzZ_y9H2w_MtxIcxR0")
+embed_youtube("PL-uRhZ_p-BM52EbMG1NR1ZfG9tEvcxE4u")
+```
+
+# Microeconomía
+
+```{r echo=FALSE}
+embed_youtube("PLa1CmC-O00ybeV_NBTPBuE63sTtqkpjaA")
+embed_youtube("PL-uRhZ_p-BM4ajpQvdU_AVUxYL3m6RvkU")
+
+```
+

@@ -3,12 +3,17 @@ output_dir: "."
 navbar:
   title: "Página web"
   left:
-    - text: "Home"
+    - text: "Inicio"
       href: index.html
     - text: "Sobre mi"
       href: about.html
-    - text: "Material"
-      href: materiales.html      
+    - text: "Videos"
+      href: materiales.html  
+    - text: "Recomendado"
+      href: recomendado.html  
+    - text: "Trabajos"
+      href: Trabajos.html  
+      
 output:
   html_document:
     theme: cosmo

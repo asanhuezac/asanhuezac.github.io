@@ -1,5 +1,4 @@
 ---
-title: "Sobre mi"
 output: 
   html_document:
     highlight: textmate
@@ -9,7 +8,8 @@ output:
 
 ## Área Académica
 
-Licenciado en Ciencias Económicas en la Univerdad de Chile. Actualmente cursando el Magister en Análisis Económico. 
+Estudiante del Magister en Análisis Económico de la Universidad de Chile. 
+Licenciado en Ciencias Económicas. 
 
 ## CV
 [Versión en Español](archivos/CV_Agustin_Sanhueza.pdf)
