@@ -6,8 +6,6 @@ output:
 
 ![](Imagenes/Foto.png){width=30%}
 
-## Área Académica
-
 Estudiante del Magister en Análisis Económico de la Universidad de Chile. 
 Licenciado en Ciencias Económicas. 
 
@@ -17,4 +15,4 @@ Licenciado en Ciencias Económicas.
 ## Datos de contacto
 
 - Correo: <asanhuezac@fen.uchile.cl>
-- Número: +56982349505
+
