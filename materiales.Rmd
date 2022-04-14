@@ -37,7 +37,7 @@ embed_youtube("Y89jBKEHp04")
 ### Parte 1
 
 ```{r echo=FALSE}
-embed_youtube("UrmVJR5SsfM&t3s")
+embed_youtube("UrmVJR5SsfM")
 ```
 
 ### Parte 2
