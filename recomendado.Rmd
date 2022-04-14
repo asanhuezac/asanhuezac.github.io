@@ -43,6 +43,4 @@ library(vembedr)
 
 [Cálculo - 3Blue1Brown](https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr)
 
-[Redes Neuronales - 3Blue1Brown](https://www.youtube.com/channel/CSANnvayOd8Ay2scpk91AtpA16FvVqEg_zCZL32hs)
-
 

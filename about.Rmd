@@ -7,12 +7,10 @@ output:
 
 ![](Imagenes/Foto.png){width=30%}
 
-Estudiante del Magister en Análisis Económico de la Universidad de Chile.
+Soy estudiante del Magister en Análisis Económico de la Universidad de Chile, prontamente tesista. Tengo experiencia en el trabajo de bases de datos y reportes de resultados en latex. Me gusta la docencia, el análisis microeconómico, las finanzas, y el [ajedrez](https://www.chess.com/stats/overview/matechileno?). Mi meta en el largo plazo es crear un canal en youtube similar al de [3Blue1Brown](https://www.youtube.com/c/3blue1brown), donde pueda explicar de manera simple y gráfica teoría econométrica y microeconómica. 
 
-## CV
-[Versión en Español](archivos/CV_Agustin_Sanhueza.pdf)
-
-## Datos de contacto
+[Curriculum](archivos/CV_Agustin_Sanhueza.pdf)
 
 - Correo: <asanhuezac@fen.uchile.cl>
+
 
