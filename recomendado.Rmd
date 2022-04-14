@@ -35,3 +35,13 @@ library(vembedr)
 
 [Fenvid](https://www.youtube.com/playlist?list=PLuWahU49hzjdj1zWjScl_jVR_TDwgOhqt)
 
+
+# Matemáticas
+
+[Algebra Lineal - 3Blue1Brown](https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab)
+
+[Cálculo - 3Blue1Brown](https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr)
+
+[Redes Neuronales - 3Blue1Brown](https://www.youtube.com/channel/CSANnvayOd8Ay2scpk91AtpA16FvVqEg_zCZL32hs)
+
+
