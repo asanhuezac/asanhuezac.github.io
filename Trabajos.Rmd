@@ -18,4 +18,4 @@ output:
 
 # Apuntes 
 
-Próximamente
+[Demostraciones Econometría](archivos/Demostraciones_Econometria.pdf) (En desarrollo con [Christían González](https://chrgonziba.github.io/))
