@@ -9,10 +9,10 @@ navbar:
       href: about.html
     - text: "Videos"
       href: materiales.html  
-    - text: "Recomendado"
-      href: recomendado.html  
     - text: "Trabajos"
       href: Trabajos.html  
+    - text: "Recomendado"
+      href: recomendado.html       
       
 output:
   html_document:

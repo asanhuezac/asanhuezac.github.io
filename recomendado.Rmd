@@ -43,4 +43,16 @@ library(vembedr)
 
 [Cálculo - 3Blue1Brown](https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr)
 
+# R
+
+[Graph Gallery](https://r-graph-gallery.com/index.html)
+
+[Daily Cheatsheets](https://twitter.com/daily_r_sheets)
+
+# Stata
+
+[Graph Gallery](https://www.stata.com/support/faqs/graphics/gph/stata-graphs/)
+
+[Cheatsheets](https://www.stata.com/bookstore/statacheatsheets.pdf)
+
 
