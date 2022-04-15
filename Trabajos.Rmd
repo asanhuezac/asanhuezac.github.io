@@ -9,7 +9,8 @@ output:
 
 - [Stata](archivos/Planilla_Stata.do)
 - [R](archivos/Planilla_R.R)
-
+- [Latex - Papers](archivos/Planilla_Papers.zip)
+- [Latex - Beamers](archivos/Planilla-Beamers.tex)
 
 # Trabajos Universitarios
 

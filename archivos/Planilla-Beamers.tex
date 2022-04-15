@@ -1,0 +1,61 @@
+\documentclass[12pt]{beamer}
+\AtBeginSection[]{
+\begin{frame}{}
+\tableofcontents[currentsection]
+\end{frame}
+}
+\mode<presentation>{\usetheme{Antibes}}
+\title{Título} 
+\author{Autores / Ramo \\
+\vspace{0.1cm}
+Texto1 \\
+Texto2}
+\date{Fecha}
+
+\begin{document}
+\begin{frame}{}
+    \maketitle
+\end{frame}
+\begin{frame}{Correos}
+\begin{columns}
+\column{0.5\textwidth}
+\begin{itemize}
+    \item \href{mailto:}{mail 1}
+    \item \href{mailto:}{mail 2}
+
+\end{itemize}
+
+\end{columns}
+\end{frame}
+
+\begin{frame}{Contenidos de Presentación}
+    \tableofcontents[] % Aquí se despliegan cada una de las \section{} que generemos
+\end{frame}
+
+\section{Sección 1}
+\begin{frame}{Algo de la sección 1}
+\onslide<1->{} % Este comando nos permite poner contenido de manera pulatina en una slide/frame
+\vspace{5mm}
+\onslide<2->{ \\
+\textbf{Respuesta:}\\
+}
+\end{frame}
+
+\section{Sección 2}
+
+\begin{frame}{Algo de la sección 2}
+\onslide<1->{Primer Texto reproducido de la slide} \\
+\onslide<2->{Segundo Texto reproducido de la slide}
+
+\end{frame}
+
+\begin{frame}
+Otra cosa de la sección 2 sin header
+\begin{center}
+\includegraphics[scale=0.5]{alguna_imagen}    
+\end{center}
+\end{frame}
+
+
+
+\end{document}
