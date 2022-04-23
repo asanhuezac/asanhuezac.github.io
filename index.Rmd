@@ -1,11 +1,14 @@
 ---
-title: "Mi Sitio"
+output: 
+  html_document:
+    css: style.css
+    highlight: textmate
 ---
 
 Hola Mundo, Bienvenidos. 
 
-Les presento mi primer gráfico animado
-```{r echo=FALSE}
+Les presento mi primer gráfico animado. 
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(ggplot2)
 library(gganimate)
 library(av)
@@ -21,10 +24,9 @@ p <- ggplot(data=gapminder %>% filter(country!="Kuwait"), aes(x=gdpPercap, y=lif
   scale_x_continuous(breaks = seq(0, 50000, by=5000)) +
   labs(x="GDP per Capita", 
        y="Esperanza de Vida",
-       title="Evolución Esperanza de vida vs GDP per Cápita",
+       title="Evolución Esperanza de vida vs PIB per Cápita",
        caption="Datos de Gapminder") +
   guides(size=FALSE, colour=guide_legend("Continent"))
-p
 
 p + transition_time(year) + 
   labs(subtitle = "Año: {frame_time}") + 
