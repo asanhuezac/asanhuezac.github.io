@@ -22,7 +22,7 @@ p <- ggplot(data=gapminder %>% filter(country!="Kuwait"), aes(x=gdpPercap, y=lif
   dark_mode() +
   scale_y_continuous(breaks = seq(0, 90, by=5)) +
   scale_x_continuous(breaks = seq(0, 50000, by=5000)) +
-  labs(x="GDP per Capita", 
+  labs(x="PIB per Cápita", 
        y="Esperanza de Vida",
        title="Evolución Esperanza de vida vs PIB per Cápita",
        caption="Datos de Gapminder") +
