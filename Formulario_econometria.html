@@ -11,7 +11,7 @@
 
 
 
-<title>recomendado.utf8</title>
+<title>Formulario_econometria.utf8</title>
 
 <script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
@@ -56,7 +56,7 @@ if (window.hljs) {
 
 
 
-<link rel="stylesheet" href="style.css" type="text/css" />
+<link rel="stylesheet" href="style1.css" type="text/css" />
 
 
 
@@ -284,38 +284,110 @@ $(document).ready(function () {
 </div>
 
 
-<div id="econometría" class="section level1">
-<h1>Econometría</h1>
-<p><a href="https://www.youtube.com/playlist?list=PL-uRhZ_p-BM5ovNRg-G6hDib27OCvcyW8">Joshua Angrist - Marginal Revolution University</a></p>
-<p><a href="https://www.youtube.com/playlist?list=PL09ENlvHqN-8jhVrnsgrfi_fyf4RygjgA">Rómulo Chumacero</a></p>
+<div id="formulario-econometría" class="section level2 tabset tabset-pills">
+<h2>Formulario Econometría</h2>
+<div id="modelo-univariado" class="section level3">
+<h3>Modelo Univariado</h3>
+<p><span class="math display">\[y_i=\beta_0+\beta_1x_{1,i}+u_i\]</span> Bajo los supuestos de regresión lineal</p>
+<p><span class="math display">\[\hat{\beta_o}=\overline{y}-\hat{\beta_1} \overline{x_{1}}\]</span> <span class="math display">\[\hat{\beta_1}=\frac{\sum_{i=1}^{T} (x_{1,i}-\overline{x_{1}})(y_i-\overline{y})}{\sum_{i=1}^{T} (x_{1,i}-\overline{x_{1}})^2}=\frac{\sum_{i=1}^{T} (x_{1,i}-\overline{x_1})y_i}{\sum_{i=1}^{T} (x_{1,i}-\overline{x_1})^2}=\frac{\sum_{i=1}^{T} (y_i-\overline{y})x_{1,i}}{\sum_{i=1}^{T} (x_{1,i}-\overline{x_{1}})^2}\]</span></p>
+<p><span class="math display">\[\hat{y_i}=\hat{\beta_0}+\hat{\beta_1}x_{1.i}\]</span> <span class="math display">\[\hat{u_i}=y_i-\hat{y_i}\]</span></p>
+<p><span class="math display">\[\mathbb{E} [\hat{\beta_0}]=\beta_0\]</span> <span class="math display">\[\mathbb{E} [\hat{\beta_1}]=\beta_1\]</span></p>
+<p><span class="math display">\[Var(\hat{\beta_0})=\frac{\sigma^2 \sum_{i=1}^T x_{1,i}^2}{T \cdot \sum_{i=1}^T (x_{1,i}-\overline{x_1})^2}=\frac{\sigma^2 \sum_{i=1}^T x_{1,i}^2}{T \cdot SST_1}\]</span> <span class="math display">\[Var(\hat{\beta_1})=\frac{\sigma^2}{\sum_{i=1}^T (x_{1.i}-\overline{x_1})}=\frac{\sigma^2}{SST_1}\]</span></p>
+<p><span class="math display">\[\hat{\sigma}^2=\frac{\sum_{i=1}^T \hat{u_i} }{T-K-1}\]</span></p>
 </div>
-<div id="macroeconomía" class="section level1">
-<h1>Macroeconomía</h1>
-<p><a href="https://www.youtube.com/playlist?list=PLa1CmC-O00yYQ0WpzZ_y9H2w_MtxIcxR0">Economía y Desarrollo</a></p>
-<p><a href="https://www.youtube.com/playlist?list=PL-uRhZ_p-BM52EbMG1NR1ZfG9tEvcxE4u">Marginal Revolution University</a></p>
-<p><a href="https://www.youtube.com/playlist?list=PLuWahU49hzjeSgihNzmv0IYroWjpouZyA">Fenvid</a></p>
-<p><a href="https://www.youtube.com/playlist?list=PL09ENlvHqN-9DNDha4lgbh_NjpTrzHcQl">Rómulo Chumacero</a></p>
+<div id="r2" class="section level3">
+<h3><span class="math inline">\(R^2\)</span></h3>
+<p><span class="math display">\[SST=SSE+SSR\]</span></p>
+<p><span class="math display">\[\sum_{i=1}^{T} (y_i-\overline{y})^2 = \sum_{i=1}^{T} (\hat{y_i}-\overline{y})^2 + \sum_{i=1}^{T} (y_i-\hat{y_i})^2\]</span></p>
+<p><span class="math display">\[R^2=\frac{\sum_{i=1}^{T} (\hat{y_i}-\overline{y})^2}{\sum_{i=1}^{T} (y_i-\overline{y})^2}=1-\frac{\sum_{i=1}^{T} (y_i-\hat{y_i})^2}{\sum_{i=1}^{T} (y_i-\overline{y})^2}\]</span></p>
 </div>
-<div id="microeconomía" class="section level1">
-<h1>Microeconomía</h1>
-<p><a href="https://www.youtube.com/playlist?list=PLa1CmC-O00ybeV_NBTPBuE63sTtqkpjaA">Economía y Desarrollo</a></p>
-<p><a href="https://www.youtube.com/playlist?list=PL-uRhZ_p-BM4XnKSe3BJa23-XKJs_k4KY">Marginal Revolution University</a></p>
-<p><a href="https://www.youtube.com/playlist?list=PLuWahU49hzjdj1zWjScl_jVR_TDwgOhqt">Fenvid</a></p>
+<div id="modelo-multivariado" class="section level3">
+<h3>Modelo Multivariado</h3>
+<p><span class="math display">\[y_i=\beta_0+\beta_1x_{1,i}+\beta_2x_{2,i}+...+\beta_kx_{k,i}+u_i\]</span></p>
+<p>Bajo los supuestos de regresión lineal</p>
+<p><span class="math display">\[\mathbb{E} [\hat{\beta_j}]=\beta_j\]</span> <span class="math display">\[Var(\hat{\beta_j})=\frac{\sigma^2}{SST_j(1-R_j^2)}=\frac{\sigma^2}{SST_j}\cdot VIF_j\]</span></p>
+<table>
+<colgroup>
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+<col width="20%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="center">Modelos</th>
+<th align="center">Regresión</th>
+<th align="center"><span class="math inline">\(\beta_1\)</span></th>
+<th align="center"><span class="math inline">\(Pendiente=\frac{\partial y}{\partial x}\)</span></th>
+<th align="center">Interpretación</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center">Nivel-Nivel</td>
+<td align="center"><span class="math inline">\(y_i=\beta_0+\beta_1x_i+u_i\)</span></td>
+<td align="center"><span class="math inline">\(\frac{\Delta y_i}{\Delta x_i}\)</span></td>
+<td align="center"><span class="math inline">\(\beta_1\)</span></td>
+<td align="center">Cambio en nivel</td>
+</tr>
+<tr class="even">
+<td align="center">Nivel-Log</td>
+<td align="center"><span class="math inline">\(y_i=\beta_0+\beta_1 ln(x_i)+u_i\)</span></td>
+<td align="center"><span class="math inline">\(\frac{\Delta y_i}{\Delta \%x_i}\)</span></td>
+<td align="center"><span class="math inline">\(\beta_1 \frac{1}{x}\)</span></td>
+<td align="center">Semi-Elasticidad</td>
+</tr>
+<tr class="odd">
+<td align="center">Log-Nivel</td>
+<td align="center"><span class="math inline">\(ln(y_i)=\beta_0+\beta_1x_i+u_i\)</span></td>
+<td align="center"><span class="math inline">\(\frac{\Delta \%y_i}{\Delta x_i}\)</span></td>
+<td align="center"><span class="math inline">\(\beta_1 y\)</span></td>
+<td align="center">Semi-Elasticidad</td>
+</tr>
+<tr class="even">
+<td align="center">Log-Log</td>
+<td align="center"><span class="math inline">\(ln(y_i)=\beta_0+\beta_1 ln(x_i)+u_i\)</span></td>
+<td align="center"><span class="math inline">\(\frac{\Delta \%y_i}{\Delta \%x_i}\)</span></td>
+<td align="center"><span class="math inline">\(\beta_1 \frac{y}{x}\)</span></td>
+<td align="center">Elasticidad</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="matemáticas" class="section level1">
-<h1>Matemáticas</h1>
-<p><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab">Algebra Lineal - 3Blue1Brown</a></p>
-<p><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr">Cálculo - 3Blue1Brown</a></p>
+<div id="sesgo" class="section level3">
+<h3>Sesgo</h3>
+<p><span class="math display">\[y_i=\beta_0+\beta_1x_{1,i}+\beta_1x_{2,i}+u_i \Rightarrow Real\]</span> <span class="math display">\[y_i=\gamma_0+\gamma_1x_{1,i}+u_i \Rightarrow Estimado\]</span></p>
+<p><span class="math display">\[\mathbb{E}[\hat{\gamma_1}]=\beta_1+\underbrace{\beta_2 \frac{Cov(X_1,X_2)}{Var(X_1)}}_{\text Sesgo}\]</span></p>
+<table>
+<thead>
+<tr class="header">
+<th align="center"></th>
+<th align="center"><span class="math inline">\(Cov(X_1,X_2)&gt;0\)</span></th>
+<th align="center"><span class="math inline">\(Cov(X_1,X_2)&lt;0\)</span></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="center"><span class="math inline">\(\beta_2&gt;0\)</span></td>
+<td align="center">Sobrevalorado</td>
+<td align="center">Subvalorado</td>
+</tr>
+<tr class="even">
+<td align="center"><span class="math inline">\(\beta_2&lt;0\)</span></td>
+<td align="center">Subvalorado</td>
+<td align="center">Sobrevalorado</td>
+</tr>
+</tbody>
+</table>
 </div>
-<div id="r" class="section level1">
-<h1>R</h1>
-<p><a href="https://r-graph-gallery.com/index.html">Graph Gallery</a></p>
-<p><a href="https://twitter.com/daily_r_sheets">Daily Cheatsheets</a></p>
+<div id="inferencia" class="section level3">
+<h3>Inferencia</h3>
+<p><span class="math display">\[t_{\hat{\beta_j}}= \frac{\hat{\beta_j}-\beta_j}{sd(\hat{\beta_j})} \sim t_{(T-K-1)}\]</span></p>
+<p><span class="math display">\[Pr\left[ \hat{\beta_j}-c_{\alpha} \cdot sd(\hat{\beta_j}) &lt; \hat{\beta_j} &lt;\hat{\beta_j}+c_{\alpha} \cdot sd(\hat{\beta_j})\right]=1-\alpha\]</span></p>
+<p><span class="math display">\[P_{value}=Pr[|t_{\hat{\beta_j}}|\geq |t_{obs}|]\]</span></p>
+<p><span class="math display">\[F_{obs}=\frac{(SSR_{r}-SSR_{ur})/q}{(SSR_{ur})/(T-K-1)}=\frac{(R_{ur}^2-R_{r}^2)/q}{(1-R_{ur}^2)/(T-K-1)} \sim F_{q, t-k-1}\]</span></p>
 </div>
-<div id="stata" class="section level1">
-<h1>Stata</h1>
-<p><a href="https://www.stata.com/support/faqs/graphics/gph/stata-graphs/">Graph Gallery</a></p>
-<p><a href="https://www.stata.com/bookstore/statacheatsheets.pdf">Cheatsheets</a></p>
 </div>
 
 

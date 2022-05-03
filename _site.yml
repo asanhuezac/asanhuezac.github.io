@@ -10,7 +10,11 @@ navbar:
     - text: "Videos"
       href: materiales.html  
     - text: "Trabajos"
-      href: Trabajos.html  
+      href: Trabajos.html
+    - text: "Formularios"
+      menu:
+      - text: Econometría Corte Transversal
+        href: Formulario_econometria.html
     - text: "Recomendado"
       href: recomendado.html       
       

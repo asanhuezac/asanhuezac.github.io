@@ -1,0 +1,81 @@
+---
+output:
+  html_document:
+    css: style1.css
+    theme: cosmo
+    highlight: textmate
+---
+
+## Formulario Econometría {.tabset .tabset-pills}
+
+### Modelo Univariado
+
+
+$$y_i=\beta_0+\beta_1x_{1,i}+u_i$$
+Bajo los supuestos de regresión lineal
+
+$$\hat{\beta_o}=\overline{y}-\hat{\beta_1} \overline{x_{1}}$$
+$$\hat{\beta_1}=\frac{\sum_{i=1}^{T} (x_{1,i}-\overline{x_{1}})(y_i-\overline{y})}{\sum_{i=1}^{T} (x_{1,i}-\overline{x_{1}})^2}=\frac{\sum_{i=1}^{T} (x_{1,i}-\overline{x_1})y_i}{\sum_{i=1}^{T} (x_{1,i}-\overline{x_1})^2}=\frac{\sum_{i=1}^{T} (y_i-\overline{y})x_{1,i}}{\sum_{i=1}^{T} (x_{1,i}-\overline{x_{1}})^2}$$
+
+$$\hat{y_i}=\hat{\beta_0}+\hat{\beta_1}x_{1.i}$$
+$$\hat{u_i}=y_i-\hat{y_i}$$
+
+$$\mathbb{E} [\hat{\beta_0}]=\beta_0$$
+$$\mathbb{E} [\hat{\beta_1}]=\beta_1$$
+
+$$Var(\hat{\beta_0})=\frac{\sigma^2 \sum_{i=1}^T x_{1,i}^2}{T \cdot \sum_{i=1}^T (x_{1,i}-\overline{x_1})^2}=\frac{\sigma^2 \sum_{i=1}^T x_{1,i}^2}{T \cdot SST_1}$$
+$$Var(\hat{\beta_1})=\frac{\sigma^2}{\sum_{i=1}^T (x_{1.i}-\overline{x_1})}=\frac{\sigma^2}{SST_1}$$
+
+$$\hat{\sigma}^2=\frac{\sum_{i=1}^T \hat{u_i} }{T-K-1}$$
+
+### $R^2$
+
+$$SST=SSE+SSR$$
+
+$$\sum_{i=1}^{T} (y_i-\overline{y})^2 = \sum_{i=1}^{T} (\hat{y_i}-\overline{y})^2 + \sum_{i=1}^{T} (y_i-\hat{y_i})^2$$
+
+$$R^2=\frac{\sum_{i=1}^{T} (\hat{y_i}-\overline{y})^2}{\sum_{i=1}^{T} (y_i-\overline{y})^2}=1-\frac{\sum_{i=1}^{T} (y_i-\hat{y_i})^2}{\sum_{i=1}^{T} (y_i-\overline{y})^2}$$
+
+### Modelo Multivariado
+
+$$y_i=\beta_0+\beta_1x_{1,i}+\beta_2x_{2,i}+...+\beta_kx_{k,i}+u_i$$
+
+Bajo los supuestos de regresión lineal 
+
+$$\mathbb{E} [\hat{\beta_j}]=\beta_j$$
+$$Var(\hat{\beta_j})=\frac{\sigma^2}{SST_j(1-R_j^2)}=\frac{\sigma^2}{SST_j}\cdot VIF_j$$
+
+
+| Modelos 	| Regresión 	| $\beta_1$ 	| $Pendiente=\frac{\partial y}{\partial x}$ 	| Interpretación 	|
+|:---:	|:---:	|:---:	|:---:	|:---:	|
+| Nivel-Nivel 	| $y_i=\beta_0+\beta_1x_i+u_i$ 	| $\frac{\Delta y_i}{\Delta x_i}$ 	| $\beta_1$ 	| Cambio en nivel 	|
+| Nivel-Log 	| $y_i=\beta_0+\beta_1 ln(x_i)+u_i$ 	| $\frac{\Delta y_i}{\Delta \%x_i}$ 	| $\beta_1 \frac{1}{x}$ 	| Semi-Elasticidad 	|
+| Log-Nivel 	| $ln(y_i)=\beta_0+\beta_1x_i+u_i$ 	| $\frac{\Delta \%y_i}{\Delta x_i}$ 	| $\beta_1 y$ 	| Semi-Elasticidad 	|
+| Log-Log 	| $ln(y_i)=\beta_0+\beta_1 ln(x_i)+u_i$ 	| $\frac{\Delta \%y_i}{\Delta \%x_i}$ 	| $\beta_1 \frac{y}{x}$ 	| Elasticidad 	|
+
+
+### Sesgo
+
+$$y_i=\beta_0+\beta_1x_{1,i}+\beta_1x_{2,i}+u_i \Rightarrow Real$$
+$$y_i=\gamma_0+\gamma_1x_{1,i}+u_i \Rightarrow Estimado$$
+
+
+$$\mathbb{E}[\hat{\gamma_1}]=\beta_1+\underbrace{\beta_2 \frac{Cov(X_1,X_2)}{Var(X_1)}}_{\text Sesgo}$$
+
+|  	| $Cov(X_1,X_2)>0$ 	| $Cov(X_1,X_2)<0$ 	|
+|:---:	|:---:	|:---:	|
+| $\beta_2>0$ 	| Sobrevalorado 	| Subvalorado 	|
+| $\beta_2<0$ 	| Subvalorado 	| Sobrevalorado 	|
+
+
+
+### Inferencia
+
+$$t_{\hat{\beta_j}}= \frac{\hat{\beta_j}-\beta_j}{sd(\hat{\beta_j})} \sim t_{(T-K-1)}$$
+
+$$Pr\left[ \hat{\beta_j}-c_{\alpha} \cdot sd(\hat{\beta_j}) < \hat{\beta_j} <\hat{\beta_j}+c_{\alpha} \cdot sd(\hat{\beta_j})\right]=1-\alpha$$
+
+$$P_{value}=Pr[|t_{\hat{\beta_j}}|\geq |t_{obs}|]$$
+
+$$F_{obs}=\frac{(SSR_{r}-SSR_{ur})/q}{(SSR_{ur})/(T-K-1)}=\frac{(R_{ur}^2-R_{r}^2)/q}{(1-R_{ur}^2)/(T-K-1)} \sim F_{q, t-k-1}$$
+
