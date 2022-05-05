@@ -73,9 +73,9 @@ $$\mathbb{E}[\hat{\gamma_1}]=\beta_1+\underbrace{\beta_2 \frac{Cov(X_1,X_2)}{Var
 
 $$t_{\hat{\beta_j}}= \frac{\hat{\beta_j}-\beta_j}{sd(\hat{\beta_j})} \sim t_{(T-K-1)}$$
 
-$$Pr\left[ \hat{\beta_j}-c_{\alpha} \cdot sd(\hat{\beta_j}) < \hat{\beta_j} <\hat{\beta_j}+c_{\alpha} \cdot sd(\hat{\beta_j})\right]=1-\alpha$$
+$$Pr\left[ \hat{\beta_j}-c_{\alpha} \cdot sd(\hat{\beta_j}) \leq \beta_j \leq \hat{\beta_j}+c_{\alpha} \cdot sd(\hat{\beta_j})\right]=1-\alpha$$
 
-$$P_{value}=Pr[|t_{\hat{\beta_j}}|\geq |t_{obs}|]$$
+$$P_{value}=Pr[|t_{obs}|\geq |t_{\hat{\beta_j}}|]$$
 
 $$F_{obs}=\frac{(SSR_{r}-SSR_{ur})/q}{(SSR_{ur})/(T-K-1)}=\frac{(R_{ur}^2-R_{r}^2)/q}{(1-R_{ur}^2)/(T-K-1)} \sim F_{q, t-k-1}$$
 

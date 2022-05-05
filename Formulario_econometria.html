@@ -384,8 +384,8 @@ $(document).ready(function () {
 <div id="inferencia" class="section level3">
 <h3>Inferencia</h3>
 <p><span class="math display">\[t_{\hat{\beta_j}}= \frac{\hat{\beta_j}-\beta_j}{sd(\hat{\beta_j})} \sim t_{(T-K-1)}\]</span></p>
-<p><span class="math display">\[Pr\left[ \hat{\beta_j}-c_{\alpha} \cdot sd(\hat{\beta_j}) &lt; \hat{\beta_j} &lt;\hat{\beta_j}+c_{\alpha} \cdot sd(\hat{\beta_j})\right]=1-\alpha\]</span></p>
-<p><span class="math display">\[P_{value}=Pr[|t_{\hat{\beta_j}}|\geq |t_{obs}|]\]</span></p>
+<p><span class="math display">\[Pr\left[ \hat{\beta_j}-c_{\alpha} \cdot sd(\hat{\beta_j}) \leq \beta_j \leq \hat{\beta_j}+c_{\alpha} \cdot sd(\hat{\beta_j})\right]=1-\alpha\]</span></p>
+<p><span class="math display">\[P_{value}=Pr[|t_{obs}|\geq |t_{\hat{\beta_j}}|]\]</span></p>
 <p><span class="math display">\[F_{obs}=\frac{(SSR_{r}-SSR_{ur})/q}{(SSR_{ur})/(T-K-1)}=\frac{(R_{ur}^2-R_{r}^2)/q}{(1-R_{ur}^2)/(T-K-1)} \sim F_{q, t-k-1}\]</span></p>
 </div>
 </div>
