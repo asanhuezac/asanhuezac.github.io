@@ -24,9 +24,9 @@ $$\mathbb{E} [\hat{\beta_0}]=\beta_0$$
 $$\mathbb{E} [\hat{\beta_1}]=\beta_1$$
 
 $$Var(\hat{\beta_0})=\frac{\sigma^2 \sum_{i=1}^T x_{1,i}^2}{T \cdot \sum_{i=1}^T (x_{1,i}-\overline{x_1})^2}=\frac{\sigma^2 \sum_{i=1}^T x_{1,i}^2}{T \cdot SST_1}$$
-$$Var(\hat{\beta_1})=\frac{\sigma^2}{\sum_{i=1}^T (x_{1.i}-\overline{x_1})}=\frac{\sigma^2}{SST_1}$$
+$$Var(\hat{\beta_1})=\frac{\sigma^2}{\sum_{i=1}^T (x_{1.i}-\overline{x_1})^2}=\frac{\sigma^2}{SST_1}$$
 
-$$\hat{\sigma}^2=\frac{\sum_{i=1}^T \hat{u_i} }{T-K-1}$$
+$$\hat{\sigma}^2=\frac{\sum_{i=1}^T \hat{u_i}^2 }{T-K-1}$$
 
 ### $R^2$
 

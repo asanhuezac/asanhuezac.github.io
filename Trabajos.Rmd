@@ -20,4 +20,6 @@ output:
 
 # Apuntes 
 
-[Demostraciones Econometría](archivos/Demostraciones_Econometria.pdf) (En desarrollo con [Christian González](https://chrgonziba.github.io/))
+- [Econometría - Demostraciones](archivos/Demostraciones_Econometria.pdf) (En desarrollo con [Christian González](https://chrgonziba.github.io/))
+- [Microeconomía - Modelos y Demostraciones](archivos/Microeconomía_modelos_demostraciones.pdf) (En desarrollo)
+
