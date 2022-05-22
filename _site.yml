@@ -15,6 +15,8 @@ navbar:
       menu:
       - text: Econometría Corte Transversal
         href: Formulario_econometria.html
+      - text: Macroeconomía
+        href: Formulario_macroeconomia.html        
     - text: "Recomendado"
       href: recomendado.html       
       

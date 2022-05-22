@@ -1,0 +1,65 @@
+---
+output:
+  html_document:
+    css: style1.css
+    theme: cosmo
+    highlight: textmate
+---
+
+## Formulario Macroeconomía {.tabset .tabset-pills}
+
+### Contabilidad Nacional
+
+$$Y=C+I+G+XN$$
+$$I_t=\Delta K_t+\delta K_t$$
+$$PNB=PIB-F$$
+$$F=r_pB_p-r_AB_A$$
+$$S_p=Y+TR-T-C-F$$
+$$S_g=T-TR-G$$
+
+$$S_n=S_p+S_g=Y-G-C-F$$
+$$S_e=F-XN$$
+$$S=Y-C-G-XN=I$$
+
+$$Deflactor_{PIB}=\frac{Nominal}{Real}=\frac{\sum p_{i,t}\cdot q_{i,t}}{\sum p_{i,0}\cdot q_{i,0}}$$
+
+
+$$IPC_t=\frac{\sum p_{i,t}\cdot q_{i,0}}{\sum p_{i,0}\cdot q_{i,0}}$$
+
+$$CC=XN-F=-S_e$$
+$$TI=\frac{P_x}{P_m}$$
+
+$$TCR=\frac{eP^*}{P}$$
+
+### Consumo
+
+$$Y_{l,t}+rA_t=C_t+T_t+A_{t+1}-A_t$$
+$$\sum_{i=0}^{\infty} \frac{C_{t+i}}{(1+r)^i}=\sum_{i=0}^N \frac{Y_{l,t+i}-T_{t+i}}{(1+r_i)^i}+(1+r)A_t$$
+
+$$\overline{C}=r \left[A_t+\sum_{i=0}^N \frac{Y_{l,t+i}-T_{t+i}}{(1+r_i)^{i+1}} \right]$$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
