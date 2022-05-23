@@ -38,6 +38,8 @@ $$\frac{\partial X^*}{\partial P_x}=\underbrace{\frac{\partial X^h}{\partial P_x
 $$Lerner \Rightarrow \lambda=\frac{P_i-c_i}{P_i}=\frac{1}{|\varepsilon|}$$
 
 $$Herfindahl-Hirschmann \Rightarrow \sum_{i=1}^{N} S_i^2$$
+Colusión 
+$$\delta \geq \frac{\pi^D-\pi^C}{\pi^D-\pi^{NC}}$$
 
 Bertrand
 $$P_i(P_j)=\begin{cases}

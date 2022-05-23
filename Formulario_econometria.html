@@ -394,6 +394,20 @@ $(document).ready(function () {
 <p><span class="math display">\[P_{value}=Pr[|t_{obs}|\geq |t_{\hat{\beta_j}}|]\]</span></p>
 <p><span class="math display">\[F_{obs}=\frac{(SSR_{r}-SSR_{ur})/q}{(SSR_{ur})/(T-K-1)}=\frac{(R_{ur}^2-R_{r}^2)/q}{(1-R_{ur}^2)/(T-K-1)} \sim F_{q, t-k-1}\]</span></p>
 </div>
+<div id="efectos-causales" class="section level3">
+<h3>Efectos Causales</h3>
+<p>Modelo de Rubin <span class="math display">\[\underbrace{E[Y_i/W_i=1]-E[Y_i/W_i=0]}_{Diferencia \hspace{1mm} Promedio \hspace{1mm} Observable} =\underbrace{E[Y_{1,i}/W_i=1]-E[Y_{0,i}/W_i=1]}_{ATT}+\underbrace{E[Y_{0,i}/W_i=1]-E[Y_{0,i}/W_i=0]}_{Sesgo \hspace{1mm} de \hspace{1mm} Selección}\]</span> <span class="math display">\[ATE=E[Y_1-Y_0]\]</span> <span class="math display">\[ATT=E[Y_1-Y_0/W_i=1]\]</span> <span class="math display">\[ITT=E[Y_i/Z_i=1]-E[Y_i/Z_i=0]=ATT \cdot Pr[W_i=1/Z_i=1]\]</span></p>
+<p>Supuestos</p>
+<p><span class="math display">\[SUTVA \Rightarrow (Y_{0,i},Y_{1,i}) \hspace{2mm} \bot  \hspace{2mm} W_j \hspace{4mm} \forall j\neq i\]</span></p>
+<p><span class="math display">\[Unconfoundedness \Rightarrow (Y_{0,i}, Y_{1,i}) \hspace{2mm}\bot \hspace{2mm} W_i/X_i\]</span></p>
+<p><span class="math display">\[Overlap \Rightarrow 0&lt;Pr[W_i=1/X_i]&lt;1\]</span></p>
+<p>Propensity Score</p>
+<p><span class="math display">\[Regresión \Rightarrow y_i=\tau w_i+\phi \underbrace{\hat{p(x_i)}}_{probit/logit} +e_i\]</span></p>
+<p><span class="math display">\[Ponderación \Rightarrow E[Y_{1,i}-Y_{0,i}]=E\left[\frac{(W_i-p(X_i))Y_i}{p(X_i)(1-p(X_i))}\right]\]</span></p>
+<p><span class="math display">\[Emparejamiento \Rightarrow ATT^M=\frac{1}{N_T}\sum_{i:w_i=1} \left(y_{1,i}-\sum_{j:w_j=0} \overbrace{\phi(i,j)}^{Ponderadores}y_{0,j} \right)\]</span></p>
+<p>Diferencias en Diferencias <span class="math display">\[DiD=\underbrace{(Y_t^T-Y_t^C)}_{Diferencias \hspace{1mm} Post \hspace{1mm} Tratamiento} - \underbrace{(Y_{t-1}^T-Y_{t-1}^C)}_{Diferencias \hspace{1mm} Pre \hspace{1mm} Tratamiento}=\underbrace{(Y_t^T-Y_{t-1}^T)}_{Diferencias \hspace{1mm} Tratados} - \underbrace{(Y_t^C-Y_{t-1}^C)}_{Diferencias \hspace{1mm} No \hspace{1mm} tratados}\]</span></p>
+<p>Control Sintético <span class="math display">\[\hat{\alpha_{1,t}}=\underbrace{Y_{1,t}}_{Serie \hspace{1mm} Observada} - \underbrace{\sum_{j=2}^{J+1} \overbrace{w_j^*}^{Ponderadores} Y_{j,t}}_{Serie \hspace{1mm} Sintética} \]</span></p>
+</div>
 </div>
 
 
