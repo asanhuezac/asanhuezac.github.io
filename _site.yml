@@ -13,10 +13,12 @@ navbar:
       href: Trabajos.html
     - text: "Formularios"
       menu:
-      - text: Econometría Corte Transversal
+      - text: Econometría
         href: Formulario_econometria.html
       - text: Macroeconomía
-        href: Formulario_macroeconomia.html        
+        href: Formulario_macroeconomia.html  
+      - text: Microeconomía
+        href: Formulario_microeconomia.html        
     - text: "Recomendado"
       href: recomendado.html       
       

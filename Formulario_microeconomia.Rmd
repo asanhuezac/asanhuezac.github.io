@@ -1,0 +1,67 @@
+---
+output:
+  html_document:
+    css: style1.css
+    theme: cosmo
+    highlight: textmate
+---
+
+## Formulario Microeconomía {.tabset .tabset-pills}
+
+### Consumidor
+
+Demandas Marshallianas
+\[\max_{\{X, Y\}} U(X,Y)\]
+\[s.a: P_xX+P_yY=I  \]
+
+$$Óptimo \Rightarrow \frac{Umg_x}{Umg_y}=\frac{P_x}{P_y}$$
+
+$$FUI \Rightarrow U(X^*,Y^*) \Rightarrow v(P_x,P_y,I)$$
+
+
+$$Roy \Rightarrow \frac{\frac{\partial v(P_x,P_y,I)}{\partial P_x}}{\frac{\partial v(P_x,P_y,I}{\partial I}}=-X^*$$
+
+Demandas Hicksianas
+\[\min_{\{X, Y\}} P_xX+P_yY\]
+\[s.a: X^{\alpha}Y^{\beta}=u_0  \]
+
+$$Función \hspace{2mm} de \hspace{2mm} Gasto \Rightarrow e(P_x,P_y,u_o)=P_xX^{h}+P_yY^{h}$$
+
+$$Shepard \Rightarrow \frac{\partial e(P_x,P_y,u_o)}{\partial P_x}=X^h$$
+
+Ecuación de Slutsky
+$$\frac{\partial X^*}{\partial P_x}=\underbrace{\frac{\partial X^h}{\partial P_x}}_{ES} -\underbrace{\frac{\partial X^*}{\partial I}X^*}_{EI}$$
+
+
+### Industrial
+
+$$Lerner \Rightarrow \lambda=\frac{P_i-c_i}{P_i}=\frac{1}{|\varepsilon|}$$
+
+$$Herfindahl-Hirschmann \Rightarrow \sum_{i=1}^{N} S_i^2$$
+
+Bertrand
+$$P_i(P_j)=\begin{cases}
+    P^M=\frac{A+c}{2} & \text{si } P^M<P_j \\
+    P_j-\varepsilon & \text{si } c<P_j\leq P^M \\
+    c & \text{si } P_j\leq c
+  \end{cases} $$
+
+
+### Laboral
+
+$$Marshall \Rightarrow |\varepsilon_{L,W}|=\frac{\sigma_{L,K}|\eta^d|+\eta_k^s[\alpha_L|\eta^d|+(1-\alpha_L)\sigma_{L,K}]}{\eta_k^s+\alpha_L \sigma_{L,K}+(1-\alpha_L)|\eta^d|}$$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
