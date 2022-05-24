@@ -23,7 +23,7 @@ $$Roy \Rightarrow \frac{\frac{\partial v(P_x,P_y,I)}{\partial P_x}}{\frac{\parti
 
 Demandas Hicksianas
 \[\min_{\{X, Y\}} P_xX+P_yY\]
-\[s.a: X^{\alpha}Y^{\beta}=u_0  \]
+\[s.a: U(X,Y)=u_0  \]
 
 $$Función \hspace{2mm} de \hspace{2mm} Gasto \Rightarrow e(P_x,P_y,u_o)=P_xX^{h}+P_yY^{h}$$
 
