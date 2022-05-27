@@ -110,6 +110,39 @@ Control Sintético
 $$\hat{\alpha_{1,t}}=\underbrace{Y_{1,t}}_{Serie \hspace{1mm} Observada} - \underbrace{\sum_{j=2}^{J+1} \overbrace{w_j^*}^{Ponderadores} Y_{j,t}}_{Serie \hspace{1mm} Sintética} $$
 
 
+### Series de Tiempo
+
+Modelos AR(P)
+$$E[y_t]=\frac{\phi_0}{(1-\sum_{i=1}^{p}\phi_i)}$$
+$$Var[y_t]=\sigma_\varepsilon^2+\sum_{i=1}^{p}\phi_i\gamma_i$$
+$$Cov[y_t,y_{t-1}]=\sum_{i=1}^{P}\phi_i\gamma_{j-i} \hspace{3mm} \forall j\geq 1$$
+$$Corr[y_t,y_{t-s}]=\phi_1^s$$
+
+Modelos MA(q)
+$$E[y_t]=\theta_0$$
+$$Var[y_t]=\left(1+\sum_{i=1}^{q} \theta_i^2\right) \sigma_\varepsilon^2$$
+$$Cov[y_t,y_{t-s}]=\begin{cases}
+    \sigma_\varepsilon^2 \sum_{j=0}^{q-s} \theta_j \theta_{j+s} & \text{si } s\leq q \hspace{3mm} donde \hspace{2mm} \theta_0=1\\
+    0 & \text{si } s> q \\
+  \end{cases}$$
+
+$$Corr[y_t,y_{t-s}]=\begin{cases}
+\frac{\sum_{j=0}^{q-s} \theta_j \theta_{j+s}}{(1+\sum_{i=1}^{q} \theta_i^2)} & \text{si } s\leq q \hspace{3mm} donde \hspace{2mm} \theta_0=1\\
+    0 & \text{si } s> q \\
+  \end{cases}$$
+
+¿Ruido Blanco?
+$$Box-Pierce \Rightarrow T \sum_{j=1}^{k}\hat{\rho_j}^2 \sim \chi_{(k-p-q)}$$
+
+$$Ljung-Box \Rightarrow T(T+2) \sum_{j=1}^{k}\frac{\hat{\rho_j}^2}{(T-k)} \sim \chi_{(k-p-q)}$$
+
+¿Quiebre Estructural?
+
+$$Chow \Rightarrow F=\frac{(SSR-SSR_1-SSR_2)/n}{(SSR_1+SSR_2)(T-2n)}\sim F_{n,(T-2n)}$$
+¿Raíz Unitaria?
+$$Dickey-Fuller \Rightarrow \Delta y_t=\mu+\beta t+\gamma y_{t-1}+u_t$$
+$$Dickey-Fuller \hspace{1mm} Aumentado \Rightarrow \Delta y_t=\mu+\beta t+\gamma y_{t-1}+\rho_1\Delta y_{t-1}+\rho_2\Delta y_{t-2}+...+\rho_p\Delta y_{t-p}+u_t$$
+
 
 
 

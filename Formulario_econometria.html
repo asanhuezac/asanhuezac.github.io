@@ -408,6 +408,22 @@ $(document).ready(function () {
 <p>Diferencias en Diferencias <span class="math display">\[DiD=\underbrace{(Y_t^T-Y_t^C)}_{Diferencias \hspace{1mm} Post \hspace{1mm} Tratamiento} - \underbrace{(Y_{t-1}^T-Y_{t-1}^C)}_{Diferencias \hspace{1mm} Pre \hspace{1mm} Tratamiento}=\underbrace{(Y_t^T-Y_{t-1}^T)}_{Diferencias \hspace{1mm} Tratados} - \underbrace{(Y_t^C-Y_{t-1}^C)}_{Diferencias \hspace{1mm} No \hspace{1mm} tratados}\]</span></p>
 <p>Control Sintético <span class="math display">\[\hat{\alpha_{1,t}}=\underbrace{Y_{1,t}}_{Serie \hspace{1mm} Observada} - \underbrace{\sum_{j=2}^{J+1} \overbrace{w_j^*}^{Ponderadores} Y_{j,t}}_{Serie \hspace{1mm} Sintética} \]</span></p>
 </div>
+<div id="series-de-tiempo" class="section level3">
+<h3>Series de Tiempo</h3>
+<p>Modelos AR(P) <span class="math display">\[E[y_t]=\frac{\phi_0}{(1-\sum_{i=1}^{p}\phi_i)}\]</span> <span class="math display">\[Var[y_t]=\sigma_\varepsilon^2+\sum_{i=1}^{p}\phi_i\gamma_i\]</span> <span class="math display">\[Cov[y_t,y_{t-1}]=\sum_{i=1}^{P}\phi_i\gamma_{j-i} \hspace{3mm} \forall j\geq 1\]</span> <span class="math display">\[Corr[y_t,y_{t-s}]=\phi_1^s\]</span></p>
+<p>Modelos MA(q) <span class="math display">\[E[y_t]=\theta_0\]</span> <span class="math display">\[Var[y_t]=\left(1+\sum_{i=1}^{q} \theta_i^2\right) \sigma_\varepsilon^2\]</span> <span class="math display">\[Cov[y_t,y_{t-s}]=\begin{cases}
+    \sigma_\varepsilon^2 \sum_{j=0}^{q-s} \theta_j \theta_{j+s} &amp; \text{si } s\leq q \hspace{3mm} donde \hspace{2mm} \theta_0=1\\
+    0 &amp; \text{si } s&gt; q \\
+  \end{cases}\]</span></p>
+<p><span class="math display">\[Corr[y_t,y_{t-s}]=\begin{cases}
+\frac{\sum_{j=0}^{q-s} \theta_j \theta_{j+s}}{(1+\sum_{i=1}^{q} \theta_i^2)} &amp; \text{si } s\leq q \hspace{3mm} donde \hspace{2mm} \theta_0=1\\
+    0 &amp; \text{si } s&gt; q \\
+  \end{cases}\]</span></p>
+<p>¿Ruido Blanco? <span class="math display">\[Box-Pierce \Rightarrow T \sum_{j=1}^{k}\hat{\rho_j}^2 \sim \chi_{(k-p-q)}\]</span></p>
+<p><span class="math display">\[Ljung-Box \Rightarrow T(T+2) \sum_{j=1}^{k}\frac{\hat{\rho_j}^2}{(T-k)} \sim \chi_{(k-p-q)}\]</span></p>
+<p>¿Quiebre Estructural?</p>
+<p><span class="math display">\[Chow \Rightarrow F=\frac{(SSR-SSR_1-SSR_2)/n}{(SSR_1+SSR_2)(T-2n)}\sim F_{n,(T-2n)}\]</span> ¿Raíz Unitaria? <span class="math display">\[Dickey-Fuller \Rightarrow \Delta y_t=\mu+\beta t+\gamma y_{t-1}+u_t\]</span> <span class="math display">\[Dickey-Fuller \hspace{1mm} Aumentado \Rightarrow \Delta y_t=\mu+\beta t+\gamma y_{t-1}+\rho_1\Delta y_{t-1}+\rho_2\Delta y_{t-2}+...+\rho_p\Delta y_{t-p}+u_t\]</span></p>
+</div>
 </div>
 
 
