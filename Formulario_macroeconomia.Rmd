@@ -38,9 +38,11 @@ $$\sum_{i=0}^{\infty} \frac{C_{t+i}}{(1+r)^i}=\sum_{i=0}^N \frac{Y_{l,t+i}-T_{t+
 
 $$\overline{C}=r \left[A_t+\sum_{i=0}^N \frac{Y_{l,t+i}-T_{t+i}}{(1+r_i)^{i+1}} \right]$$
 
+### Monetaria
 
+$$\underbrace{M}_{Oferta \hspace{1mm} Monetaria} \cdot \underbrace{V}_{Velocidad}=\underbrace{P}_{Precios}\cdot \underbrace{Y}_{Producto}$$
 
-
+$$\underbrace{M}_{Oferta \hspace{1mm} Monetaria}=\underbrace{\left(\frac{1+\overline{C}}{\theta+ \overline{C}}\right)}_{Multiplicador}\cdot \underbrace{H}_{Emisión}$$
 
 
 

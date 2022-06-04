@@ -22,4 +22,4 @@ output:
 
 - [Econometría - Demostraciones](archivos/Demostraciones_Econometria.pdf) (En desarrollo con [Christian González](https://chrgonziba.github.io/))
 - [Microeconomía - Modelos y Demostraciones](archivos/Microeconomía_modelos_demostraciones.pdf) (En desarrollo)
-
+- [Macroeconomía - Modelos y Demostraciones](archivos/Macroeconomía_modelos_demostraciones.pdf) (En desarrollo)
