@@ -45,19 +45,31 @@ $$\underbrace{M}_{Oferta \hspace{1mm} Monetaria} \cdot \underbrace{V}_{Velocidad
 $$\underbrace{M}_{Oferta \hspace{1mm} Monetaria}=\underbrace{\left(\frac{1+\overline{C}}{\theta+ \overline{C}}\right)}_{Multiplicador}\cdot \underbrace{H}_{Emisión}$$
 
 
+### Fiscal
+
+$$d_t=-b_t \left(\frac{r-g}{1+g}\right)$$
 
 
+### Modelos
+
+Salarios de Eficiencia, Shapiro-Stiglitz
+$$\rho V_e=(w-e)-b(V_e-V_u)$$
+
+$$\rho V_s=w-(b+q)(V_s-V_u)$$
+$$\rho V_u=a(V_e-V_u)$$
+$$w^*=e+\left(\rho+\frac{b\overline{L}}{\overline{L}-NL}\right) \frac{e}{q}$$
 
 
+Modelo de Búsqueda y Emparejamiento
 
+$$rJ=P-w+\lambda(V-J)$$
+$$rV=-Pc+q(\theta)(J-V)$$
+$$rW=w+\lambda(U-W)$$
+$$rU=z+\theta q(\theta)(W-U)$$
+$$u=\frac{\lambda}{\lambda+\theta q(\theta)}$$
+$$w=P-\frac{(r+\lambda)Pc}{q(\theta)}$$
 
-
-
-
-
-
-
-
+$$w=(1-\beta)z+\beta(P+C\theta)$$
 
 
 
