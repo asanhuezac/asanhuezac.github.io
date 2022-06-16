@@ -5,7 +5,7 @@ output:
     highlight: textmate
 ---
 
-Hola Mundo, Bienvenidos. 
+Hola Mundo, bienvenidos. 
 
 Les presento mi primer gráfico animado. 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}

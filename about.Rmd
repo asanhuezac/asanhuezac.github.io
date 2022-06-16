@@ -7,11 +7,11 @@ output:
 
 ![](Imagenes/Foto.png){width=30%}
 
-Soy estudiante del Magister en Análisis Económico de la Universidad de Chile. Me gusta la docencia, el análisis microeconómico, las finanzas, y el [ajedrez](https://www.chess.com/stats/overview/matechileno?) ¿una partida?. 
+Soy estudiante del Magíster en Análisis Económico de la Universidad de Chile. Me gusta la docencia, el análisis microeconómico, las finanzas, y el [ajedrez](https://www.chess.com/stats/overview/matechileno?) ¿una partida?. 
 
 Mi meta en el largo plazo es crear un canal en youtube similar al de [3Blue1Brown](https://www.youtube.com/c/3blue1brown), donde pueda explicar de manera simple y gráfica teoría microeconómica y econométrica. 
 
-- [Curriculum](archivos/CV_Agustin_Sanhueza.pdf)
+- [Currículum](archivos/CV_Agustin_Sanhueza.pdf)
 
 - Correo: <asanhuezac@fen.uchile.cl>
 
