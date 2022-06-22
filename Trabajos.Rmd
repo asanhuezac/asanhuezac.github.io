@@ -31,8 +31,8 @@ output:
 - [Microeconomía I - Ayudantías](archivos/Ayudantias_microeconomia_I.pdf)
 - [Microeconomía I - Evaluaciones](archivos/Evaluaciones_microeconomia_I.pdf)
 - [Introducción a las Finanzas - Ayudantía Solidaria](archivos/Ayudantia_Solidaria_Intro_a_Finanzas.pdf)
-- [Finanzas I - Ayudantías](archivos/Pautas_Ayudantias_Finanzas I.pdf) (Junto a Alejandro Lainez)
-- [Finanzas I - Evaluaciones](archivos/Pautas_Evaluaciones_Finanzas_I.pdf) (Junto a Juan Romagosa y Alejandro Lainez)
-- [Introducción a las Finanzas - Ayudantías](archivos/Pautas_Ayudantias_Intro_a_Finanzas.pdf) (Junto a Vicente Bavestrello y Rodrigo Fuentealba)
-- [Introducción a las Finanzas - Evaluaciones](archivos/Pautas_Evaluaciones_Intro_a_Finanzas.pdf) (Junto a Juan Romagosa, Vicente Bavestrello y Rodrigo Fuentealba)
+- [Finanzas I - Ayudantías](archivos/Pautas_Ayudantias_Finanzas I.pdf) (Desarrollado junto a Alejandro Lainez)
+- [Finanzas I - Evaluaciones](archivos/Pautas_Evaluaciones_Finanzas_I.pdf) (Desarrollado junto a Juan Romagosa y Alejandro Lainez)
+- [Introducción a las Finanzas - Ayudantías](archivos/Pautas_Ayudantias_Intro_a_Finanzas.pdf) (Desarrollado junto a Vicente Bavestrello y Rodrigo Fuentealba)
+- [Introducción a las Finanzas - Evaluaciones](archivos/Pautas_Evaluaciones_Intro_a_Finanzas.pdf) (Desarrollado junto a Juan Romagosa, Vicente Bavestrello y Rodrigo Fuentealba)
 
