@@ -23,3 +23,15 @@ output:
 - [Econometría - Demostraciones](archivos/Demostraciones_Econometria.pdf) (En desarrollo con [Christian González](https://chrgonziba.github.io/))
 - [Microeconomía - Modelos y Demostraciones](archivos/Microeconomía_modelos_demostraciones.pdf) (En desarrollo)
 - [Macroeconomía - Modelos y Demostraciones](archivos/Macroeconomía_modelos_demostraciones.pdf) (En desarrollo)
+
+# Ayudantías y Evaluaciones
+
+- [Econometría I - Ayudantías](archivos/Ayudantias_econometria_I.pdf)
+- [Microeconomía I - Ayudantías](archivos/Ayudantias_microeconomia_I.pdf)
+- [Microeconomía I - Evaluaciones](archivos/Evaluaciones_microeconomia_I.pdf)
+- [Introducción a las Finanzas - Ayudantía Solidaria](archivos/Ayudantia_Solidaria_Intro_a_Finanzas.pdf)
+- [Finanzas I - Ayudantías](archivos/Pautas_Ayudantias_Finanzas I.pdf) (Junto a Alejandro Lainez)
+- [Finanzas I - Evaluaciones](archivos/Pautas_Evaluaciones_Finanzas_I.pdf) (Junto a Juan Romagosa y Alejandro Lainez)
+- [Introducción a las Finanzas - Ayudantías](archivos/Pautas_Ayudantias_Intro_a_Finanzas.pdf) (Junto a Vicente Bavestrello y Rodrigo Fuentealba)
+- [Introducción a las Finanzas - Evaluaciones](archivos/Pautas_Evaluaciones_Intro_a_Finanzas.pdf) (Junto a Juan Romagosa, Vicente Bavestrello y Rodrigo Fuentealba)
+
