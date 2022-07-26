@@ -56,3 +56,28 @@ library(vembedr)
 [Cheatsheets](https://www.stata.com/bookstore/statacheatsheets.pdf)
 
 
+# Videos de Softwares
+
+ [R](https://drive.google.com/drive/folders/1_vhmCecx3-mJhMG461x5bO8DysZu86E6?usp=sharing)
+ 
+ [Tableau](https://drive.google.com/drive/folders/1FRkEzO7WXvBks20ncTVeEPIcsc9HL0Ix?usp=sharing)
+
+ [Power Bi](https://drive.google.com/drive/folders/1EuLQJXry9V6u1oi6FayROaoEcUqwSg0-?usp=sharing)
+
+
+# Link de interés
+ [Sci-Hub](https://sci-hub.se/)
+
+ [Libgen](http://libgen.rs/)
+ 
+ [Data-Camp](https://www.datacamp.com/)
+ 
+ [Manim](https://docs.manim.community/en/stable/index.html)
+
+ [Rómulo Chumacero](http://rchumace.econ.uchile.cl/)
+ 
+ [Damián Clarke](https://www.damianclarke.net/)
+ 
+ [Pokerstars](https://www.pokerstars.com/es-419/)
+ 
+ [Chess](https://www.chess.com/)
