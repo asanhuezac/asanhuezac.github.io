@@ -1,0 +1,62 @@
+---
+output:
+  html_document:
+    css: style1.css
+    theme: cosmo
+    highlight: textmate
+---
+
+## Formulario Matemática {.tabset .tabset-pills}
+
+### Sumatorias
+
+Sean ''a'', ''b'' y ''c'' constantes
+
+
+$$\sum_{i=1}^{N}x_i=x_1+x_2+...+x_n$$
+
+$$\frac{\sum_{i=1}^{N} x_i}{N}=\overline{x}$$
+
+$$\sum_{i=1}^{N}c=N\cdot c$$
+
+
+$$\sum_{i=1}^{N} (ax_i+by_i)=a \sum_{i=1}^{N} x_i+b\sum_{i=1}^{N}y_i$$
+
+$$\sum_{i=1}^{N} (x_i y_i) \neq \left( \sum_{i=1}^{N} x_i\right) \left( \sum_{i=1}^{N} y_i\right)$$
+
+$$\sum_{i=1}^{N-1} (x_{i+1}-x_i)=x_n-x_1$$
+
+$$\sum_{i=1}^{N} i=\frac{n(n+1)}{2}$$
+$$\sum_{i=0}^{N} c^{i}=\frac{1-c^{n+1}}{1-c} \hspace{3mm} \forall \hspace{1mm}  c\neq 1 $$
+$$\sum_{i=0}^{\infty} c^{i}=lim_{n \rightarrow \infty} \frac{1-c^{n+1}}{1-c}=\frac{1}{1-c} \hspace{3mm} \forall \hspace{1mm} 0<c< 1 $$
+$$\sum_{i=1}^{N} \sum_{j=1}^{K}x_{ij} = \sum_{j=1}^{K} \sum_{i=1}^{N}x_{ij}$$
+
+$$\sum_{i=1}^{N} \left(\frac{x_i}{y_i}\right) \neq \frac{\sum_{i=1}^{N} x_i}{\sum_{i=1}^{N} y_i} \hspace{4mm} \forall y_i \neq 0 $$
+$$\sum_{i=1}^{N} (x_i-\overline{x})=0$$
+
+$$\sum_{i=1}^{N} (x_i-\overline{x})^2=\sum_{i=1}^{N} x_i^2-n(\overline{x})^2$$
+
+$$\sum_{i=1}^{N} (x_i-\overline{x})(y_i-\overline{y})=\sum_{i=1}^{N} y_i(x_i-\overline{x})=\sum_{i=1}^{N} x_i(y_i-\overline{y})$$
+
+
+### Pitatorias
+Sea ''c'' una constante
+
+$$\Pi_{i=1}^{N} x_i=x_1\cdot x_2\cdot x_3 \hspace{1mm}... \hspace{1mm} x_n $$
+$$\Pi_{i=1}^{N} c=c^{N} $$
+
+$$\Pi_{i=1}^{N} i=n!=1\cdot 2\hspace{1mm} ...\hspace{1mm} (n-1)n $$
+$$\Pi_{i=m}^{N} i=\frac{n!}{(m-1)!} \hspace{3mm} \forall \hspace{1mm} m\leq n $$
+
+$$\Pi_{i=1}^{N} (i+c)=\frac{(n+c)!}{c!} $$
+
+$$ln\left( \Pi_{i=1}^{N}x_i \right)=\sum_{i=1}^{N}ln(x_i)$$
+
+$$\Pi_{i=1}^{N} (x_i \cdot y_i)=\Pi_{i=1}^{N} x_i \hspace{1mm} \cdot \hspace{1mm} \Pi_{i=1}^{N}y_i $$
+
+$$\Pi_{i=1}^{N} \left(\frac{x_i}{y_i}\right)=\frac{\Pi_{i=1}^{N} x_i}{\Pi_{i=1}^{N} y_i} \hspace{4mm} \forall y_i\neq0 $$
+
+$$\Pi_{i=1}^{N} \left(\frac{x_{i+1}}{x_i}\right)=\frac{x_{n+1}}{x_1} \hspace{3mm} \forall \hspace{1mm} x_i\neq 0$$
+
+
+

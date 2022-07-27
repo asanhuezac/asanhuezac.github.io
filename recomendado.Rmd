@@ -65,7 +65,7 @@ library(vembedr)
  [Power Bi](https://drive.google.com/drive/folders/1EuLQJXry9V6u1oi6FayROaoEcUqwSg0-?usp=sharing)
 
 
-# Link de interés
+# Links de interés
  [Sci-Hub](https://sci-hub.se/)
 
  [Libgen](http://libgen.rs/)
@@ -76,7 +76,7 @@ library(vembedr)
 
  [Rómulo Chumacero](http://rchumace.econ.uchile.cl/)
  
- [Damián Clarke](https://www.damianclarke.net/)
+ [Damian Clarke](https://www.damianclarke.net/)
  
  [Pokerstars](https://www.pokerstars.com/es-419/)
  

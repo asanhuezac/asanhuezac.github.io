@@ -13,12 +13,16 @@ navbar:
       href: Trabajos.html
     - text: "Formularios"
       menu:
+      - text: Matemática
+        href: Formulario_matematica.html
       - text: Econometría
         href: Formulario_econometria.html
       - text: Macroeconomía
         href: Formulario_macroeconomia.html  
       - text: Microeconomía
         href: Formulario_microeconomia.html        
+    - text: "Juegos"
+      href: Juegos.html
     - text: "Recomendado"
       href: recomendado.html       
       

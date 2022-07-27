@@ -7,7 +7,7 @@ output:
 
 ![](Imagenes/Foto.png){width=30%}
 
-Soy estudiante del Magíster en Análisis Económico de la Universidad de Chile. Me gusta la docencia, el análisis microeconómico, las finanzas, el blackjack, el póker y el [ajedrez](https://www.chess.com/stats/overview/matechileno?) ¿una partida?. 
+Soy estudiante del Magíster en Análisis Económico de la Universidad de Chile. Me gusta la docencia, el análisis microeconómico y las finanzas. Invertir en el blackjack, apostar en el póker (hold' em) y jugar al [ajedrez](https://www.chess.com/stats/overview/matechileno?) ¿una partida?. 
 
 Mi meta en el largo plazo es crear un canal en youtube similar al de [3Blue1Brown](https://www.youtube.com/c/3blue1brown), donde pueda explicar de manera simple y gráfica teoría microeconómica y econométrica. 
 

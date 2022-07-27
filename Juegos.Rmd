@@ -1,0 +1,17 @@
+---
+output: 
+  html_document:
+    css: style.css
+    highlight: textmate
+---
+
+# Blackjack
+
+![](Imagenes/Estrategia_basica.png){width=22%}
+
+
+# Poker
+![](Imagenes/Estrategia_poker.png){width=70%}
+
+
+
