@@ -8,6 +8,25 @@ output:
 
 ## Formulario Matemática {.tabset .tabset-pills}
 
+### Potencias
+
+$$a^{\frac{m}{n}}=\sqrt[n]{a^m}$$
+$$a^x\cdot a^y=a^{x+y}$$
+$$\frac{a^x}{a^y}=a^{x-y}$$
+$$\left(a^x \right)^y=a^{x\cdot y}$$
+$$a^0=1$$
+$$a^{-x}=\frac{1}{a^x}$$
+
+### Logaritmos
+
+$$a^{log_a(x)}=x \hspace{3mm} \forall \hspace{1mm} x>0$$
+$$log(1)=0$$
+$$log(0)=-\infty$$
+$$log(x \cdot y)=log(x)+log(y)$$
+$$log \left(\frac{x}{y} \right)=log(x)-log(y)$$
+$$log(x^a)=a\cdot log(x)$$
+$$log_a(x)=\frac{log_b(x)}{log_b(a)}$$
+
 ### Sumatorias
 
 Sean ''a'', ''b'' y ''c'' constantes
@@ -58,5 +77,39 @@ $$\Pi_{i=1}^{N} \left(\frac{x_i}{y_i}\right)=\frac{\Pi_{i=1}^{N} x_i}{\Pi_{i=1}^
 
 $$\Pi_{i=1}^{N} \left(\frac{x_{i+1}}{x_i}\right)=\frac{x_{n+1}}{x_1} \hspace{3mm} \forall \hspace{1mm} x_i\neq 0$$
 
+### Derivadas
 
+$$f(x)=x^a \hspace{2mm} \Rightarrow \hspace{2mm} f'(x)=a\cdot x^{a-1}$$
+
+$$f(x)=e^x \hspace{2mm} \Rightarrow \hspace{2mm} f'(x)=e^x$$
+
+$$[a\cdot f(x)]'=a\cdot f'(x)$$
+$$[f(x)+a\cdot g(x)]'=f'(x)+a\cdot g'(x)$$
+$$[f(x)\cdot g(x)]'=f'(x)\cdot g(x)+f(x)\cdot g'(x)$$
+
+$$\left(\frac{f(x)}{g(x)} \right)'=\frac{f'(x)\cdot g(x)-f(x)\cdot g'(x)}{[g(x)]^2} $$
+
+$$h(x)=g(f(x)) \hspace{2mm} \Rightarrow \hspace{2mm} h'(x)=g'(f(x))\cdot f'(x)$$
+$$h(x)=a^x \hspace{2mm} \Rightarrow \hspace{2mm} h'(x)=ln(a)\cdot a^x$$
+$$f'(f^{-1}(x))\cdot (f^{-1}(x))'=1  $$
+$$f(x)=ln(x) \hspace{2mm} \Rightarrow \hspace{2mm} f'(x)=\frac{1}{x}$$
+Polinomio de Taylor (de orden k)
+$$f(x) \approx \sum_{i=0}^{k} \frac{f^{(i)}(x_0)}{i!}\cdot (x-x_0)^{i} $$
+
+### Integrales
+
+$$\int [f(x)+a\cdot g(x)] dx = \int f(x)dx+a \int g(x)dx$$
+
+$$\int \left(\sum_{i=0}^{K} \frac{x^{i}}{i!}dx \right)=\sum_{i=0}^{K} \frac{x^{i+1}}{(i+1)!}$$
+Teorema Fundamental del Cálculo
+
+$$\int_{a}^{b} f(x)dx=F(b)-F(a)$$
+
+Integración por partes
+
+$$\int u\cdot dv=u\cdot v-\int v\cdot du$$
+
+Integración Impropia
+
+$$\int_{a}^{\infty}f(x)dx=lim_{n\rightarrow \infty} \left(\int_{a}^{n}f(x)dx \right) \hspace{4mm} o \hspace{4mm} \int_{-\infty}^{b}f(x)dx=lim_{n\rightarrow \infty} \left(\int_{-n}^{b}f(x)dx \right)$$
 
