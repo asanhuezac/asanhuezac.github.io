@@ -7,11 +7,18 @@ output:
 
 # Blackjack
 
-![](Imagenes/Estrategia_basica.png){width=22%}
+“Blackjack is very scientific. There’s always a right answer and a wrong answer.” 
+Charlie Ergen
+
+![](Imagenes/Estrategia_basica.png){width=30%}
 
 
-# Poker
-![](Imagenes/Estrategia_poker.png){width=70%}
+# Póker
+
+“It’s not about the cards you’re dealt, but how you play the hand.” 
+Randy Pausch
+
+![](Imagenes/Estrategia_poker.png){width=90%}
 
 
 
