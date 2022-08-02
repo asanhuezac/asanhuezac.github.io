@@ -7,9 +7,12 @@ output:
 
 ![](Imagenes/Foto.png){width=30%}
 
-Soy estudiante del Magíster en Análisis Económico de la Universidad de Chile. Me gusta la docencia, el análisis microeconómico y las finanzas. Invertir en el blackjack, apostar en el póker (hold' em) y jugar al [ajedrez](https://www.chess.com/stats/overview/matechileno?) ¿una partida?. 
+Soy Ingeniero Comercial licenciado en Ciencias Económicas de la Universidad de Chile. Actualmente estoy en calidad de tesista en el Magister de Análisis Económico en la misma universidad, y en búsqueda de mi primer trabajo. Tengo interés en las finanzas, el análisis microeconómico y la docencia.  
 
-Mi meta en el largo plazo es crear un canal en youtube similar al de [3Blue1Brown](https://www.youtube.com/c/3blue1brown), donde pueda explicar de manera simple y gráfica teoría microeconómica y econométrica. 
+Mi meta en el largo plazo es crear un canal de youtube similar al de [3Blue1Brown](https://www.youtube.com/c/3blue1brown), en donde pueda explicar de manera simple y gráfica teoría microeconómica y econométrica. 
+
+Juego Blackjack, Póker (texas hold'em) y [Ajedrez](https://www.chess.com/stats/overview/matechileno?) ¿una partida?.
+
 
 - [Currículum](archivos/CV_Agustin_Sanhueza.pdf)
 
