@@ -9,6 +9,7 @@ output:
 
 - [Stata](archivos/Planilla_Stata.do)
 - [R](archivos/Planilla_R.R)
+- [Python](archivos/Planilla_Python.py)
 - [Latex - Papers](archivos/Planilla_Papers.zip)
 - [Latex - Beamers](archivos/Planilla-Beamers.tex)
 
