@@ -31,6 +31,11 @@ embed_youtube("Nlhg333-L9g")
 embed_youtube("Y89jBKEHp04")
 ```
 
+# Control Sintético ([Link](https://economics.mit.edu/files/11859) del Paper)
+
+```{r echo=FALSE}
+embed_youtube("PIzgnmcuaA8")
+```
 
 # Portafolio y CAPM
 
@@ -45,3 +50,11 @@ embed_youtube("UrmVJR5SsfM")
 ```{r echo=FALSE}
 embed_youtube("nZ2IRaWlTb4")
 ```
+
+# Teoría de la Utilidad Bajo Incertidumbre (Pendiente)
+
+```{r echo=FALSE}
+embed_youtube("qVubcMn0tOI")
+```
+
+
