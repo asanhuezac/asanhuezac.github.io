@@ -64,6 +64,7 @@ library(vembedr)
 
  [Power Bi](https://drive.google.com/drive/folders/1EuLQJXry9V6u1oi6FayROaoEcUqwSg0-?usp=sharing)
 
+ [Manim (Python)](https://drive.google.com/drive/folders/1LG60_lgUwYq8GfzVRGrMiTmO-xCc4htR?usp=sharing)
 
 # Links de interés
  [Sci-Hub](https://sci-hub.se/)
