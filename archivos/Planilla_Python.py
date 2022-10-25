@@ -7,6 +7,7 @@ import matplotlib as plt # Permite trabajar gráficos
 import xlwings as xw # Permite trabajar y automatizar procesos en excel usando python
 import time 
 import os # Permite cambiar el directorio 
+import pyautogui # Permite webscrapping usando coordenadas de mouse y botones de teclado. Imoportante usar software que entrega coordenadas de mouse  https://github.com/ElektroStudios/Mouse-Point-Viewer/releases
 from itertools import count
 from pathlib import Path # Permite conocer el directorio que estamos trabajando
 from datetime import datetime 
@@ -18,8 +19,9 @@ from numpy import array # Puede parecer redudante importar parte de una librerí
 Path.cwd() # Vemos cuál es el directorio actual
 os.chdir('ruta') # Cambiamos el directorio de trabajo
 
-df = pd.read_excel("nombre_archivo.xlsx") # Crea dataframe a partir de datos xlsx o xls
+df = pd.read_excel("nombre_archivo.xlsx", sheet_name="nombre_hoja") # Crea dataframe a partir de datos xlsx o xls
 df = pd.read_csv("nombre_archivo.csv",encoding="latin-1",sep=";") # Crea dataframe a partir de datos csv, separando columnas por ;
+
 
 # ESTUDIANDO LA BASE DE DATOS
 df.info(verbose=False) # Da el número de filas, columnas y tipo de variables
@@ -51,12 +53,14 @@ df = df.fillna(0) # Reemplaza los missing values por 0
 df["var"]=df["var"].astype("datetime64") # Cambia el formato de una columna a formato temporal
 df["Area"] = df.largo*df.ancho # Genera una nueva variable en función de otras que están en la base
 df["Area"] = df["Area"]*1.03 # Actualiza los valores de la columna aumentándo sus valores un 3%
-df.rename(columns={'nombre_nuevo1': 'nombre_antiguo1','nombre_nuevo2':'nombre_antiguo2'},inplace=True) # Renombre de columnas por nombre
+df.rename(columns={'nombre_antiguo1': 'nombre_nuevo1','nombre_antiguo2':'nombre_nuevo2'},inplace=True) # Renombre de columnas por nombre
 df.rename(columns={df.columns[1]: 'nombre_nuevo1', df.columns[2]: 'nombre_nuevo2'}, inplace=True) # Renombre de columnas por indice
+df["nombre columna"]=pd.to_datetime(Fecha_Cierre).strftime('%d-%m-%Y') # Cambia columna a formato fecha, dia-mes-Año
 df["nombre columna"].str.lower() # Cambiar el texto de una columna todo a minúscula
 df["nombre columna"].str.upper() # Cambiar el texto de una columna todo a mayúscula
 
 df.sort.values('var', ascending=False) # Ordena observaciones en función de una variable de manera descendente
+df.sort_values(by=['var1', 'var2'], ascending=False)
 df = df[['var1','var2', 'var3',...]] # Reordena pocas variables de la base como queramos
 mysubset = ["var_1","var_2"] # Guardamos las variables que queremos poner al principio de la base 
 df[sorted(df, key=lambda x: x not in mysubset)] # Corremos este código y el resto de variables mantiene su orden
@@ -82,11 +86,25 @@ plt.ylabel('Texto eje Y')
 plt.title("Texto título") 
 plt.legend(loc='ubicación_legenda')
 plt.yticks([N°1, N°2, ..., ], ["Texto1, Texto2, ..., "]) # Marcadores eje Y
-plt.savefig('.png') # Guardar el gráfico
 plt.show() # Mostrar el gráfico
+plt.savefig('.png') # Guardar el gráfico
+
+# Webscrapping con pyautogui 
+pyautogui.press("win") #Clickeamos el botón de windows
+time.sleep(1) #Esperamos 1 segundo para que el computador pueda ejecutar lo que le pedimos
+pyautogui.write('Google') #En la barra de busqueda escribimos ''Google'' 
+pyautogui.press('enter') #Apretamos la tecla enter
+pyautogui.write('https://www.bcentral.cl/inicio') #Ingresamos a la página del banco central 
+pyautogui.press('enter')
+pyautogui.click(322,432) # Hacemos click en las coordenadas que pongamos
+pyautogui.press('tab') #Presiona el botón tab
+pyautogui.hotkey('ctrl','j') #Presiona los botones ''control'' y ''j'' (abre descargas)
+pyautogui.hotkey('shift','f10') #Despliega opciones 
+pyautogui.hotkey('down')  # Apreta el botón flecha hacia abajo
+pyautogui.hotkey('del') # Apreta el botón suprimir
 
 # AUTOMATIZACIÓN EN EXCEL (XLWINGS)
-xb = xw.Book("nombre_archivo.xlsx") # Abre el archivo excel. Es necesario que en la carpeta del directorio esté el archivo a abrir
+xb = xw.Book("nombre_archivo.xlsx") # Abre el archivo excel. Es necesario que en la carpeta del directorio esté el archivo a abrir. si no ponemos nada, abrirá un libro en blanco. 
 hoja=xb.sheets["nombre_hoja"] # Identifica la hoja del excel 
 hoja.range("A1").expand('table').copy # Copia los datos de la hoja indicada desde la celda A1
 
@@ -95,12 +113,23 @@ hoja_nueva.range("A1").paste(paste='all') # Pegamos los datos que teníamos copi
 
 hoja_nueva.range("I53").value = "=SUM(I2:I51)" # Selecciona una celda y ejecuta alguna función
 hoja_nueva.range("H53").value = "Total" # Selecciona una celda y coloca algun texto
+hoja_nueva.range("J53").value = "Total" # Selecciona una celda y coloca algun valor
 hoja_nueva.range("A1:B5").color=(154, 200, 122) # Selecciona celdas y cambia su color
 hoja_nueva.range("A1").api.Font.Size=24  # Cambia el tamaño del texto de una celda en una hoja determinada 
 hoja_nueva.range('D10:G11').row_height=30 # Cambia el alto de las columnas seleccionadas
 hoja_nueva.range('D10:G11').column_width=30 # Cambia el ancho de las columnas seleccionadas
 
 xb.save(str(date.today())+"Algun_texto") # Guardamos el excel poniéndole algún nombre 
+xb.close() # Cierra el archivo 
+
+# Envío de Correos
+import win32com.client as win32 # Paquete que permite usar softwares de windows office  
+outlook = win32.Dispatch('outlook.application') # Abre la aplicación de outlook
+mail = outlook.CreateItem(0) # Nuevo correo
+mail.To = 'algunmail' # Destinatario
+mail.Subject = 'algun asunto ' + str(fecha_cierre) # Asunto del correo. (Se puede combinar texto y algún objeto como fecha)
+mail.Body = nemos_na + ".\n El retorno máximo fue de " + str(round(Retornos3.iloc[:, 1].max(), 4)*100) + "." # 
+mail.Send() # Mandamos el correo
 
 # ESTADÍSTICOS
 count() # Cuenta los valores no faltantes de un objeto 
@@ -153,6 +182,13 @@ print("z no es divisible por 2 ni por 3") # Si ninguna de las 2 condiciones ante
 phrase = ['printed', 'with', 'a', 'dash', 'in', 'between']
 for word in phrase:
     print(word, end='-') # Escribe el guión entremedio de cada palabra definida
+
+# Trata esto, si te sale error, sigue desde except en adelante. Es importante la altura horizontal de donde se escriben los códigos
+try:
+    codigos
+
+except:
+    codigos
 
 
 # Comandos Sueltos
