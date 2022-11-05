@@ -12,7 +12,7 @@ navbar:
     - text: "Trabajos"
       href: Trabajos.html
     - text: "Programación"
-      href: Programacion.html
+      href: programacion.html
     - text: "Tesis"
       href: Tesis.html
     - text: "Formularios"
