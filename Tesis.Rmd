@@ -1,0 +1,58 @@
+---
+output: 
+  html_document:
+    css: style.css
+    highlight: textmate
+---
+
+# Social Movility Around the World (in progress)
+
+### Coresidence Rate
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(ggplot2)
+library(gganimate)
+library(av)
+library(gifski)
+library(gapminder)
+library(dplyr)
+library(ggdark)
+library(readxl)
+
+datos_coresidencia <- read_excel("archivos/datos_coresidencia.xlsx")
+
+pib_per_capita_ppp <- datos_coresidencia %>%
+  mutate(world_inc_group=NULL) %>%
+  filter(year>=1995) %>% 
+  group_by(ccode, year) %>% 
+  summarise(tcores=mean(tcores, na.rm=TRUE), per_capita=mean(per_capita, na.rm=TRUE), world_region=world_region, population=population) %>% distinct()
+
+a <- ggplot(data=na.omit(pib_per_capita_ppp), aes(x=per_capita, y=tcores, colour=world_region, size=population)) +
+  geom_point(alpha=0.7) + 
+  dark_mode() +
+  scale_y_continuous(breaks = seq(0, 0.7, by=0.1)) +
+  scale_x_continuous(breaks = seq(0, 100000, by=25000)) +
+  labs(x="PIB per Cápita PPP 2017", 
+       y="Coresidence Rate",
+       caption="Source: Self Made") +
+  guides(size=FALSE, colour=guide_legend("World Region"))
+
+a <- a + transition_time(year) + 
+  labs(subtitle = "Year: {as.integer(frame_time)}") 
+
+animate(a, height=500, width=800, fps=30, duration = 25)
+
+```
+
+
+### Labor Force Participation Rate 
+
+
+
+
+### Intergenerational Elasticity 
+
+
+
+
+
+

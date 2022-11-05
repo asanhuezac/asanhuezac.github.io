@@ -5,15 +5,6 @@ output:
     highlight: textmate
 ---
 
-# Planilla de Códigos
-
-- [Stata](archivos/Planilla_Stata.do)
-- [R](archivos/Planilla_R.R)
-- [Python](archivos/Planilla_Python.py)
-- [Manim (Python)](archivos/Planilla Manim.ipynb)
-- [Latex - Papers](archivos/Planilla_Papers.zip)
-- [Latex - Beamers](archivos/Planilla-Beamers.tex)
-
 # Trabajos Universitarios
 
 - [Mauricio, Diagnóstico de Crecimiento](archivos/Mauricio_Diagnostico_de_Crecimiento.pdf)

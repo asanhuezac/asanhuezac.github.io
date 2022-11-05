@@ -11,6 +11,10 @@ navbar:
       href: materiales.html  
     - text: "Trabajos"
       href: Trabajos.html
+    - text: "Programación"
+      href: Programacion.html
+    - text: "Tesis"
+      href: Tesis.html
     - text: "Formularios"
       menu:
       - text: Matemática

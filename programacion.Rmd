@@ -1,0 +1,19 @@
+---
+output: 
+  html_document:
+    css: style.css
+    highlight: textmate
+---
+
+# Planilla de Códigos
+
+- [Stata](archivos/Planilla_Stata.do)
+- [R](archivos/Planilla_R.R)
+- [Python](archivos/Planilla_Python.py)
+- [Manim (Python)](archivos/Planilla Manim.ipynb)
+- [Cheatsheet Compilado (Stata, R & Python)](archivos/Cheatsheet_Compilado.pdf)
+- [Latex - Papers](archivos/Planilla_Papers.zip)
+- [Latex - Beamers](archivos/Planilla-Beamers.tex)
+
+
+# Aplicación de Códigos (En desarrollo)
