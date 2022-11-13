@@ -5,53 +5,40 @@ output:
     highlight: textmate
 ---
 
-# Social Movility Around the World (in progress)
+# Social Movility Around the World (in progress). Working with [Claudio Montenegro](https://econ.uchile.cl/es/academico/cmontene) & [Javier Nuñez](https://econ.uchile.cl/es/academico/jnunez)
 
 ### Coresidence Rate
-```{r echo=FALSE, message=FALSE, warning=FALSE}
-library(ggplot2)
-library(gganimate)
-library(av)
-library(gifski)
-library(gapminder)
-library(dplyr)
-library(ggdark)
-library(readxl)
 
-datos_coresidencia <- read_excel("archivos/datos_coresidencia.xlsx")
+$$\text{Coresidence Rate}=\frac{\text{Children living with their parents}}{\text{Total of Children}}$$
 
-pib_per_capita_ppp <- datos_coresidencia %>%
-  mutate(world_inc_group=NULL) %>%
-  filter(year>=1995) %>% 
-  group_by(ccode, year) %>% 
-  summarise(tcores=mean(tcores, na.rm=TRUE), per_capita=mean(per_capita, na.rm=TRUE), world_region=world_region, population=population) %>% distinct()
+![](archivos/Tesis/Coresidencia/Cores_age.gif){width=60%}
+![](archivos/Tesis/Coresidencia/Cores_inc.gif){width=70%}
 
-a <- ggplot(data=na.omit(pib_per_capita_ppp), aes(x=per_capita, y=tcores, colour=world_region, size=population)) +
-  geom_point(alpha=0.7) + 
-  dark_mode() +
-  scale_y_continuous(breaks = seq(0, 0.7, by=0.1)) +
-  scale_x_continuous(breaks = seq(0, 100000, by=25000)) +
-  labs(x="PIB per Cápita PPP 2017", 
-       y="Coresidence Rate",
-       caption="Source: Self Made") +
-  guides(size=FALSE, colour=guide_legend("World Region"))
+![](archivos/Tesis/Coresidencia/hist_cores_inc.gif){width=70%}
 
-a <- a + transition_time(year) + 
-  labs(subtitle = "Year: {as.integer(frame_time)}") 
+### Labor Force Participation & Ocupattion Rate 
 
-animate(a, height=500, width=800, fps=30, duration = 25)
+$$\text{Labor Force Participation Rate}=\frac{Employed + Unemployed}{\text{Working age population}}$$
 
-```
+![](archivos/Tesis/Participacion_laboral/year_age_part_lab_g.gif){width=60%}
+
+![](archivos/Tesis/Participacion_laboral/inc_age_part_lab_g.gif){width=70%}
 
 
-### Labor Force Participation Rate 
+$$\text{Ocupation Rate}=\frac{Employed}{\text{Working age population}}$$
 
+![](archivos/Tesis/Participacion_laboral/year_age_ocup_g.gif){width=60%}
 
+![](archivos/Tesis/Participacion_laboral/inc_age_ocup_g.gif){width=70%}
 
 
 ### Intergenerational Elasticity 
+$$y_s=\text{Children's income}$$
+$$y_f=\text{Father's income (it could be with the mother, but there would be greater bias due to labor participation)}$$
+$$X=\text{Control Variables}$$
 
-
+$$y_s=\beta_0+\underbrace{\beta_1}_{\text{Intergenerational Elasticity}} y_f+\beta_2X+u_i$$
+The closer the beta is to 0, the greater the social mobility.
 
 
 

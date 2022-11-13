@@ -31,7 +31,7 @@ embed_youtube("Nlhg333-L9g")
 embed_youtube("Y89jBKEHp04")
 ```
 
-# Control Sintético ([Link](https://economics.mit.edu/files/11859) del Paper)
+# Control Sintético ([Link](https://sci-hub.se/https://doi.org/10.1198/jasa.2009.ap08746) del Paper)
 
 ```{r echo=FALSE}
 embed_youtube("PIzgnmcuaA8")

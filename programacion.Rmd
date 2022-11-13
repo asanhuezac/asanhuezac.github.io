@@ -11,9 +11,16 @@ output:
 - [R](archivos/Planilla_R.R)
 - [Python](archivos/Planilla_Python.py)
 - [Manim (Python)](archivos/Planilla Manim.ipynb)
-- [Cheatsheet Compilado (Stata, R & Python)](archivos/Cheatsheet_Compilado.pdf)
+- [Cheatsheet Compilado. Stata, R & Python (En desarrollo)](archivos/Cheatsheet_Compilado.pdf)
 - [Latex - Papers](archivos/Planilla_Papers.zip)
 - [Latex - Beamers](archivos/Planilla-Beamers.tex)
 
 
-# Aplicación de Códigos (En desarrollo)
+# Aplicación de Códigos (Próximamente)
+- Stata
+- R
+_ Python 
+
+# Bots (Próximamente)
+- Envio del informe IPOM e IEF a elección, en formato PDF mediante whatsapp y/o correo.
+

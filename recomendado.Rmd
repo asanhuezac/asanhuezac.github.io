@@ -71,6 +71,8 @@ library(vembedr)
 
  [Libgen](http://libgen.rs/)
  
+ [Banco Central de Chile](https://www.bcentral.cl/web/banco-central)
+ 
  [LarrainVial - Corredora de Bolsa](https://chile.larrainvial.com/que-hacemos/corredora-de-bolsa)
  
  [Data-Camp](https://www.datacamp.com/)
