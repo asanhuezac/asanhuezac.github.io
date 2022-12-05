@@ -19,8 +19,8 @@ output:
 # Aplicación de Códigos (Próximamente)
 - Stata
 - R
-_ Python 
+- Python 
 
 # Bots (Próximamente)
-- Envio del informe IPOM e IEF a elección, en formato PDF mediante whatsapp y/o correo.
+- Envio del IPOM, IEF o el Informe Anual de Productividad más actualizado, en formato PDF mediante whatsapp y/o correo.
 
