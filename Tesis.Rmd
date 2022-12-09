@@ -29,7 +29,7 @@ $$\text{Ocupation Rate}=\frac{Employed}{\text{Working age population}}$$
 ![](archivos/Tesis/Participacion_laboral/inc_age_ocup_g.gif){width=70%}
 
 
-### Intergenerational Elasticity 
+# Intergenerational Elasticity 
 $$y_s=\text{ln(Children's income) or Children's Education}$$
 $$y_f=\text{ln(Father's income) or  Father's Education}$$
 $$X=\text{Control Variables}$$
@@ -37,7 +37,32 @@ $$X=\text{Control Variables}$$
 $$y_s=\beta_0+\underbrace{\beta_1}_{\text{Intergenerational Elasticity}} y_f+\beta_2X+u_i$$
 The closer the beta is to 0, the greater the social mobility.
 
+## Great Gatsby Curve Evidence
 
-![](archivos/Tesis/movilidad/elast_lac.png){width=60%}
+In line with the existing literature, it can be seen that the greater the inequality, the less social mobility
 
-![](archivos/Tesis/movilidad/hist_elast_ing.png){width=60%}
+
+![](archivos/Tesis/Movilidad/gatsby_ing_economy.png){width=60%}
+
+![](archivos/Tesis/Movilidad/gatsby_educ_economy.png){width=60%}
+![](archivos/Tesis/Movilidad/income_education_economy.png){width=60%}
+
+There is a positive correlation between inequality and social mobility over time
+
+![](archivos/Tesis/Movilidad/income_elast_educ_gini_time.png){width=60%}
+
+![](archivos/Tesis/Movilidad/LAC_elast_educ_gini_time.png){width=60%}
+
+![](archivos/Tesis/Movilidad/region_elast_educ_gini_time.png){width=60%}
+
+
+
+
+
+
+
+
+
+
+
+
