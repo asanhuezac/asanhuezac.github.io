@@ -47,7 +47,7 @@ In line with the existing literature, it can be seen that the greater the inequa
 ![](archivos/Tesis/Movilidad/gatsby_educ_economy.png){width=60%}
 ![](archivos/Tesis/Movilidad/income_education_economy.png){width=60%}
 
-There is a positive correlation between inequality and social mobility over time
+There is a negative correlation between inequality and social mobility over time
 
 ![](archivos/Tesis/Movilidad/income_elast_educ_gini_time.png){width=60%}
 
