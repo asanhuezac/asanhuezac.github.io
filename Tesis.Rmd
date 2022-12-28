@@ -37,6 +37,12 @@ $$X=\text{Control Variables}$$
 $$y_s=\beta_0+\underbrace{\beta_1}_{\text{Intergenerational Elasticity}} y_f+\beta_2X+u_i$$
 The closer the beta is to 0, the greater the social mobility.
 
+![](archivos/Tesis/Movilidad/income_education_economy.png){width=60%}
+
+![](archivos/Tesis/Movilidad/educ_gob_economy.png){width=60%}
+
+![](archivos/Tesis/Movilidad/elast_glob_economy.png){width=60%}
+
 ## Great Gatsby Curve Evidence
 
 In line with the existing literature, it can be seen that the greater the inequality, the less social mobility
@@ -45,9 +51,6 @@ In line with the existing literature, it can be seen that the greater the inequa
 ![](archivos/Tesis/Movilidad/gatsby_ing_economy.png){width=60%}
 
 ![](archivos/Tesis/Movilidad/gatsby_educ_economy.png){width=60%}
-![](archivos/Tesis/Movilidad/income_education_economy.png){width=60%}
-
-There is a negative correlation between inequality and social mobility over time
 
 ![](archivos/Tesis/Movilidad/income_elast_educ_gini_time.png){width=60%}
 
