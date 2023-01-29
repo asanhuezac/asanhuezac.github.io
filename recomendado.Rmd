@@ -67,6 +67,9 @@ library(vembedr)
  [Manim (Python)](https://drive.google.com/drive/folders/1LG60_lgUwYq8GfzVRGrMiTmO-xCc4htR?usp=sharing)
 
 # Links de interés
+
+ [ChatGPT](https://openai.com/blog/chatgpt/)
+
  [Sci-Hub](https://sci-hub.se/)
 
  [Libgen](http://libgen.rs/)

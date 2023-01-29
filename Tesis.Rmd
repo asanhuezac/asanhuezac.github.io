@@ -7,6 +7,8 @@ output:
 
 # Social Movility Around the World (in progress). Working with [Claudio Montenegro](https://econ.uchile.cl/es/academico/cmontene) & [Javier Nuñez](https://econ.uchile.cl/es/academico/jnunez)
 
+- [Draft - Working Paper](archivos/Tesis/Tesis_working_paper_MOVILIDAD.pdf)
+
 $$\text{Coresidence Rate}=\frac{\text{Children living with their parents}}{\text{Total of Children}}$$
 
 ![](archivos/Tesis/Coresidencia/Cores_age.gif){width=60%}
