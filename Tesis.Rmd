@@ -5,9 +5,11 @@ output:
     highlight: textmate
 ---
 
-# Social Movility Around the World (in progress). Working with [Claudio Montenegro](https://econ.uchile.cl/es/academico/cmontene) & [Javier Nuñez](https://econ.uchile.cl/es/academico/jnunez)
+# Social Movility Around the World (in progress). Working with [Javier Nuñez](https://econ.uchile.cl/es/academico/jnunez) & [Claudio Montenegro](https://econ.uchile.cl/es/academico/cmontene) 
 
 - [Draft - Working Paper](archivos/Tesis/Tesis_working_paper_MOVILIDAD.pdf)
+
+![](archivos/Tesis/Surveys/hist.png){width=60%}
 
 $$\text{Coresidence Rate}=\frac{\text{Children living with their parents}}{\text{Total of Children}}$$
 
@@ -36,8 +38,8 @@ $$y_s=\text{ln(Children's income) or Children's Education}$$
 $$y_f=\text{ln(Father's income) or  Father's Education}$$
 $$X=\text{Control Variables}$$
 
-$$y_s=\beta_0+\underbrace{\beta_1}_{\text{Intergenerational Elasticity}} y_f+\beta_2X+u_i$$
-The closer the beta is to 0, the greater the social mobility.
+$$y_s=\beta_0+\underbrace{\beta_1}_{\text{Mobility Coefficient}} y_f+\beta_2X+u_i$$
+The closer $\beta_1$ is to 0, the greater the social mobility.
 
 ![](archivos/Tesis/Movilidad/income_education_economy.png){width=60%}
 
