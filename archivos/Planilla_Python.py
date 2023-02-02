@@ -266,7 +266,7 @@ conn.close() # Cerramos la conexión para liberar los recursos
 
 # REFINITIV
 import eikon as ek # Este paquete de Thomson Reuters nos sirve para acceder a datos financiero de Refinitiv
-ek.set_app_key('2ce95ab412bd413b8f76c6c644487942a079b9d5') # Ponemos el la clave de la API de nuestro refinitiv
+ek.set_app_key('numero_APP_KEY') # Ponemos el la clave de la API de nuestro refinitiv
 df1, err1 = ek.get_data(instruments = lista_de_nemos, fields = ["TR.FiTradeDate;TR.FiMaturityDate;TR.FiMaturityStandardYield; CF_LAST;..."])
 df1
 
