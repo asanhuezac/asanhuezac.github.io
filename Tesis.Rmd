@@ -5,13 +5,14 @@ output:
     highlight: textmate
 ---
 
-# Social Movility Around the World (in progress). Working with [Javier Nuñez](https://econ.uchile.cl/es/academico/jnunez) & [Claudio Montenegro](https://econ.uchile.cl/es/academico/cmontene) 
+# Intergenerational Mobility Around the World (in progress). Working with [Javier Nuñez](https://econ.uchile.cl/es/academico/jnunez) & [Claudio Montenegro](https://econ.uchile.cl/es/academico/cmontene) 
 
+- [Presentación 1](archivos/Tesis/Tesis_Presentacion_1.pdf)
 - [Draft - Working Paper](archivos/Tesis/Tesis_working_paper_MOVILIDAD.pdf)
 
 ![](archivos/Tesis/Surveys/hist.png){width=60%}
 
-$$\text{Coresidence Rate}=\frac{\text{Son's living with their father}}{\text{Son's not living with their father + Total of fathers}}$$
+$$\text{Coresidence Rate}=\frac{\text{Son's living with their father}}{\text{Total of Son's + Total of fathers}}$$
 
 ![](archivos/Tesis/Coresidencia/Cores_inc.gif){width=70%}
 
@@ -40,8 +41,8 @@ $$y_s=\text{ln(Children's income) or Children's Education}$$
 $$y_f=\text{ln(Father's income) or  Father's Education}$$
 $$X=\text{Control Variables}$$
 
-$$y_s=\beta_0+\underbrace{\beta_1}_{\text{Mobility Coefficient}} y_f+\beta_2X+u_i$$
-The closer $\beta_1$ is to 0, the greater the social mobility.
+$$y_s=\alpha+\underbrace{\beta}_{\text{Mobility Coefficient}} y_f+\gamma X+u_i$$
+The closer $\beta$ is to 0, the greater the social mobility.
 
 ![](archivos/Tesis/Movilidad/income_education_economy.png){width=60%}
 
@@ -60,8 +61,6 @@ In line with the existing literature, it can be seen that countries with higher 
 ![](archivos/Tesis/Movilidad/income_elast_educ_gini_time.png){width=60%}
 
 ![](archivos/Tesis/Movilidad/LAC_elast_educ_gini_time.png){width=60%}
-
-![](archivos/Tesis/Movilidad/region_elast_educ_gini_time.png){width=60%}
 
 
 
