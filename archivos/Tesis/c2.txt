@@ -1,0 +1,189 @@
+Valida Precios
+
+----------------------------------------------------------
+import pyodbc
+import pandas as pd
+import numpy as np
+import xlwings as xw
+import sys
+import math
+import warnings 
+import shutil
+import xlsxwriter
+import win32com.client
+from PIL import ImageGrab
+from pathlib import Path
+import os
+import locale
+
+warnings.filterwarnings('ignore') # ignoramos alertas
+
+acc = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=\\petrohue\riesgofinanciero$\Acciones\BD_MRV_RISK.accdb;')
+
+FECHA_INFORME = pd.read_sql_query('select * from tbl_FechaCierre', acc)
+
+acc.close()
+
+FECHA_INFORME = FECHA_INFORME.max()
+FECHA_INFORME = FECHA_INFORME[0]
+FECHA_INFORME
+----------------------------------------------------------
+acc = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=\\petrohue\riesgofinanciero$\Acciones\BD_MRV_Risk.accdb;')
+Fecha_Cierre = pd.read_sql_query('select * from tbl_FechaCierre', acc) #obtine fecha Cierre del access
+Fecha_Cierre=Fecha_Cierre['FechaCierre']
+Fecha_Cierre = Fecha_Cierre.values[0].astype('datetime64[ns]')
+fechaC=pd.to_datetime(str(Fecha_Cierre)).strftime('%Y%m%d') #cambiar a formatos YYYYMMDD
+----------------------------------------------------------
+Fecha_Cierre
+fechaC_1=pd.to_datetime(str(Fecha_Cierre)).strftime('%Y-%m-%d')
+----------------------------------------------------------
+conn = pyodbc.connect('Driver={SQL Server};'
+                      'Server=ALASKA;'
+                      'Database=RFinanciero;'
+                      'Trusted_Connection=yes;')
+
+cursor = conn.cursor()
+
+sql= "SELECT FECHA from dbo.TBL_SRF_PRM_PLAZO_FECHA" # Si es feriado en chile pero en colombia no, agregar _COLOMBIA
+sql3= "SELECT * from dbo.TBL_SRF_PRM_PLAZO_FECHA" # Si es feriado en chile pero en colombia no, agregar _COLOMBIA
+sql1= "select * from TBL_SRF_FACTOR_RIESGO" #where ID_TIPO_FACTOR=3
+sql2= "select [FECHA_CIERRE],[ID_FACTOR_RIESGO],[PRECIO] from TBL_SRF_SERIE_PRECIOS WHERE FECHA_CIERRE >'2016-01-01' AND ID_PLAZO='1'"
+sql4= "select * from TBL_SRF_ADR_CARTERA"
+
+prm_fecha = pd.read_sql(sql,conn)
+prm_fecha2 = pd.read_sql(sql,conn)
+prmfecha = pd.read_sql(sql3,conn)
+Factor_Riesgo= pd.read_sql(sql1,conn)
+Precios=pd.read_sql(sql2 , conn)
+Precios_20=pd.read_sql(sql2 , conn)
+tablita=pd.read_sql(sql4, conn)
+
+cursor.close()
+conn.close()
+
+#______________Fecha Cierre t-1_________________
+#prm_fecha = pd.read_sql('SELECT FECHA from dbo.TBL_SRF_PRM_PLAZO_FECHA',alk)
+prm_fecha = prm_fecha[prm_fecha.FECHA<=Fecha_Cierre]
+prm_fecha = pd.DataFrame(prm_fecha.groupby(['FECHA'])['FECHA'].count()).tail(2)
+Fechat_1 = prm_fecha.index.values[0].astype('datetime64[D]')
+
+fechaT=str(pd.to_datetime(str(Fechat_1)).strftime('%Y%m%d')) #fecha cierre t-1
+----------------------------------------------------------
+#Cartera de Acciones
+Cartera_RV=pd.read_excel (r'\\petrohue\riesgofinanciero$\SRF\Nemos_RV.xlsx')
+Factor_Riesgo=Factor_Riesgo[['ID_FACTOR_RIESGO','CLAVE_ISIN','NOMBRE_FACTOR','ID_TIPO_FACTOR']]
+Cart_RV_Val=pd.merge(Cartera_RV,Factor_Riesgo,left_on='TICKER',right_on='CLAVE_ISIN')
+Cart_RV_Val=Cart_RV_Val[['TICKER','ID_FACTOR_RIESGO']]
+Cart_RV_Val
+----------------------------------------------------------
+prmfecha['FECHA'] =  pd.to_datetime(prmfecha['FECHA'])
+vector = prmfecha[prmfecha['ID_PLAZO'] == 1]
+vector =  vector[vector['FECHA'] <= fechaC].sort_values('FECHA') # filtro menores a fecha de cierre desde el mes pasado
+vector = vector.tail(1001) #ultimas 1001 fechas
+vector=vector.drop(['ID_PLAZO','FECHA_DIA','DIAS_PLAZO'],1)
+----------------------------------------------------------
+Cart_RV_Val=Cart_RV_Val[['TICKER','ID_FACTOR_RIESGO']]
+Precios=pd.merge(Cart_RV_Val,Precios,on='ID_FACTOR_RIESGO')
+Precios=pd.merge(vector,Precios,left_on='FECHA',right_on='FECHA_CIERRE')
+Precios=Precios.drop(['FECHA','ID_FACTOR_RIESGO'],1)
+Precios
+----------------------------------------------------------
+#VECTOR DE PRECIOS
+Vector_resultados=pd.pivot_table(Precios,values='PRECIO',index=['FECHA_CIERRE'],columns=['TICKER'])
+Vector_resultados.fillna(method='bfill',inplace=True)# Repite el ultimo precio hacia atras si no tiene los suficientes. Arreglar!!!
+Prec=Vector_resultados
+----------------------------------------------------------
+#VECTOR DE RETORNOS
+Vector_resultados_log=np.log(Vector_resultados)-np.log(Vector_resultados.shift(1))
+Vector_resultados_log=Vector_resultados_log.tail(1000)
+----------------------------------------------------------
+Retornos=Vector_resultados_log
+Retornos.to_csv(r'\\petrohue\riesgofinanciero$\SRF\Ret_RV_nemos.csv',sep=';',decimal=',',index=True)
+Prec.to_csv(r'\\petrohue\riesgofinanciero$\SRF\Prec_RV_nemos.csv',sep=';',decimal=',',index=True)
+----------------------------------------------------------
+# Generamos un archivo csv llamado 'Var99' tomando los retornos de todas las acciones en todos los periodos disponibles
+Var99=pd.DataFrame(Retornos.quantile(.01,interpolation='nearest')) # Generamos un nuevo df que tirará 2 columnas. 
+Var99.rename(columns={0.01: 'VaR99'}, inplace = True) # Cambiamos el nombre de la columna indice
+Var99['Fecha_cierre']=fechaC_1 # Ponemos una columna que pone la fecha de cierre correspondiente
+Var99.reset_index() # Reseteamos indice
+Var99.to_csv(r'\\petrohue\riesgofinanciero$\SRF\var99.csv',sep=';',decimal=',',index=True) # Exportamos el resultado a formato csv
+Var99
+----------------------------------------------------------
+# Guardamos la fecha de cierre para poder mandar el mail. 
+fecha_cierre=Retornos.reset_index()
+fecha_cierre=fecha_cierre.tail(1)
+fecha_cierre=fecha_cierre.iat[0,0]
+fecha_cierre=fecha_cierre.strftime('%m-%d-%Y') 
+----------------------------------------------------------
+Retornos3=Retornos.tail(1) # Agarramos la última fecha de la base retornos. 
+Retornos3=pd.melt(Retornos3) # Transponemos la base para tener dos variables, los ticket y sus valores
+Retornos3
+----------------------------------------------------------
+if len(Retornos3.loc[Retornos3['value']>0.05, ['TICKER']]['TICKER'].tolist())>0: 
+    superiores=Retornos3.loc[Retornos3['value']>0.05, ['TICKER', 'value']]
+    superiores['value']=round(superiores['value']*100, 2) 
+    superiores=superiores.sort_values(by='value', ascending=False)
+    superiores['value']=superiores['value'].astype(str)+'%'
+    superiores= '''<h3> Las acciones que presentan un retorno mayor a 5% son: </h3>
+                   {}'''.format(superiores.to_html(index=False))
+else: 
+    superiores= ' No hay acciones con un retorno mayor a 5%'
+----------------------------------------------------------
+if len(Retornos3.loc[Retornos3['value']<-0.05, ['TICKER']]['TICKER'].tolist())>0: # Evaluamos condición en las acciones 
+    inferiores=Retornos3.loc[Retornos3['value']<-0.05, ['TICKER', 'value']]
+    inferiores['value']=round(inferiores['value']*100, 2)
+    inferiores=inferiores.sort_values(by='value', ascending=True)
+    inferiores['value']=inferiores['value'].astype(str)+'%'
+    inferiores= '''<h3> Las acciones que presentan un retorno menor a -5% son: </h3>
+                   {}'''.format(inferiores.to_html(index=False))
+else: 
+    inferiores= ' No hay acciones con un retorno menor a -5%'
+----------------------------------------------------------
+Precio_na=Prec.tail(1) 
+Precio_na=pd.melt(Precio_na)
+Precio_na.drop_duplicates(subset='TICKER', keep='first', inplace=True, ignore_index=True) # Quitamos duplicados si los tiene
+Precio_na["TICKER"][Precio_na["value"].isna()].tolist()
+if len(Precio_na["TICKER"][Precio_na["value"].isna()].tolist())>0: # Evaluamos condición de si hay missing values
+    nemos_na= 'Las acciones que presentan precios faltantes son: ' + "\n" + str(Precio_na["TICKER"][Precio_na["value"].isna()].tolist()) 
+else:
+    nemos_na= ' No existen precios faltantes'
+----------------------------------------------------------
+# Outliers
+Retornos4=Retornos.tail(200) # Agarramos los últimos 200 precios de las acciones
+
+Q1 = Retornos4.quantile(0.25) # Cuartil 1 
+Q3 = Retornos4.quantile(0.75) # Cuartil 3
+IQR = Q3 - Q1 # Rango intercuartil
+SUP = Q3+1.5*IQR # Rango superior
+INF = Q1-1.5*IQR # Rango inferior
+
+sin_outliers = Retornos4[((Retornos4 > INF) | (Retornos4 < SUP))] # Generamos los últimos 200 precios sin outliers
+
+p99=sin_outliers.quantile(0.99) # Generamos el limite superior del VAR
+p01=sin_outliers.quantile(0.01) # Generamos el Limite inferior del VAR
+
+Retornos5=Retornos.tail(1) # Agarramos las acciones a la fecha de cierre
+Retornos5=Retornos5[((Retornos5>p99) | (Retornos5<p01))] # Nos quedamos con los retornos con outliers
+Retornos5=Retornos5.dropna(axis=1) # Quitamos los NA
+Retornos5=pd.melt(Retornos5) # Transponemos la base para tener dos variables, los ticket y sus valores
+Retornos5
+----------------------------------------------------------
+if len(Retornos5['TICKER'].tolist())>0: # Vemos si existen acciones con outliers
+    outliers=Retornos5
+    outliers=outliers.sort_values(by='value', ascending=False) # Ordenamos de manera descendente
+    outliers['value']=round(outliers['value']*100, 2) # Redondeamos a dos decimales
+    outliers['value']=outliers['value'].astype(str)+'%' # Le ponemos el porcentaje
+    outliers= '''<h3> Las acciones que presentan un retorno mayor al 99% o menor al 1% son: </h3>
+                   {}'''.format(outliers.to_html(index=False))    
+else: 
+    outliers= ' No existen outliers'
+----------------------------------------------------------
+import win32com.client as win32
+outlook = win32.Dispatch('outlook.application')
+mail = outlook.CreateItem(0) # Nuevo correo
+mail.To = 'riesgofinanciero@larrainvial.com' # Destinatario
+mail.Subject = 'Valida Precios al ' + str(Fechat_1+1) # Asunto
+mail.HTMLBody = nemos_na + outliers + superiores + inferiores # Cuerpo del mail
+mail.Send() # Mandamos el correo
+----------------------------------------------------------
+

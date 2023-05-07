@@ -1,0 +1,157 @@
+Ventas Cortas
+
+import pyodbc
+import pandas as pd
+import numpy as np
+import sys
+import math
+import datetime
+import os
+import win32com.client
+import xlwings as xw
+from xlwings import Range, constants
+from xlwings.constants import DeleteShiftDirection
+from datetime import date
+import locale
+
+------------------------------------------------------
+
+acc = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=\\petrohue\riesgofinanciero$\Acciones\BD_MRV_RISK.accdb;')
+
+Fecha_Cierre = pd.read_sql_query('select * from tbl_FechaCierre', acc) #obtine fecha Cierre del access
+Fecha_Cierre=Fecha_Cierre['FechaCierre']
+Fecha_Cierre = Fecha_Cierre.values[0].astype('datetime64[ns]')
+
+fechaC=pd.to_datetime(str(Fecha_Cierre)).strftime('%Y%m%d') #Fecha cierre
+
+------------------------------------------------------
+
+conn = pyodbc.connect('Driver={SQL Server};'
+                      'Server=ALASKA;'
+                      'Database=RFinanciero;'
+                      'Trusted_Connection=yes;')
+
+cursor = conn.cursor()
+
+sql= "SELECT FECHA from dbo.TBL_SRF_PRM_PLAZO_FECHA"
+sql1= "select * from TBL_SRF_FACTOR_RIESGO"
+sql2="SELECT * from TBL_SRF_PLAZO"
+
+prm_fecha = pd.read_sql(sql,conn)
+Factor_Riesgo= pd.read_sql(sql1,conn)
+Plazos=pd.read_sql(sql2,conn)
+
+cursor.close()
+conn.close()
+
+#______________Fecha Cierre t-1_________________
+#prm_fecha = pd.read_sql('SELECT FECHA from dbo.TBL_SRF_PRM_PLAZO_FECHA',alk)
+prm_fecha = prm_fecha[prm_fecha.FECHA<=Fecha_Cierre]
+prm_fecha = pd.DataFrame(prm_fecha.groupby(['FECHA'])['FECHA'].count()).tail(2)
+Fechat_1 = prm_fecha.index.values[0].astype('datetime64[D]')
+
+fechaT=str(pd.to_datetime(str(Fechat_1)).strftime('%Y%m%d')) #fecha cierre t-1
+
+------------------------------------------------------
+locale.setlocale(locale.LC_TIME, "es_ES")
+Mes= str(pd.to_datetime(str(fechaC)).strftime('%B')).capitalize()
+Mes#Mes asunto correo
+
+
+------------------------------------------------------
+fec_bec=pd.to_datetime(str(Fecha_Cierre)).strftime('%d-%m')
+fec_bec
+
+
+------------------------------------------------------
+
+Fecha_mail = str(pd.to_datetime(str(Fecha_Cierre)).strftime('%Y%m%d'))
+Fecha_mail
+
+
+------------------------------------------------------
+
+outlook = win32com.client.Dispatch("Outlook.Application").GetNamespace("MAPI")
+inbox = outlook.GetDefaultFolder(6) 
+messages = inbox.Items
+messages.Sort("[ReceivedTime]", True)
+path = r"\\petrohue\riesgofinanciero$\VentasCortas\BEC"
+attach_name = "Operaciones_ventas_cortas"+Fecha_mail+".xlsx"
+
+j=0
+for message in messages:
+    try:
+        sender = message.Sender.GetExchangeUser().PrimarySmtpAddress
+    except:
+        sender = message.SenderEmailAddress
+    sender = sender.lower()
+    sub= message.Subject
+ 
+
+    if sub==('Operaciones Simultáneas y Prestamos por instrumentos Vigentes '+ Mes):
+        print('Correo encontrado')
+        #print (message.body)
+        attachments = message.Attachments
+        for k in range(1,len(attachments)+1):
+            print(attachments.Item(k))
+            if ('Operaciones Ventas Cortas '+Mes+' 2023.xlsx'  in str(attachments.Item(k))):
+                    attachments.Item(k).SaveAsFile(os.path.join(path, str(attach_name)))
+                
+        break
+        
+    j=j+1
+    if j ==1000:
+        break
+
+
+------------------------------------------------------
+bec=pd.read_excel (r'\\petrohue\riesgofinanciero$\VentasCortas\BEC\Operaciones_ventas_cortas'+Fecha_mail+'.xlsx',sheet_name=fec_bec)#fec_bec
+bec=bec[["Unnamed: 1","Unnamed: 10","Unnamed: 16"]].reset_index(drop=True).dropna() # Sacamos las columnas que sobran y los NA 
+bec.rename(columns={'Unnamed: 1':'Nemotécnico','Unnamed: 10':'Unidades','Unnamed: 16':'Monto en $'}, inplace = True) # Renombramos las columnas que quedan
+bec=bec.reset_index(drop=True) # Reiniciamos el índice de observaciones
+bec['N° Neg.']=1 # Creamos esta columna que siempre será 1
+bec['Fecha']=pd.to_datetime(Fecha_Cierre).strftime('%d-%m-%Y') # Creamos la columna fecha, las obs están en t-1
+bec=bec[['Fecha','Nemotécnico','N° Neg.','Unidades','Monto en $']] # Reordenamos las columnas para luego pegar fácil
+bec
+
+
+------------------------------------------------------
+print("Si el df obtenido de la bec no aparece aquí o hay algo mal, hay que hacer el trabajo manual")
+resp=input("¿Son correctos los valores BEC? (y/n)")
+if resp=="n":
+    sys.exit()
+
+------------------------------------------------------
+bec_historico = pd.read_excel(r'\\petrohue\riesgofinanciero$\VentasCortas\Informe_VentasCortas_PY_REFINITIV.xlsm', sheet_name='BEC') # Obtenemos el df que tenemos del excel
+bec_historico = bec_historico.drop(columns=["Unnamed: 5", "Unnamed: 6", "Unnamed: 7", "Unnamed: 8"]) # Eliminamos las columnas que sobran
+bec_historico.rename(columns={'    Monto en $': 'Monto en $'}, inplace=True) # Renombramos las columnas para que se haga el append
+bec_historico
+
+
+------------------------------------------------------
+nuevo_bec_historico=pd.concat([bec_historico,bec], ignore_index=True)
+nuevo_bec_historico
+
+
+
+------------------------------------------------------
+bcs=pd.read_excel (r'\\petrohue\riesgofinanciero$\VentasCortas\BCS' + '\\' + Fecha_mail+ '_BCS.xlsx',sheet_name='VC', header=None)
+bcs.rename(columns={0:"NEMO", 1:"N", 2:'CANTIDAD', 3:"MONTO"}, inplace = True) # Renombramos las columnas que quedan
+bcs['FECHA']=pd.to_datetime(Fecha_Cierre).strftime('%d-%m-%Y')
+bcs=bcs[['FECHA','NEMO','N','CANTIDAD','MONTO']] # Reordenamos las columnas para luego pegar fácil
+bcs
+
+------------------------------------------------------
+bcs_historico = pd.read_excel(r'\\petrohue\riesgofinanciero$\VentasCortas\Informe_VentasCortas_PY_REFINITIV.xlsm', sheet_name='BCS') # Obtenemos el df que tenemos del excel
+bcs_historico
+
+
+------------------------------------------------------
+nuevo_bcs_historico=pd.concat([bcs_historico,bcs], ignore_index=True)
+nuevo_bcs_historico
+------------------------------------------------------
+wb = xw.Book(r'\\petrohue\riesgofinanciero$\VentasCortas\Informe_VentasCortas_PY_REFINITIV.xlsm')
+wb.sheets["BEC"].range('A1').options(index=False,header=True).value = nuevo_bec_historico #Pegamos el nuevo BEC histórico
+wb.sheets["BCS"].range('A1').options(index=False,header=True).value = nuevo_bcs_historico #Pegamos el nuevo BEC histórico
+
+

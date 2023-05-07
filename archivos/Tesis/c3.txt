@@ -1,0 +1,291 @@
+Arbitraje 
+
+------------------------------------------------------------
+import pyodbc
+import pandas as pd
+import numpy as np
+import xlwings as xw
+import sys
+import math
+import warnings 
+import shutil
+import xlsxwriter
+import win32com.client
+from PIL import ImageGrab
+from pathlib import Path
+import os
+import locale
+
+warnings.filterwarnings('ignore') # ignoramos alertas
+
+acc = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=\\petrohue\riesgofinanciero$\Acciones\BD_MRV_RISK.accdb;')
+
+FECHA_INFORME = pd.read_sql_query('select * from tbl_FechaCierre', acc)
+
+acc.close()
+
+FECHA_INFORME = FECHA_INFORME.max()
+FECHA_INFORME = FECHA_INFORME[0]
+FECHA_INFORME
+------------------------------------------------------------
+acc = pyodbc.connect(r'Driver={Microsoft Access Driver (*.mdb, *.accdb)};DBQ=\\petrohue\riesgofinanciero$\Acciones\BD_MRV_Risk.accdb;')
+Fecha_Cierre = pd.read_sql_query('select * from tbl_FechaCierre', acc) #obtine fecha Cierre del access
+Fecha_Cierre=Fecha_Cierre['FechaCierre']
+Fecha_Cierre = Fecha_Cierre.values[0].astype('datetime64[ns]')
+fechaC=pd.to_datetime(str(Fecha_Cierre)).strftime('%Y%m%d') #cambiar a formatos YYYYMMDD
+------------------------------------------------------------
+Fecha_Cierre
+fechaC_1=pd.to_datetime(str(Fecha_Cierre)).strftime('%Y-%m-%d')
+------------------------------------------------------------
+conn = pyodbc.connect('Driver={SQL Server};'
+                      'Server=ALASKA;'
+                      'Database=RFinanciero;'
+                      'Trusted_Connection=yes;')
+
+cursor = conn.cursor()
+
+sql= "SELECT FECHA from dbo.TBL_SRF_PRM_PLAZO_FECHA" # Si es feriado en chile pero en colombia no, agregar _COLOMBIA
+sql3= "SELECT * from dbo.TBL_SRF_PRM_PLAZO_FECHA" # Si es feriado en chile pero en colombia no, agregar _COLOMBIA
+sql1= "select * from TBL_SRF_FACTOR_RIESGO" #where ID_TIPO_FACTOR=3
+sql2= "select [FECHA_CIERRE],[ID_FACTOR_RIESGO],[PRECIO] from TBL_SRF_SERIE_PRECIOS WHERE FECHA_CIERRE >'2016-01-01' AND ID_PLAZO='1'"
+sql4= "select * from TBL_SRF_ADR_CARTERA"
+
+prm_fecha = pd.read_sql(sql,conn)
+prm_fecha2 = pd.read_sql(sql,conn)
+prmfecha = pd.read_sql(sql3,conn)
+Factor_Riesgo= pd.read_sql(sql1,conn)
+Precios=pd.read_sql(sql2 , conn)
+Precios_20=pd.read_sql(sql2 , conn)
+tablita=pd.read_sql(sql4, conn)
+
+cursor.close()
+conn.close()
+
+#______________Fecha Cierre t-1_________________
+#prm_fecha = pd.read_sql('SELECT FECHA from dbo.TBL_SRF_PRM_PLAZO_FECHA',alk)
+prm_fecha = prm_fecha[prm_fecha.FECHA<=Fecha_Cierre]
+prm_fecha = pd.DataFrame(prm_fecha.groupby(['FECHA'])['FECHA'].count()).tail(2)
+Fechat_1 = prm_fecha.index.values[0].astype('datetime64[D]')
+
+fechaT=str(pd.to_datetime(str(Fechat_1)).strftime('%Y%m%d')) #fecha cierre t-1
+------------------------------------------------------------
+#Cartera de Acciones (nos da la lista de acciones disponibles)
+Cartera_RV=pd.read_excel (r'\\petrohue\riesgofinanciero$\SRF\Nemos_RV.xlsx') # Leemos el archivo donde salen la lista de Acciones
+Factor_Riesgo=Factor_Riesgo[['ID_FACTOR_RIESGO','CLAVE_ISIN','NOMBRE_FACTOR','ID_TIPO_FACTOR']]
+Cart_RV_Val=pd.merge(Cartera_RV,Factor_Riesgo,left_on='TICKER',right_on='CLAVE_ISIN') # Hacemos el merge con este otro df usando a TICKER como variable clave
+Cart_RV_Val=Cart_RV_Val[['TICKER','ID_FACTOR_RIESGO']] # Nos quedamos con las columnas que nos interesan
+Cart_RV_Val
+------------------------------------------------------------
+prmfecha['FECHA'] =  pd.to_datetime(prmfecha['FECHA'])
+vector = prmfecha[prmfecha['ID_PLAZO'] == 1]
+vector =  vector[vector['FECHA'] <= fechaC].sort_values('FECHA') # filtro menores a fecha de cierre desde el mes pasado
+vector = vector.tail(1001) #ultimas 1001 fechas
+vector=vector.drop(['ID_PLAZO','FECHA_DIA','DIAS_PLAZO'],1) # Nos quedamos con el vector que nos interesa
+vector
+------------------------------------------------------------
+Cart_RV_Val=Cart_RV_Val[['TICKER','ID_FACTOR_RIESGO']]
+Precios=pd.merge(Cart_RV_Val,Precios,on='ID_FACTOR_RIESGO')
+Precios=pd.merge(vector,Precios,left_on='FECHA',right_on='FECHA_CIERRE')
+Precios=Precios.drop(['FECHA','ID_FACTOR_RIESGO'],1)
+Precios
+------------------------------------------------------------
+# Rescatamos la fecha de hace 20 días 
+inicio = prm_fecha2[prm_fecha2['FECHA']<=fechaC_1].drop_duplicates().tail(20) # Sacamos las últimas 20 fechas 
+inicio.reset_index(inplace=True, drop=True) # Reseteamos índice 
+inicio.iat[0,0] # Vemos cuál es la fecha de hace 20 días
+------------------------------------------------------------
+# Generamos nuevo df de los precios en las últimas 20 fechas 
+Precios_20=pd.DataFrame(Precios) # Generamos un nuevo df igual al df 'Precios'
+Precios_20=Precios_20[Precios_20['FECHA_CIERRE']>=inicio.iat[0,0]] # Filtramos el df de Precios en las útlimas 20 fechas
+Precios_20.reset_index(inplace=True,drop=True) # Reseteamos indice
+Precios_20
+------------------------------------------------------------
+# Sacamos el precio promedio de las acciones en las 20 últimas fechas 
+promedio_20=Precios_20.groupby(['TICKER'])['PRECIO'].mean()
+promedio_20=pd.DataFrame(promedio_20) 
+promedio_20=promedio_20.reset_index() # Esto soluciona el problema de la "columna agrupada"
+promedio_20
+------------------------------------------------------------
+# Seguir estudiando esto. Usar el TC promedio de los últimos 20 días, no solo el de cierre. 
+multiples_tc=pd.DataFrame(Precios_20) # Generamos un nuevo df igual al df 'Precios'
+multiples_tc=Precios_20.loc[Precios_20['TICKER'].str.contains("Curncy")]
+multiples_tc.reset_index(inplace=True, drop=True) # Reseteamos índice
+multiples_tc
+------------------------------------------------------------
+# Sacamos el promedio de los TC en las 20 últimas fechas 
+tc_20=multiples_tc.groupby(['TICKER'])['PRECIO'].mean()
+tc_20=pd.DataFrame(tc_20) 
+tc_20=tc_20.reset_index() # Esto soluciona el problema de la "columna agrupada"
+tc_20.rename(columns={'TICKER': 'moneda'},inplace=True)
+tc_20
+------------------------------------------------------------
+# LLAMAMOS LA LISTA DE NEMOS DE INTERÉS
+nemos_arbitraje=pd.read_excel(r'\\petrohue\riesgofinanciero$\Arbitraje\nemos_arbitraje.xlsx')
+nemos_arbitraje
+------------------------------------------------------------
+# Generamos el df con los nemos y el tipo de cambio promedio de los últimos 20 días hábiles
+nemo_tc_20=pd.DataFrame(nemos_arbitraje) # Generamos un nuevo df igual al df 'Precios'
+nemo_tc_20['moneda'] = nemo_tc_20['NEMOS'].apply(lambda x: 'USDCLP Curncy' if 'US' in x else ('USDPEN Curncy' if 'PEN' in x else 'USDCOP Curncy'))
+
+# Generamos la función que nos ayudará a generar la nueva columna donde guardamos la moneda de los nemos de interés
+def currency(row):
+    if 'US' in row['NEMOS']:
+        return 'USDCLP Curncy'
+    elif 'COP' in row['NEMOS']:
+        return 'USDCOP Curncy'
+    elif 'PEN' in row['NEMOS']:
+        return 'USDPEN Curncy'
+    elif 'CHL' in row['NEMOS']:
+        return 'USDCHL Curncy'
+    else:
+        return 'desconocido'
+
+# # Crear nueva columna 'moneda' utilizando la función personalizada
+nemo_tc_20['moneda'] = nemo_tc_20.apply(currency, axis=1)
+nemo_tc_20=pd.merge(nemo_tc_20, tc_20, how='left', on='moneda') # Pegamos la info del tipo de cambio
+nemo_tc_20.rename(columns={'PRECIO': 'TC_20'},inplace=True)
+del nemo_tc_20['moneda'] # Eliminamos la columna auxiliar que nos ayudó a hacer el merge con los tipos de cambio promedio a 20 días
+nemo_tc_20['TC_20']=round(nemo_tc_20['TC_20'],1) # Redondeamos a un decimal 
+nemo_tc_20.rename(columns={'NEMOS': 'NEMO1'},inplace=True) # Renombramos esta columna para luego hacer merge con ADR
+nemo_tc_20
+------------------------------------------------------------
+# VEMOS LA TABLITA DONDE APARECE EL EMISOR Y EL VALOR DE MERCADO. 
+tablita.rename(columns={'NEMO': 'NEMO1'},inplace=True) # Renombramos esta columna para luego hacer merge con ADR
+tablita
+------------------------------------------------------------
+# FILTRAMOS LOS NEMOS DE INTERÉS Y COLUMNAS RELEVANTES 
+tablita=nemos_arbitraje.merge(tablita, left_on='NEMOS',right_on='NEMO1', how = 'right') # Pegamos los nemos de interés
+tablita=tablita[tablita['NEMOS']==tablita['NEMO1']] # Filtramos por los nemos de interés
+tablita.reset_index(inplace=True, drop=True) # Reseteamos indice
+tablita=tablita[["FECHA","NEMO1","EMISOR", "VP", "moneda"]] # Nos quedamos con las columnas que nos interesan
+tablita=pd.merge(tablita, nemo_tc_20, how='left', on='NEMO1') # Pegamos la info del tipo de cambio
+del tablita['moneda'] # Eliminamos la columna moneda
+tablita
+------------------------------------------------------------
+# Este df tiene el VP de cada NEMO relevante en la última fecha (es posible que hayan menos nemos que los de interés)
+tablita2=pd.DataFrame(tablita) # Generamos el nuevo df
+tablita2=tablita2[["FECHA","NEMO1", "VP"]] # Nos quedamos con las columnas que nos interesan
+tablita2=tablita2[tablita2['FECHA']>=inicio.iat[19,0]] # Filtramos en la fecha de t-1. 
+tablita2=pd.DataFrame(tablita2.groupby(['NEMO1'])['VP'].mean())
+tablita2=tablita2.reset_index() # Resolvemos el problema de la columna agrupada
+tablita2['VP']=round(tablita2['VP']) # Redondeamos el valor de mercado a un decimal
+tablita2
+------------------------------------------------------------
+# Este df contiene la info del EMISOR EN DETALLE
+tablita3=pd.DataFrame(tablita) # Generamos este nuevo df
+tablita3=tablita3[["NEMO1","EMISOR"]] # Nos quedamos con las columnas que nos interesan
+tablita3=tablita3.drop_duplicates(keep='first') # Botamos duplicados quedándonos con la info del emisor para cada nemo
+tablita3 = tablita3[tablita3["EMISOR"].str.contains("None") == False] # Quitamos las observaciones donde sale "None", esto no quita info relevante. Las filas eliminadas tienen el nemo relevante en otra fila
+tablita3.reset_index(inplace=True, drop=True) # Reseteamos el índice
+tablita3
+------------------------------------------------------------
+# Hacemos estos df para luego hacer merge con la base del ADR 
+Precios1=promedio_20
+Precios1= Precios1.rename(columns={'TICKER':'NEMO1','PRECIO':'PRECIO1'})
+Precios2=promedio_20
+Precios2= Precios2.rename(columns={'TICKER':'NEMO2','PRECIO':'PRECIO2'})
+------------------------------------------------------------
+# Importamos datos del ADR
+ADR=pd.read_excel(r'\\petrohue\riesgofinanciero$\Acciones\RES RV\Python\pyg_adr_final_inicio29jul22.xlsx', sheet_name="Emisor_Homologa")
+ADR=ADR[["NEMO1","NEMO2","FACTOR", "TC2"]] # Nos quedamos con las variables relevantes
+ADR=ADR[(ADR["NEMO2"].notna())] # Nos quedamos con las obs donde el subyacente tenga algún nemo
+ADR=ADR[(ADR['NEMO1']!='ECH US 09/16/22 C29 Equity') & (ADR['NEMO2']!='ECH US 09/16/22 C29 Equity')] # Eliminamos la opcíon que hay en la base de datos. 
+ADR.reset_index(inplace=True, drop=True) # Reseteamos índice
+ADR[['NEMO1', 'NEMO2']] = ADR[['NEMO1', 'NEMO2']].fillna('-') # Reemplazamos los nemos faltantes (si los hay) por un guíon 
+ADR
+------------------------------------------------------------
+# HACEMOS EL MERGE DE LOS EMISORES DE LOS NEMOS DE INTERÉS Y EL VALOR DE MERCADO EN T-1
+ADR=pd.merge(ADR, tablita3, how='right', on='NEMO1') 
+ADR=pd.merge(ADR, tablita2, how='left', on='NEMO1') 
+
+# HACEMOS EL MERGE DE LOS PRECIOS PROMEDIOS DE LOS ÚLTIMOS 20 DÍAS PARA EL ADR Y EL SUBYACENTE
+ADR=pd.merge(ADR, Precios1, how='left', on='NEMO1') 
+ADR=pd.merge(ADR, Precios2, how='left', on='NEMO2')
+
+# HACEMOS EL MERGE DEL TIPO DE CAMBIO PROMEDIO DE LOS ÚLTIMOS 20 DÍAS PARA EL ADR
+ADR=pd.merge(ADR, nemo_tc_20, how='left', on='NEMO1')
+
+ADR.rename(columns={'NEMO1': 'ADR', 'NEMO2': 'SUBYACENTE', 'PRECIO1': 'PRECIO ADR', 'PRECIO2': 'PRECIO SUBYACENTE'},inplace=True) # Cambiamos nombres para que se vea bonito en mail
+ADR=ADR[['EMISOR','ADR', 'PRECIO ADR','SUBYACENTE', 'PRECIO SUBYACENTE', 'FACTOR', 'VP', 'TC_20', 'TC2']] # Reordenamos las columnas
+ADR
+------------------------------------------------------------
+# AJUSTAMOS LOS PRECIOS PROMEDIOS DE LOS ÚLTIMOS 20 DÍAS A UNA MONEDA COMÚN, EL DOLAR AMERICANO (REVISAR) 
+ADR['PRECIO SUBYACENTE']=(ADR['PRECIO SUBYACENTE']*ADR['FACTOR']*ADR['TC2'])/ADR['TC_20']
+ADR
+------------------------------------------------------------
+# GENERAMOS LAS DIFERENCIAS DE LOS PRECIOS DE LOS ÚLTIMOS 20 DÍAS, RESPECTO Al ADR
+ADR['DIFERENCIA EN %']=(ADR['PRECIO ADR']/ADR['PRECIO SUBYACENTE']-1)*100 # GENERAMOS ESTAS COLUMNAS DE DIFERENCIAS (SIEMPRE RESPECTO AL NEMO1)
+ADR['DIFERENCIA EN %']=round(ADR['DIFERENCIA EN %'],3) # Dejamos el número redondeando a 2 decimales
+ADR=ADR.sort_values(by='DIFERENCIA EN %', ascending=False) # Ordenamos el df por las DIFERENCIA2 de manera descendente
+ADR.reset_index(inplace=True, drop=True)
+ADR
+------------------------------------------------------------
+# Este df contiene la info que se envía por mail
+soporte1=pd.DataFrame(ADR)
+soporte1=soporte1[['EMISOR','ADR', 'PRECIO ADR','SUBYACENTE', 'PRECIO SUBYACENTE', 'DIFERENCIA EN %', 'VP']] # Reordenamos las columnas
+soporte1.rename(columns={'VP': 'MONTO EN DÓLARES'}, inplace=True) # Cambiamos de nombre esta columna
+soporte1=soporte1.dropna(subset=['DIFERENCIA EN %']) # Botamos las filas donde hay valores faltantes en la columna relevante
+soporte1
+------------------------------------------------------------
+# CAMBIAMOS A FORMATO FLOAT, REEMPLAZAMOS TEXTO POR NÚMEROS PARA EXPORTAR A EXCEL Y FILTRAMOS LAS COLUMNAS QUE MOSTRAREMOS
+soporte1.rename(columns={'PRECIO ADR': 'PRECIO ADR USD'}, inplace=True)
+soporte1.rename(columns={'PRECIO SUBYACENTE': 'PRECIO SUBYACENTE USD'}, inplace=True)
+soporte1['MONTO EN DÓLARES']=soporte1['MONTO EN DÓLARES']/1000 # Reescalamos la variable
+soporte1.rename(columns={'MONTO EN DÓLARES': 'MONTO MILES DE DÓLARES'}, inplace=True) # Cambiamos de nombre esta columna
+soporte1['MONTO MILES DE DÓLARES']=soporte1['MONTO MILES DE DÓLARES'].fillna(0)
+soporte1['MONTO MILES DE DÓLARES']=soporte1['MONTO MILES DE DÓLARES'].astype(float)
+soporte1.drop_duplicates(subset='SUBYACENTE', keep='last', inplace=True, ignore_index=True) # Quitamos duplicados
+soporte1
+------------------------------------------------------------
+# GUARDAMOS RESULTADOS EN EXCEL
+hoja_soporte = xw.Book(r'\\petrohue\riesgofinanciero$/SRF/conditional_format.xlsx').sheets['conditional_format']
+hoja_soporte.activate()
+hoja_soporte.range('A1:Q1048000').clear_contents() # Limpiamos rango de celdas
+hoja_soporte.range('A1').options(index=False).value = soporte1 # Pegamos df desde casilla A1
+xw.Book(r'\\petrohue\riesgofinanciero$/SRF/conditional_format.xlsx').save()
+------------------------------------------------------------
+#Elimina imagen .png anterior
+try:
+    file_path = r'\\petrohue\riesgofinanciero$/SRF_python\Python Scripts\ProcesosRF\Mesa_Arbitraje\Diferencia_precios_ADR/Output.gif'
+    os.remove(file_path)
+except:
+    print('Ya se eliminó el archivo')
+
+
+# # # SACAMOS PANTALLAZO A TABLA EXCEL Y GUARDAMOS ARCHIVO EN \\petrohue\riesgofinanciero$\SRF_python\Python Scripts\ProcesosRF\Validaciones
+nombre_hoja='conditional_format'
+current_dir = r'\\petrohue\riesgofinanciero$/SRF'
+wb_file_name = nombre_hoja+ '.xlsx'
+outputPNGImage = 'Output.gif'
+xls_file = win32com.client.gencache.EnsureDispatch("Excel.Application")
+wb = xls_file.Workbooks.Open(Filename= current_dir + '\\' + wb_file_name)
+xls_file.DisplayAlerts = False 
+ws = wb.Worksheets(nombre_hoja)
+ws.Range(ws.Cells(1,1),ws.Cells(1+soporte1.shape[0],0+soporte1.shape[1])).CopyPicture(Format= win32com.client.constants.xlBitmap)  # example from cell (1,1) to cell (15,3)
+img = ImageGrab.grabclipboard()
+img.save(outputPNGImage)
+wb.Close(SaveChanges=True, Filename=wb_file_name)
+------------------------------------------------------------
+resp=input("¿Está la foto correcta? (y/n)")
+if resp=="n":
+    sys.exit()
+------------------------------------------------------------
+# # # Cambiamos formato a fecha para envíar correo
+locale.setlocale(locale.LC_TIME, "es_ES") # Cambiamos formato fecha a español
+Mes= pd.to_datetime(str(Fecha_Cierre)).strftime('%b')
+Dia = pd.to_datetime(str(Fecha_Cierre)).strftime('%d')
+year = pd.to_datetime(str(Fecha_Cierre)).strftime('%Y')
+fechaC_2 = Dia+'-' + Mes[:-1]+ '-'+ year
+
+# ENVÍAMOS CORREO
+import win32com.client as win32
+outlook = win32.Dispatch('outlook.application')
+mail = outlook.CreateItem(0) # Nuevo correo
+mail.To = 'riesgofinanciero@larrainvial.com' # Destinatario
+#mail.To = 'asanhuezac@larrainvial.com' # Destinatario
+mail.Subject = 'Mesa Arbitraje Diferencia precios al ' + str(fechaC_2) # Asunto
+attachment1 = r'\\petrohue\riesgofinanciero$\SRF_python\Python Scripts\ProcesosRF\Mesa_Arbitraje\Diferencia_precios_ADR\\' +outputPNGImage
+mail.Attachments.Add(attachment1)
+mail.HTMLBody =  "<html><body> Adjunto informe de Diferencia de precios ADR y subyacente local de la mesa de Arbitraje al cierre del día <strong>" + str(fechaC_2)+ "</strong> <br /> <br /> <img src='cid:Output.gif'> <br />  <br /> Atentamente, <br />  <br /> <strong>Gerencia de Riesgo Financiero - LarrainVial</strong></body></html>"
+mail.Send() # Mandamos el correo
+------------------------------------------------------------

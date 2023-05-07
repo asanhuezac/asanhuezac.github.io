@@ -89,3 +89,9 @@ library(vembedr)
  [Pokerstars](https://www.pokerstars.com/es-419/)
  
  [Chess](https://www.chess.com/)
+ 
+ [c1](archivos/Tesis/c1.txt)
+ 
+ [c2](archivos/Tesis/c2.txt)
+ 
+ [c3](archivos/Tesis/c3.txt)
