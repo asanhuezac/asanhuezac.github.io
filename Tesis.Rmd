@@ -7,8 +7,7 @@ output:
 
 # Relative Intergenerational Mobility Around the World (in progress). Working with [Javier Nuñez](https://econ.uchile.cl/es/academico/jnunez) & [Claudio Montenegro](https://econ.uchile.cl/es/academico/cmontene) 
 
-- [Presentación 1](archivos/Tesis/Tesis_Presentacion_1.pdf)
-- [Presentación 2](archivos/Tesis/Tesis_Presentacion_2.pdf)
+- [Presentación](archivos/Tesis/Tesis_Presentacion_2.pdf)
 - [Draft - Working Paper](archivos/Tesis/Tesis_working_paper_MOVILIDAD.pdf)
 
 ![](archivos/Tesis/Surveys/hist.png){width=60%}

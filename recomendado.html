@@ -11,9 +11,10 @@
 
 
 
-<title>recomendado.utf8</title>
+<title>recomendado.knit</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.27/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -56,6 +57,7 @@ if (window.hljs) {
 
 
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 
 
@@ -80,6 +82,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -137,11 +142,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -170,8 +179,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -179,16 +188,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -232,7 +234,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -260,7 +262,7 @@ $(document).ready(function () {
   <a href="Tesis.html">Tesis</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Formularios
      
     <span class="caret"></span>
@@ -304,60 +306,92 @@ $(document).ready(function () {
 
 <div id="econometría" class="section level1">
 <h1>Econometría</h1>
-<p><a href="https://www.youtube.com/playlist?list=PL-uRhZ_p-BM5ovNRg-G6hDib27OCvcyW8">Joshua Angrist - Marginal Revolution University</a></p>
-<p><a href="https://www.youtube.com/playlist?list=PL09ENlvHqN-8jhVrnsgrfi_fyf4RygjgA">Rómulo Chumacero</a></p>
+<p><a
+href="https://www.youtube.com/playlist?list=PL-uRhZ_p-BM5ovNRg-G6hDib27OCvcyW8">Joshua
+Angrist - Marginal Revolution University</a></p>
+<p><a
+href="https://www.youtube.com/playlist?list=PL09ENlvHqN-8jhVrnsgrfi_fyf4RygjgA">Rómulo
+Chumacero</a></p>
 </div>
 <div id="macroeconomía" class="section level1">
 <h1>Macroeconomía</h1>
-<p><a href="https://www.youtube.com/playlist?list=PLa1CmC-O00yYQ0WpzZ_y9H2w_MtxIcxR0">Economía y Desarrollo</a></p>
-<p><a href="https://www.youtube.com/playlist?list=PL-uRhZ_p-BM52EbMG1NR1ZfG9tEvcxE4u">Marginal Revolution University</a></p>
-<p><a href="https://www.youtube.com/playlist?list=PLuWahU49hzjeSgihNzmv0IYroWjpouZyA">Fenvid</a></p>
-<p><a href="https://www.youtube.com/playlist?list=PL09ENlvHqN-9DNDha4lgbh_NjpTrzHcQl">Rómulo Chumacero</a></p>
+<p><a
+href="https://www.youtube.com/playlist?list=PLa1CmC-O00yYQ0WpzZ_y9H2w_MtxIcxR0">Economía
+y Desarrollo</a></p>
+<p><a
+href="https://www.youtube.com/playlist?list=PL-uRhZ_p-BM52EbMG1NR1ZfG9tEvcxE4u">Marginal
+Revolution University</a></p>
+<p><a
+href="https://www.youtube.com/playlist?list=PLuWahU49hzjeSgihNzmv0IYroWjpouZyA">Fenvid</a></p>
+<p><a
+href="https://www.youtube.com/playlist?list=PL09ENlvHqN-9DNDha4lgbh_NjpTrzHcQl">Rómulo
+Chumacero</a></p>
 </div>
 <div id="microeconomía" class="section level1">
 <h1>Microeconomía</h1>
-<p><a href="https://www.youtube.com/playlist?list=PLa1CmC-O00ybeV_NBTPBuE63sTtqkpjaA">Economía y Desarrollo</a></p>
-<p><a href="https://www.youtube.com/playlist?list=PL-uRhZ_p-BM4XnKSe3BJa23-XKJs_k4KY">Marginal Revolution University</a></p>
-<p><a href="https://www.youtube.com/playlist?list=PLuWahU49hzjdj1zWjScl_jVR_TDwgOhqt">Fenvid</a></p>
+<p><a
+href="https://www.youtube.com/playlist?list=PLa1CmC-O00ybeV_NBTPBuE63sTtqkpjaA">Economía
+y Desarrollo</a></p>
+<p><a
+href="https://www.youtube.com/playlist?list=PL-uRhZ_p-BM4XnKSe3BJa23-XKJs_k4KY">Marginal
+Revolution University</a></p>
+<p><a
+href="https://www.youtube.com/playlist?list=PLuWahU49hzjdj1zWjScl_jVR_TDwgOhqt">Fenvid</a></p>
 </div>
 <div id="matemáticas" class="section level1">
 <h1>Matemáticas</h1>
-<p><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab">Algebra Lineal - 3Blue1Brown</a></p>
-<p><a href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr">Cálculo - 3Blue1Brown</a></p>
+<p><a
+href="https://www.youtube.com/playlist?list=PLZHQObOWTQDPD3MizzM2xVFitgF8hE_ab">Algebra
+Lineal - 3Blue1Brown</a></p>
+<p><a
+href="https://www.youtube.com/playlist?list=PLZHQObOWTQDMsr9K-rj53DwVRMYO3t5Yr">Cálculo
+- 3Blue1Brown</a></p>
 </div>
 <div id="r" class="section level1">
 <h1>R</h1>
-<p><a href="https://r-graph-gallery.com/index.html">Graph Gallery</a></p>
-<p><a href="https://twitter.com/daily_r_sheets">Daily Cheatsheets</a></p>
+<p><a href="https://r-graph-gallery.com/index.html">Graph
+Gallery</a></p>
+<p><a href="https://twitter.com/daily_r_sheets">Daily
+Cheatsheets</a></p>
 </div>
 <div id="stata" class="section level1">
 <h1>Stata</h1>
-<p><a href="https://www.stata.com/support/faqs/graphics/gph/stata-graphs/">Graph Gallery</a></p>
-<p><a href="https://www.stata.com/bookstore/statacheatsheets.pdf">Cheatsheets</a></p>
+<p><a
+href="https://www.stata.com/support/faqs/graphics/gph/stata-graphs/">Graph
+Gallery</a></p>
+<p><a
+href="https://www.stata.com/bookstore/statacheatsheets.pdf">Cheatsheets</a></p>
 </div>
 <div id="videos-de-softwares" class="section level1">
 <h1>Videos de Softwares</h1>
-<p><a href="https://drive.google.com/drive/folders/1_vhmCecx3-mJhMG461x5bO8DysZu86E6?usp=sharing">R</a></p>
-<p><a href="https://drive.google.com/drive/folders/1FRkEzO7WXvBks20ncTVeEPIcsc9HL0Ix?usp=sharing">Tableau</a></p>
-<p><a href="https://drive.google.com/drive/folders/1EuLQJXry9V6u1oi6FayROaoEcUqwSg0-?usp=sharing">Power Bi</a></p>
-<p><a href="https://drive.google.com/drive/folders/1LG60_lgUwYq8GfzVRGrMiTmO-xCc4htR?usp=sharing">Manim (Python)</a></p>
+<p><a
+href="https://drive.google.com/drive/folders/1_vhmCecx3-mJhMG461x5bO8DysZu86E6?usp=sharing">R</a></p>
+<p><a
+href="https://drive.google.com/drive/folders/1FRkEzO7WXvBks20ncTVeEPIcsc9HL0Ix?usp=sharing">Tableau</a></p>
+<p><a
+href="https://drive.google.com/drive/folders/1EuLQJXry9V6u1oi6FayROaoEcUqwSg0-?usp=sharing">Power
+Bi</a></p>
+<p><a
+href="https://drive.google.com/drive/folders/1LG60_lgUwYq8GfzVRGrMiTmO-xCc4htR?usp=sharing">Manim
+(Python)</a></p>
 </div>
 <div id="links-de-interés" class="section level1">
 <h1>Links de interés</h1>
+<p><a href="https://www.bcentral.cl/web/banco-central">Banco Central de
+Chile</a></p>
+<p><a
+href="https://chile.larrainvial.com/que-hacemos/corredora-de-bolsa">LarrainVial
+- Corredora de Bolsa</a></p>
+<p><a
+href="https://docs.manim.community/en/stable/index.html">Manim</a></p>
 <p><a href="https://openai.com/blog/chatgpt/">ChatGPT</a></p>
 <p><a href="https://sci-hub.se/">Sci-Hub</a></p>
 <p><a href="http://libgen.rs/">Libgen</a></p>
-<p><a href="https://www.bcentral.cl/web/banco-central">Banco Central de Chile</a></p>
-<p><a href="https://chile.larrainvial.com/que-hacemos/corredora-de-bolsa">LarrainVial - Corredora de Bolsa</a></p>
 <p><a href="https://www.datacamp.com/">Data-Camp</a></p>
-<p><a href="https://docs.manim.community/en/stable/index.html">Manim</a></p>
 <p><a href="http://rchumace.econ.uchile.cl/">Rómulo Chumacero</a></p>
 <p><a href="https://www.damianclarke.net/">Damian Clarke</a></p>
 <p><a href="https://www.pokerstars.com/es-419/">Pokerstars</a></p>
 <p><a href="https://www.chess.com/">Chess</a></p>
-<p><a href="archivos/Tesis/c1.txt">c1</a></p>
-<p><a href="archivos/Tesis/c2.txt">c2</a></p>
-<p><a href="archivos/Tesis/c3.txt">c3</a></p>
 </div>
 
 

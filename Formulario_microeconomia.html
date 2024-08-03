@@ -11,9 +11,10 @@
 
 
 
-<title>Formulario_microeconomia.utf8</title>
+<title>Formulario_microeconomia.knit</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.27/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -56,6 +57,7 @@ if (window.hljs) {
 
 
 
+
 <link rel="stylesheet" href="style1.css" type="text/css" />
 
 
@@ -80,6 +82,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -137,11 +142,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -170,8 +179,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -179,16 +188,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -232,7 +234,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -260,7 +262,7 @@ $(document).ready(function () {
   <a href="Tesis.html">Tesis</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Formularios
      
     <span class="caret"></span>
@@ -302,23 +304,40 @@ $(document).ready(function () {
 </div>
 
 
-<div id="formulario-microeconomía" class="section level2 tabset tabset-pills">
-<h2>Formulario Microeconomía</h2>
+<div id="formulario-microeconomía"
+class="section level2 tabset tabset-pills">
+<h2 class="tabset tabset-pills">Formulario Microeconomía</h2>
 <div id="consumidor" class="section level3">
 <h3>Consumidor</h3>
-<p>Demandas Marshallianas <span class="math display">\[\max_{\{X, Y\}} U(X,Y)\]</span> <span class="math display">\[s.a: P_xX+P_yY=I  \]</span></p>
-<p><span class="math display">\[Óptimo \Rightarrow \frac{Umg_x}{Umg_y}=\frac{P_x}{P_y}\]</span></p>
-<p><span class="math display">\[FUI \Rightarrow U(X^*,Y^*) \Rightarrow v(P_x,P_y,I)\]</span></p>
-<p><span class="math display">\[Roy \Rightarrow \frac{\frac{\partial v(P_x,P_y,I)}{\partial P_x}}{\frac{\partial v(P_x,P_y,I}{\partial I}}=-X^*\]</span></p>
-<p>Demandas Hicksianas <span class="math display">\[\min_{\{X, Y\}} P_xX+P_yY\]</span> <span class="math display">\[s.a: U(X,Y)=u_0  \]</span></p>
-<p><span class="math display">\[Función \hspace{2mm} de \hspace{2mm} Gasto \Rightarrow e(P_x,P_y,u_o)=P_xX^{h}+P_yY^{h}\]</span></p>
-<p><span class="math display">\[Shepard \Rightarrow \frac{\partial e(P_x,P_y,u_o)}{\partial P_x}=X^h\]</span></p>
-<p>Ecuación de Slutsky <span class="math display">\[\frac{\partial X^*}{\partial P_x}=\underbrace{\frac{\partial X^h}{\partial P_x}}_{ES} -\underbrace{\frac{\partial X^*}{\partial I}X^*}_{EI}\]</span></p>
+<p>Demandas Marshallianas <span class="math display">\[\max_{\{X, Y\}}
+U(X,Y)\]</span> <span class="math display">\[s.a:
+P_xX+P_yY=I  \]</span></p>
+<p><span class="math display">\[Óptimo \Rightarrow
+\frac{Umg_x}{Umg_y}=\frac{P_x}{P_y}\]</span></p>
+<p><span class="math display">\[FUI \Rightarrow U(X^*,Y^*) \Rightarrow
+v(P_x,P_y,I)\]</span></p>
+<p><span class="math display">\[Roy \Rightarrow \frac{\frac{\partial
+v(P_x,P_y,I)}{\partial P_x}}{\frac{\partial v(P_x,P_y,I}{\partial
+I}}=-X^*\]</span></p>
+<p>Demandas Hicksianas <span class="math display">\[\min_{\{X, Y\}}
+P_xX+P_yY\]</span> <span class="math display">\[s.a:
+U(X,Y)=u_0  \]</span></p>
+<p><span class="math display">\[Función \hspace{2mm} de \hspace{2mm}
+Gasto \Rightarrow e(P_x,P_y,u_o)=P_xX^{h}+P_yY^{h}\]</span></p>
+<p><span class="math display">\[Shepard \Rightarrow \frac{\partial
+e(P_x,P_y,u_o)}{\partial P_x}=X^h\]</span></p>
+<p>Ecuación de Slutsky <span class="math display">\[\frac{\partial
+X^*}{\partial P_x}=\underbrace{\frac{\partial X^h}{\partial P_x}}_{ES}
+-\underbrace{\frac{\partial X^*}{\partial I}X^*}_{EI}\]</span></p>
 </div>
 <div id="industrial" class="section level3">
 <h3>Industrial</h3>
-<p><span class="math display">\[Lerner \Rightarrow \lambda=\frac{P_i-c_i}{P_i}=\frac{1}{|\varepsilon|}\]</span></p>
-<p><span class="math display">\[Herfindahl-Hirschmann \Rightarrow \sum_{i=1}^{N} S_i^2\]</span> Colusión <span class="math display">\[\delta \geq \frac{\pi^D-\pi^C}{\pi^D-\pi^{NC}}\]</span></p>
+<p><span class="math display">\[Lerner \Rightarrow
+\lambda=\frac{P_i-c_i}{P_i}=\frac{1}{|\varepsilon|}\]</span></p>
+<p><span class="math display">\[Herfindahl-Hirschmann \Rightarrow
+\sum_{i=1}^{N} S_i^2\]</span> Colusión <span
+class="math display">\[\delta \geq
+\frac{\pi^D-\pi^C}{\pi^D-\pi^{NC}}\]</span></p>
 <p>Bertrand <span class="math display">\[P_i(P_j)=\begin{cases}
     P^M=\frac{A+c}{2} &amp; \text{si } P^M&lt;P_j \\
     P_j-\varepsilon &amp; \text{si } c&lt;P_j\leq P^M \\
@@ -327,7 +346,9 @@ $(document).ready(function () {
 </div>
 <div id="laboral" class="section level3">
 <h3>Laboral</h3>
-<p><span class="math display">\[Marshall \Rightarrow |\varepsilon_{L,W}|=\frac{\sigma_{L,K}|\eta^d|+\eta_k^s[\alpha_L|\eta^d|+(1-\alpha_L)\sigma_{L,K}]}{\eta_k^s+\alpha_L \sigma_{L,K}+(1-\alpha_L)|\eta^d|}\]</span></p>
+<p><span class="math display">\[Marshall \Rightarrow
+|\varepsilon_{L,W}|=\frac{\sigma_{L,K}|\eta^d|+\eta_k^s[\alpha_L|\eta^d|+(1-\alpha_L)\sigma_{L,K}]}{\eta_k^s+\alpha_L
+\sigma_{L,K}+(1-\alpha_L)|\eta^d|}\]</span></p>
 </div>
 </div>
 

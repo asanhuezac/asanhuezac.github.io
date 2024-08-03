@@ -11,9 +11,10 @@
 
 
 
-<title>Formulario_macroeconomia.utf8</title>
+<title>Formulario_macroeconomia.knit</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.27/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -56,6 +57,7 @@ if (window.hljs) {
 
 
 
+
 <link rel="stylesheet" href="style1.css" type="text/css" />
 
 
@@ -80,6 +82,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -137,11 +142,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -170,8 +179,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -179,16 +188,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -232,7 +234,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -260,7 +262,7 @@ $(document).ready(function () {
   <a href="Tesis.html">Tesis</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Formularios
      
     <span class="caret"></span>
@@ -302,38 +304,73 @@ $(document).ready(function () {
 </div>
 
 
-<div id="formulario-macroeconomía" class="section level2 tabset tabset-pills">
-<h2>Formulario Macroeconomía</h2>
+<div id="formulario-macroeconomía"
+class="section level2 tabset tabset-pills">
+<h2 class="tabset tabset-pills">Formulario Macroeconomía</h2>
 <div id="contabilidad-nacional" class="section level3">
 <h3>Contabilidad Nacional</h3>
-<p><span class="math display">\[Y=C+I+G+XN\]</span> <span class="math display">\[I_t=\Delta K_t+\delta K_t\]</span> <span class="math display">\[PNB=PIB-F\]</span> <span class="math display">\[F=r_pB_p-r_AB_A\]</span> <span class="math display">\[S_p=Y+TR-T-C-F\]</span> <span class="math display">\[S_g=T-TR-G\]</span></p>
-<p><span class="math display">\[S_n=S_p+S_g=Y-G-C-F\]</span> <span class="math display">\[S_e=F-XN\]</span> <span class="math display">\[S=Y-C-G-XN=I\]</span></p>
-<p><span class="math display">\[Deflactor_{PIB}=\frac{Nominal}{Real}=\frac{\sum p_{i,t}\cdot q_{i,t}}{\sum p_{i,0}\cdot q_{i,0}}\]</span></p>
-<p><span class="math display">\[IPC_t=\frac{\sum p_{i,t}\cdot q_{i,0}}{\sum p_{i,0}\cdot q_{i,0}}\]</span></p>
-<p><span class="math display">\[CC=XN-F=-S_e\]</span> <span class="math display">\[TI=\frac{P_x}{P_m}\]</span></p>
+<p><span class="math display">\[Y=C+I+G+XN\]</span> <span
+class="math display">\[I_t=\Delta K_t+\delta K_t\]</span> <span
+class="math display">\[PNB=PIB-F\]</span> <span
+class="math display">\[F=r_pB_p-r_AB_A\]</span> <span
+class="math display">\[S_p=Y+TR-T-C-F\]</span> <span
+class="math display">\[S_g=T-TR-G\]</span></p>
+<p><span class="math display">\[S_n=S_p+S_g=Y-G-C-F\]</span> <span
+class="math display">\[S_e=F-XN\]</span> <span
+class="math display">\[S=Y-C-G-XN=I\]</span></p>
+<p><span
+class="math display">\[Deflactor_{PIB}=\frac{Nominal}{Real}=\frac{\sum
+p_{i,t}\cdot q_{i,t}}{\sum p_{i,0}\cdot q_{i,0}}\]</span></p>
+<p><span class="math display">\[IPC_t=\frac{\sum p_{i,t}\cdot
+q_{i,0}}{\sum p_{i,0}\cdot q_{i,0}}\]</span></p>
+<p><span class="math display">\[CC=XN-F=-S_e\]</span> <span
+class="math display">\[TI=\frac{P_x}{P_m}\]</span></p>
 <p><span class="math display">\[TCR=\frac{eP^*}{P}\]</span></p>
 </div>
 <div id="consumo" class="section level3">
 <h3>Consumo</h3>
-<p><span class="math display">\[Y_{l,t}+rA_t=C_t+T_t+A_{t+1}-A_t\]</span> <span class="math display">\[\sum_{i=0}^{\infty} \frac{C_{t+i}}{(1+r)^i}=\sum_{i=0}^N \frac{Y_{l,t+i}-T_{t+i}}{(1+r_i)^i}+(1+r)A_t\]</span></p>
-<p><span class="math display">\[\overline{C}=r \left[A_t+\sum_{i=0}^N \frac{Y_{l,t+i}-T_{t+i}}{(1+r_i)^{i+1}} \right]\]</span></p>
+<p><span
+class="math display">\[Y_{l,t}+rA_t=C_t+T_t+A_{t+1}-A_t\]</span> <span
+class="math display">\[\sum_{i=0}^{\infty}
+\frac{C_{t+i}}{(1+r)^i}=\sum_{i=0}^N
+\frac{Y_{l,t+i}-T_{t+i}}{(1+r_i)^i}+(1+r)A_t\]</span></p>
+<p><span class="math display">\[\overline{C}=r \left[A_t+\sum_{i=0}^N
+\frac{Y_{l,t+i}-T_{t+i}}{(1+r_i)^{i+1}} \right]\]</span></p>
 </div>
 <div id="monetaria" class="section level3">
 <h3>Monetaria</h3>
-<p><span class="math display">\[\underbrace{M}_{Oferta \hspace{1mm} Monetaria} \cdot \underbrace{V}_{Velocidad}=\underbrace{P}_{Precios}\cdot \underbrace{Y}_{Producto}\]</span></p>
-<p><span class="math display">\[\underbrace{M}_{Oferta \hspace{1mm} Monetaria}=\underbrace{\left(\frac{1+\overline{C}}{\theta+ \overline{C}}\right)}_{Multiplicador}\cdot \underbrace{H}_{Emisión}\]</span></p>
+<p><span class="math display">\[\underbrace{M}_{Oferta \hspace{1mm}
+Monetaria} \cdot
+\underbrace{V}_{Velocidad}=\underbrace{P}_{Precios}\cdot
+\underbrace{Y}_{Producto}\]</span></p>
+<p><span class="math display">\[\underbrace{M}_{Oferta \hspace{1mm}
+Monetaria}=\underbrace{\left(\frac{1+\overline{C}}{\theta+
+\overline{C}}\right)}_{Multiplicador}\cdot
+\underbrace{H}_{Emisión}\]</span></p>
 </div>
 <div id="fiscal" class="section level3">
 <h3>Fiscal</h3>
-<p><span class="math display">\[d_t=-b_t \left(\frac{r-g}{1+g}\right)\]</span></p>
+<p><span class="math display">\[d_t=-b_t
+\left(\frac{r-g}{1+g}\right)\]</span></p>
 </div>
 <div id="modelos" class="section level3">
 <h3>Modelos</h3>
-<p>Salarios de Eficiencia, Shapiro-Stiglitz <span class="math display">\[\rho V_e=(w-e)-b(V_e-V_u)\]</span></p>
-<p><span class="math display">\[\rho V_s=w-(b+q)(V_s-V_u)\]</span> <span class="math display">\[\rho V_u=a(V_e-V_u)\]</span> <span class="math display">\[w^*=e+\left(\rho+\frac{b\overline{L}}{\overline{L}-NL}\right) \frac{e}{q}\]</span></p>
+<p>Salarios de Eficiencia, Shapiro-Stiglitz <span
+class="math display">\[\rho V_e=(w-e)-b(V_e-V_u)\]</span></p>
+<p><span class="math display">\[\rho V_s=w-(b+q)(V_s-V_u)\]</span> <span
+class="math display">\[\rho V_u=a(V_e-V_u)\]</span> <span
+class="math display">\[w^*=e+\left(\rho+\frac{b\overline{L}}{\overline{L}-NL}\right)
+\frac{e}{q}\]</span></p>
 <p>Modelo de Búsqueda y Emparejamiento</p>
-<p><span class="math display">\[rJ=P-w+\lambda(V-J)\]</span> <span class="math display">\[rV=-Pc+q(\theta)(J-V)\]</span> <span class="math display">\[rW=w+\lambda(U-W)\]</span> <span class="math display">\[rU=z+\theta q(\theta)(W-U)\]</span> <span class="math display">\[u=\frac{\lambda}{\lambda+\theta q(\theta)}\]</span> <span class="math display">\[w=P-\frac{(r+\lambda)Pc}{q(\theta)}\]</span></p>
-<p><span class="math display">\[w=(1-\beta)z+\beta(P+C\theta)\]</span></p>
+<p><span class="math display">\[rJ=P-w+\lambda(V-J)\]</span> <span
+class="math display">\[rV=-Pc+q(\theta)(J-V)\]</span> <span
+class="math display">\[rW=w+\lambda(U-W)\]</span> <span
+class="math display">\[rU=z+\theta q(\theta)(W-U)\]</span> <span
+class="math display">\[u=\frac{\lambda}{\lambda+\theta
+q(\theta)}\]</span> <span
+class="math display">\[w=P-\frac{(r+\lambda)Pc}{q(\theta)}\]</span></p>
+<p><span
+class="math display">\[w=(1-\beta)z+\beta(P+C\theta)\]</span></p>
 </div>
 </div>
 

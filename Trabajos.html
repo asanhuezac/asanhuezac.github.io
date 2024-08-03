@@ -11,9 +11,10 @@
 
 
 
-<title>Trabajos.utf8</title>
+<title>Trabajos.knit</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.27/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -56,6 +57,7 @@ if (window.hljs) {
 
 
 
+
 <link rel="stylesheet" href="style.css" type="text/css" />
 
 
@@ -80,6 +82,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -137,11 +142,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -170,8 +179,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -179,16 +188,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -232,7 +234,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -260,7 +262,7 @@ $(document).ready(function () {
   <a href="Tesis.html">Tesis</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Formularios
      
     <span class="caret"></span>
@@ -305,31 +307,54 @@ $(document).ready(function () {
 <div id="trabajos-universitarios" class="section level1">
 <h1>Trabajos Universitarios</h1>
 <ul>
-<li><a href="archivos/Mauricio_Diagnostico_de_Crecimiento.pdf">Mauricio, Diagnóstico de Crecimiento</a></li>
-<li><a href="archivos/Hacinamiento.pdf">Efecto del Hacinamiento en el Desarrollo de los Niños</a></li>
+<li><a href="archivos/Mauricio_Diagnostico_de_Crecimiento.pdf">Mauricio,
+Diagnóstico de Crecimiento</a></li>
+<li><a href="archivos/Hacinamiento.pdf">Efecto del Hacinamiento en el
+Desarrollo de los Niños</a></li>
 <li><a href="archivos/Capm.pdf">Modelo CAPM en Chile 2010-2021</a></li>
-<li><a href="archivos/Capacitaciones.pdf">Efecto de la Capacitación en la Productividad de las Empresas en 2017</a></li>
+<li><a href="archivos/Capacitaciones.pdf">Efecto de la Capacitación en
+la Productividad de las Empresas en 2017</a></li>
 </ul>
 </div>
 <div id="apuntes" class="section level1">
 <h1>Apuntes</h1>
 <ul>
-<li><a href="archivos/Demostraciones_Econometria.pdf">Econometría - Demostraciones</a> (En desarrollo con <a href="https://chrgonziba.github.io/">Christian González</a>)</li>
-<li><a href="archivos/Microeconomía_modelos_demostraciones.pdf">Microeconomía - Modelos y Demostraciones</a> (En desarrollo)</li>
-<li><a href="archivos/Macroeconomía_modelos_demostraciones.pdf">Macroeconomía - Modelos y Demostraciones</a> (En desarrollo)</li>
+<li><a href="archivos/Demostraciones_Econometria.pdf">Econometría -
+Demostraciones</a> (En desarrollo con <a
+href="https://chrgonziba.github.io/">Christian González</a>)</li>
+<li><a
+href="archivos/Microeconomía_modelos_demostraciones.pdf">Microeconomía -
+Modelos y Demostraciones</a> (En desarrollo)</li>
+<li><a
+href="archivos/Macroeconomía_modelos_demostraciones.pdf">Macroeconomía -
+Modelos y Demostraciones</a> (En desarrollo)</li>
 </ul>
 </div>
 <div id="ayudantías-y-evaluaciones" class="section level1">
 <h1>Ayudantías y Evaluaciones</h1>
 <ul>
-<li><a href="archivos/Ayudantias_econometria_I.pdf">Econometría I - Ayudantías</a></li>
-<li><a href="archivos/Ayudantias_microeconomia_I.pdf">Microeconomía I - Ayudantías</a></li>
-<li><a href="archivos/Evaluaciones_microeconomia_I.pdf">Microeconomía I - Evaluaciones</a></li>
-<li><a href="archivos/Ayudantia_Solidaria_Intro_a_Finanzas.pdf">Introducción a las Finanzas - Ayudantía Solidaria</a></li>
-<li><a href="archivos/Pautas_Ayudantias_Finanzas%20I.pdf">Finanzas I - Ayudantías</a> (Desarrollado junto a Alejandro Lainez)</li>
-<li><a href="archivos/Pautas_Evaluaciones_Finanzas_I.pdf">Finanzas I - Evaluaciones</a> (Desarrollado junto a Juan Romagosa y Alejandro Lainez)</li>
-<li><a href="archivos/Pautas_Ayudantias_Intro_a_Finanzas.pdf">Introducción a las Finanzas - Ayudantías</a> (Desarrollado junto a Vicente Bavestrello y Rodrigo Fuentealba)</li>
-<li><a href="archivos/Pautas_Evaluaciones_Intro_a_Finanzas.pdf">Introducción a las Finanzas - Evaluaciones</a> (Desarrollado junto a Juan Romagosa, Vicente Bavestrello y Rodrigo Fuentealba)</li>
+<li><a href="archivos/Ayudantias_econometria_I.pdf">Econometría I -
+Ayudantías</a></li>
+<li><a href="archivos/Ayudantias_microeconomia_I.pdf">Microeconomía I -
+Ayudantías</a></li>
+<li><a href="archivos/Evaluaciones_microeconomia_I.pdf">Microeconomía I
+- Evaluaciones</a></li>
+<li><a
+href="archivos/Ayudantia_Solidaria_Intro_a_Finanzas.pdf">Introducción a
+las Finanzas - Ayudantía Solidaria</a></li>
+<li><a href="archivos/Pautas_Ayudantias_Finanzas%20I.pdf">Finanzas I -
+Ayudantías</a> (Desarrollado junto a Alejandro Lainez)</li>
+<li><a href="archivos/Pautas_Evaluaciones_Finanzas_I.pdf">Finanzas I -
+Evaluaciones</a> (Desarrollado junto a Juan Romagosa y Alejandro
+Lainez)</li>
+<li><a
+href="archivos/Pautas_Ayudantias_Intro_a_Finanzas.pdf">Introducción a
+las Finanzas - Ayudantías</a> (Desarrollado junto a Vicente Bavestrello
+y Rodrigo Fuentealba)</li>
+<li><a
+href="archivos/Pautas_Evaluaciones_Intro_a_Finanzas.pdf">Introducción a
+las Finanzas - Evaluaciones</a> (Desarrollado junto a Juan Romagosa,
+Vicente Bavestrello y Rodrigo Fuentealba)</li>
 </ul>
 </div>
 

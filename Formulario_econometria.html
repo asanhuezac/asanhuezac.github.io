@@ -11,9 +11,10 @@
 
 
 
-<title>Formulario_econometria.utf8</title>
+<title>Formulario_econometria.knit</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.27/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -56,6 +57,7 @@ if (window.hljs) {
 
 
 
+
 <link rel="stylesheet" href="style1.css" type="text/css" />
 
 
@@ -80,6 +82,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -137,11 +142,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -170,8 +179,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -179,16 +188,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -232,7 +234,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -260,7 +262,7 @@ $(document).ready(function () {
   <a href="Tesis.html">Tesis</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Formularios
      
     <span class="caret"></span>
@@ -302,28 +304,57 @@ $(document).ready(function () {
 </div>
 
 
-<div id="formulario-econometría" class="section level2 tabset tabset-pills">
-<h2>Formulario Econometría</h2>
+<div id="formulario-econometría"
+class="section level2 tabset tabset-pills">
+<h2 class="tabset tabset-pills">Formulario Econometría</h2>
 <div id="modelo-univariado" class="section level3">
 <h3>Modelo Univariado</h3>
-<p><span class="math display">\[y_i=\beta_0+\beta_1x_{1,i}+u_i\]</span> Bajo los supuestos de regresión lineal</p>
-<p><span class="math display">\[\hat{\beta_o}=\overline{y}-\hat{\beta_1} \overline{x_{1}}\]</span> <span class="math display">\[\hat{\beta_1}=\frac{\sum_{i=1}^{T} (x_{1,i}-\overline{x_{1}})(y_i-\overline{y})}{\sum_{i=1}^{T} (x_{1,i}-\overline{x_{1}})^2}=\frac{\sum_{i=1}^{T} (x_{1,i}-\overline{x_1})y_i}{\sum_{i=1}^{T} (x_{1,i}-\overline{x_1})^2}=\frac{\sum_{i=1}^{T} (y_i-\overline{y})x_{1,i}}{\sum_{i=1}^{T} (x_{1,i}-\overline{x_{1}})^2}\]</span></p>
-<p><span class="math display">\[\hat{y_i}=\hat{\beta_0}+\hat{\beta_1}x_{1.i}\]</span> <span class="math display">\[\hat{u_i}=y_i-\hat{y_i}\]</span></p>
-<p><span class="math display">\[\mathbb{E} [\hat{\beta_0}]=\beta_0\]</span> <span class="math display">\[\mathbb{E} [\hat{\beta_1}]=\beta_1\]</span></p>
-<p><span class="math display">\[Var(\hat{\beta_0})=\frac{\sigma^2 \sum_{i=1}^T x_{1,i}^2}{T \cdot \sum_{i=1}^T (x_{1,i}-\overline{x_1})^2}=\frac{\sigma^2 \sum_{i=1}^T x_{1,i}^2}{T \cdot SST_1}\]</span> <span class="math display">\[Var(\hat{\beta_1})=\frac{\sigma^2}{\sum_{i=1}^T (x_{1.i}-\overline{x_1})^2}=\frac{\sigma^2}{SST_1}\]</span></p>
-<p><span class="math display">\[\hat{\sigma}^2=\frac{\sum_{i=1}^T \hat{u_i}^2 }{T-K-1}\]</span></p>
+<p><span class="math display">\[y_i=\beta_0+\beta_1x_{1,i}+u_i\]</span>
+Bajo los supuestos de regresión lineal</p>
+<p><span class="math display">\[\hat{\beta_o}=\overline{y}-\hat{\beta_1}
+\overline{x_{1}}\]</span> <span
+class="math display">\[\hat{\beta_1}=\frac{\sum_{i=1}^{T}
+(x_{1,i}-\overline{x_{1}})(y_i-\overline{y})}{\sum_{i=1}^{T}
+(x_{1,i}-\overline{x_{1}})^2}=\frac{\sum_{i=1}^{T}
+(x_{1,i}-\overline{x_1})y_i}{\sum_{i=1}^{T}
+(x_{1,i}-\overline{x_1})^2}=\frac{\sum_{i=1}^{T}
+(y_i-\overline{y})x_{1,i}}{\sum_{i=1}^{T}
+(x_{1,i}-\overline{x_{1}})^2}\]</span></p>
+<p><span
+class="math display">\[\hat{y_i}=\hat{\beta_0}+\hat{\beta_1}x_{1.i}\]</span>
+<span class="math display">\[\hat{u_i}=y_i-\hat{y_i}\]</span></p>
+<p><span class="math display">\[\mathbb{E}
+[\hat{\beta_0}]=\beta_0\]</span> <span class="math display">\[\mathbb{E}
+[\hat{\beta_1}]=\beta_1\]</span></p>
+<p><span class="math display">\[Var(\hat{\beta_0})=\frac{\sigma^2
+\sum_{i=1}^T x_{1,i}^2}{T \cdot \sum_{i=1}^T
+(x_{1,i}-\overline{x_1})^2}=\frac{\sigma^2 \sum_{i=1}^T x_{1,i}^2}{T
+\cdot SST_1}\]</span> <span
+class="math display">\[Var(\hat{\beta_1})=\frac{\sigma^2}{\sum_{i=1}^T
+(x_{1.i}-\overline{x_1})^2}=\frac{\sigma^2}{SST_1}\]</span></p>
+<p><span class="math display">\[\hat{\sigma}^2=\frac{\sum_{i=1}^T
+\hat{u_i}^2 }{T-K-1}\]</span></p>
 </div>
 <div id="r2" class="section level3">
 <h3><span class="math inline">\(R^2\)</span></h3>
 <p><span class="math display">\[SST=SSE+SSR\]</span></p>
-<p><span class="math display">\[\sum_{i=1}^{T} (y_i-\overline{y})^2 = \sum_{i=1}^{T} (\hat{y_i}-\overline{y})^2 + \sum_{i=1}^{T} (y_i-\hat{y_i})^2\]</span></p>
-<p><span class="math display">\[R^2=\frac{\sum_{i=1}^{T} (\hat{y_i}-\overline{y})^2}{\sum_{i=1}^{T} (y_i-\overline{y})^2}=1-\frac{\sum_{i=1}^{T} (y_i-\hat{y_i})^2}{\sum_{i=1}^{T} (y_i-\overline{y})^2}\]</span></p>
+<p><span class="math display">\[\sum_{i=1}^{T} (y_i-\overline{y})^2 =
+\sum_{i=1}^{T} (\hat{y_i}-\overline{y})^2 + \sum_{i=1}^{T}
+(y_i-\hat{y_i})^2\]</span></p>
+<p><span class="math display">\[R^2=\frac{\sum_{i=1}^{T}
+(\hat{y_i}-\overline{y})^2}{\sum_{i=1}^{T}
+(y_i-\overline{y})^2}=1-\frac{\sum_{i=1}^{T}
+(y_i-\hat{y_i})^2}{\sum_{i=1}^{T} (y_i-\overline{y})^2}\]</span></p>
 </div>
 <div id="modelo-multivariado" class="section level3">
 <h3>Modelo Multivariado</h3>
-<p><span class="math display">\[y_i=\beta_0+\beta_1x_{1,i}+\beta_2x_{2,i}+...+\beta_kx_{k,i}+u_i\]</span></p>
+<p><span
+class="math display">\[y_i=\beta_0+\beta_1x_{1,i}+\beta_2x_{2,i}+...+\beta_kx_{k,i}+u_i\]</span></p>
 <p>Bajo los supuestos de regresión lineal</p>
-<p><span class="math display">\[\mathbb{E} [\hat{\beta_j}]=\beta_j\]</span> <span class="math display">\[Var(\hat{\beta_j})=\frac{\sigma^2}{SST_j(1-R_j^2)}=\frac{\sigma^2}{SST_j}\cdot VIF_j\]</span></p>
+<p><span class="math display">\[\mathbb{E}
+[\hat{\beta_j}]=\beta_j\]</span> <span
+class="math display">\[Var(\hat{\beta_j})=\frac{\sigma^2}{SST_j(1-R_j^2)}=\frac{\sigma^2}{SST_j}\cdot
+VIF_j\]</span></p>
 <table>
 <colgroup>
 <col width="20%" />
@@ -337,37 +368,48 @@ $(document).ready(function () {
 <th align="center">Modelos</th>
 <th align="center">Regresión</th>
 <th align="center"><span class="math inline">\(\beta_1\)</span></th>
-<th align="center"><span class="math inline">\(Pendiente=\frac{\partial y}{\partial x}\)</span></th>
+<th align="center"><span class="math inline">\(Pendiente=\frac{\partial
+y}{\partial x}\)</span></th>
 <th align="center">Interpretación</th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
 <td align="center">Nivel-Nivel</td>
-<td align="center"><span class="math inline">\(y_i=\beta_0+\beta_1x_i+u_i\)</span></td>
-<td align="center"><span class="math inline">\(\frac{\Delta y_i}{\Delta x_i}\)</span></td>
+<td align="center"><span
+class="math inline">\(y_i=\beta_0+\beta_1x_i+u_i\)</span></td>
+<td align="center"><span class="math inline">\(\frac{\Delta y_i}{\Delta
+x_i}\)</span></td>
 <td align="center"><span class="math inline">\(\beta_1\)</span></td>
 <td align="center">Cambio en nivel</td>
 </tr>
 <tr class="even">
 <td align="center">Nivel-Log</td>
-<td align="center"><span class="math inline">\(y_i=\beta_0+\beta_1 ln(x_i)+u_i\)</span></td>
-<td align="center"><span class="math inline">\(\frac{\Delta y_i}{\Delta \%x_i}\)</span></td>
-<td align="center"><span class="math inline">\(\beta_1 \frac{1}{x}\)</span></td>
+<td align="center"><span class="math inline">\(y_i=\beta_0+\beta_1
+ln(x_i)+u_i\)</span></td>
+<td align="center"><span class="math inline">\(\frac{\Delta y_i}{\Delta
+\%x_i}\)</span></td>
+<td align="center"><span class="math inline">\(\beta_1
+\frac{1}{x}\)</span></td>
 <td align="center">Semi-Elasticidad</td>
 </tr>
 <tr class="odd">
 <td align="center">Log-Nivel</td>
-<td align="center"><span class="math inline">\(ln(y_i)=\beta_0+\beta_1x_i+u_i\)</span></td>
-<td align="center"><span class="math inline">\(\frac{\Delta \%y_i}{\Delta x_i}\)</span></td>
+<td align="center"><span
+class="math inline">\(ln(y_i)=\beta_0+\beta_1x_i+u_i\)</span></td>
+<td align="center"><span class="math inline">\(\frac{\Delta
+\%y_i}{\Delta x_i}\)</span></td>
 <td align="center"><span class="math inline">\(\beta_1 y\)</span></td>
 <td align="center">Semi-Elasticidad</td>
 </tr>
 <tr class="even">
 <td align="center">Log-Log</td>
-<td align="center"><span class="math inline">\(ln(y_i)=\beta_0+\beta_1 ln(x_i)+u_i\)</span></td>
-<td align="center"><span class="math inline">\(\frac{\Delta \%y_i}{\Delta \%x_i}\)</span></td>
-<td align="center"><span class="math inline">\(\beta_1 \frac{y}{x}\)</span></td>
+<td align="center"><span class="math inline">\(ln(y_i)=\beta_0+\beta_1
+ln(x_i)+u_i\)</span></td>
+<td align="center"><span class="math inline">\(\frac{\Delta
+\%y_i}{\Delta \%x_i}\)</span></td>
+<td align="center"><span class="math inline">\(\beta_1
+\frac{y}{x}\)</span></td>
 <td align="center">Elasticidad</td>
 </tr>
 </tbody>
@@ -375,24 +417,34 @@ $(document).ready(function () {
 </div>
 <div id="sesgo" class="section level3">
 <h3>Sesgo</h3>
-<p><span class="math display">\[y_i=\beta_0+\beta_1x_{1,i}+\beta_1x_{2,i}+u_i \Rightarrow Real\]</span> <span class="math display">\[y_i=\gamma_0+\gamma_1x_{1,i}+u_i \Rightarrow Estimado\]</span></p>
-<p><span class="math display">\[\mathbb{E}[\hat{\gamma_1}]=\beta_1+\underbrace{\beta_2 \frac{Cov(X_1,X_2)}{Var(X_1)}}_{\text Sesgo}\]</span></p>
+<p><span
+class="math display">\[y_i=\beta_0+\beta_1x_{1,i}+\beta_1x_{2,i}+u_i
+\Rightarrow Real\]</span> <span
+class="math display">\[y_i=\gamma_0+\gamma_1x_{1,i}+u_i \Rightarrow
+Estimado\]</span></p>
+<p><span
+class="math display">\[\mathbb{E}[\hat{\gamma_1}]=\beta_1+\underbrace{\beta_2
+\frac{Cov(X_1,X_2)}{Var(X_1)}}_{\text Sesgo}\]</span></p>
 <table>
 <thead>
 <tr class="header">
 <th align="center"></th>
-<th align="center"><span class="math inline">\(Cov(X_1,X_2)&gt;0\)</span></th>
-<th align="center"><span class="math inline">\(Cov(X_1,X_2)&lt;0\)</span></th>
+<th align="center"><span
+class="math inline">\(Cov(X_1,X_2)&gt;0\)</span></th>
+<th align="center"><span
+class="math inline">\(Cov(X_1,X_2)&lt;0\)</span></th>
 </tr>
 </thead>
 <tbody>
 <tr class="odd">
-<td align="center"><span class="math inline">\(\beta_2&gt;0\)</span></td>
+<td align="center"><span
+class="math inline">\(\beta_2&gt;0\)</span></td>
 <td align="center">Sobrevalorado</td>
 <td align="center">Subvalorado</td>
 </tr>
 <tr class="even">
-<td align="center"><span class="math inline">\(\beta_2&lt;0\)</span></td>
+<td align="center"><span
+class="math inline">\(\beta_2&lt;0\)</span></td>
 <td align="center">Subvalorado</td>
 <td align="center">Sobrevalorado</td>
 </tr>
@@ -401,40 +453,96 @@ $(document).ready(function () {
 </div>
 <div id="inferencia" class="section level3">
 <h3>Inferencia</h3>
-<p><span class="math display">\[t_{\hat{\beta_j}}= \frac{\hat{\beta_j}-\beta_j}{sd(\hat{\beta_j})} \sim t_{(T-K-1)}\]</span></p>
-<p><span class="math display">\[Pr\left[ \hat{\beta_j}-c_{\alpha} \cdot sd(\hat{\beta_j}) \leq \beta_j \leq \hat{\beta_j}+c_{\alpha} \cdot sd(\hat{\beta_j})\right]=1-\alpha\]</span></p>
-<p><span class="math display">\[P_{value}=Pr[|t_{obs}|\geq |t_{\hat{\beta_j}}|]\]</span></p>
-<p><span class="math display">\[F_{obs}=\frac{(SSR_{r}-SSR_{ur})/q}{(SSR_{ur})/(T-K-1)}=\frac{(R_{ur}^2-R_{r}^2)/q}{(1-R_{ur}^2)/(T-K-1)} \sim F_{q, t-k-1}\]</span></p>
+<p><span class="math display">\[t_{\hat{\beta_j}}=
+\frac{\hat{\beta_j}-\beta_j}{sd(\hat{\beta_j})} \sim
+t_{(T-K-1)}\]</span></p>
+<p><span class="math display">\[Pr\left[ \hat{\beta_j}-c_{\alpha} \cdot
+sd(\hat{\beta_j}) \leq \beta_j \leq \hat{\beta_j}+c_{\alpha} \cdot
+sd(\hat{\beta_j})\right]=1-\alpha\]</span></p>
+<p><span class="math display">\[P_{value}=Pr[|t_{obs}|\geq
+|t_{\hat{\beta_j}}|]\]</span></p>
+<p><span
+class="math display">\[F_{obs}=\frac{(SSR_{r}-SSR_{ur})/q}{(SSR_{ur})/(T-K-1)}=\frac{(R_{ur}^2-R_{r}^2)/q}{(1-R_{ur}^2)/(T-K-1)}
+\sim F_{q, t-k-1}\]</span></p>
 </div>
 <div id="efectos-causales" class="section level3">
 <h3>Efectos Causales</h3>
-<p>Modelo de Rubin <span class="math display">\[\underbrace{E[Y_i/W_i=1]-E[Y_i/W_i=0]}_{Diferencia \hspace{1mm} Promedio \hspace{1mm} Observable} =\underbrace{E[Y_{1,i}/W_i=1]-E[Y_{0,i}/W_i=1]}_{ATT}+\underbrace{E[Y_{0,i}/W_i=1]-E[Y_{0,i}/W_i=0]}_{Sesgo \hspace{1mm} de \hspace{1mm} Selección}\]</span> <span class="math display">\[ATE=E[Y_1-Y_0]\]</span> <span class="math display">\[ATT=E[Y_1-Y_0/W_i=1]\]</span> <span class="math display">\[ITT=E[Y_i/Z_i=1]-E[Y_i/Z_i=0]=ATT \cdot Pr[W_i=1/Z_i=1]\]</span></p>
+<p>Modelo de Rubin <span
+class="math display">\[\underbrace{E[Y_i/W_i=1]-E[Y_i/W_i=0]}_{Diferencia
+\hspace{1mm} Promedio \hspace{1mm} Observable}
+=\underbrace{E[Y_{1,i}/W_i=1]-E[Y_{0,i}/W_i=1]}_{ATT}+\underbrace{E[Y_{0,i}/W_i=1]-E[Y_{0,i}/W_i=0]}_{Sesgo
+\hspace{1mm} de \hspace{1mm} Selección}\]</span> <span
+class="math display">\[ATE=E[Y_1-Y_0]\]</span> <span
+class="math display">\[ATT=E[Y_1-Y_0/W_i=1]\]</span> <span
+class="math display">\[ITT=E[Y_i/Z_i=1]-E[Y_i/Z_i=0]=ATT \cdot
+Pr[W_i=1/Z_i=1]\]</span></p>
 <p>Supuestos</p>
-<p><span class="math display">\[SUTVA \Rightarrow (Y_{0,i},Y_{1,i}) \hspace{2mm} \bot  \hspace{2mm} W_j \hspace{4mm} \forall j\neq i\]</span></p>
-<p><span class="math display">\[Unconfoundedness \Rightarrow (Y_{0,i}, Y_{1,i}) \hspace{2mm}\bot \hspace{2mm} W_i/X_i\]</span></p>
-<p><span class="math display">\[Overlap \Rightarrow 0&lt;Pr[W_i=1/X_i]&lt;1\]</span></p>
+<p><span class="math display">\[SUTVA \Rightarrow (Y_{0,i},Y_{1,i})
+\hspace{2mm} \bot  \hspace{2mm} W_j \hspace{4mm} \forall j\neq
+i\]</span></p>
+<p><span class="math display">\[Unconfoundedness \Rightarrow (Y_{0,i},
+Y_{1,i}) \hspace{2mm}\bot \hspace{2mm} W_i/X_i\]</span></p>
+<p><span class="math display">\[Overlap \Rightarrow
+0&lt;Pr[W_i=1/X_i]&lt;1\]</span></p>
 <p>Propensity Score</p>
-<p><span class="math display">\[Regresión \Rightarrow y_i=\tau w_i+\phi \underbrace{\hat{p(x_i)}}_{probit/logit} +e_i\]</span></p>
-<p><span class="math display">\[Ponderación \Rightarrow E[Y_{1,i}-Y_{0,i}]=E\left[\frac{(W_i-p(X_i))Y_i}{p(X_i)(1-p(X_i))}\right]\]</span></p>
-<p><span class="math display">\[Emparejamiento \Rightarrow ATT^M=\frac{1}{N_T}\sum_{i:w_i=1} \left(y_{1,i}-\sum_{j:w_j=0} \overbrace{\phi(i,j)}^{Ponderadores}y_{0,j} \right)\]</span></p>
-<p>Diferencias en Diferencias <span class="math display">\[DiD=\underbrace{(Y_t^T-Y_t^C)}_{Diferencias \hspace{1mm} Post \hspace{1mm} Tratamiento} - \underbrace{(Y_{t-1}^T-Y_{t-1}^C)}_{Diferencias \hspace{1mm} Pre \hspace{1mm} Tratamiento}=\underbrace{(Y_t^T-Y_{t-1}^T)}_{Diferencias \hspace{1mm} Tratados} - \underbrace{(Y_t^C-Y_{t-1}^C)}_{Diferencias \hspace{1mm} No \hspace{1mm} tratados}\]</span></p>
-<p>Control Sintético <span class="math display">\[\hat{\alpha_{1,t}}=\underbrace{Y_{1,t}}_{Serie \hspace{1mm} Observada} - \underbrace{\sum_{j=2}^{J+1} \overbrace{w_j^*}^{Ponderadores} Y_{j,t}}_{Serie \hspace{1mm} Sintética} \]</span></p>
+<p><span class="math display">\[Regresión \Rightarrow y_i=\tau w_i+\phi
+\underbrace{\hat{p(x_i)}}_{probit/logit} +e_i\]</span></p>
+<p><span class="math display">\[Ponderación \Rightarrow
+E[Y_{1,i}-Y_{0,i}]=E\left[\frac{(W_i-p(X_i))Y_i}{p(X_i)(1-p(X_i))}\right]\]</span></p>
+<p><span class="math display">\[Emparejamiento \Rightarrow
+ATT^M=\frac{1}{N_T}\sum_{i:w_i=1} \left(y_{1,i}-\sum_{j:w_j=0}
+\overbrace{\phi(i,j)}^{Ponderadores}y_{0,j} \right)\]</span></p>
+<p>Diferencias en Diferencias <span
+class="math display">\[DiD=\underbrace{(Y_t^T-Y_t^C)}_{Diferencias
+\hspace{1mm} Post \hspace{1mm} Tratamiento} -
+\underbrace{(Y_{t-1}^T-Y_{t-1}^C)}_{Diferencias \hspace{1mm} Pre
+\hspace{1mm} Tratamiento}=\underbrace{(Y_t^T-Y_{t-1}^T)}_{Diferencias
+\hspace{1mm} Tratados} - \underbrace{(Y_t^C-Y_{t-1}^C)}_{Diferencias
+\hspace{1mm} No \hspace{1mm} tratados}\]</span></p>
+<p>Control Sintético <span
+class="math display">\[\hat{\alpha_{1,t}}=\underbrace{Y_{1,t}}_{Serie
+\hspace{1mm} Observada} - \underbrace{\sum_{j=2}^{J+1}
+\overbrace{w_j^*}^{Ponderadores} Y_{j,t}}_{Serie \hspace{1mm} Sintética}
+\]</span></p>
 </div>
 <div id="series-de-tiempo" class="section level3">
 <h3>Series de Tiempo</h3>
-<p>Modelos AR(P) <span class="math display">\[E[y_t]=\frac{\phi_0}{(1-\sum_{i=1}^{p}\phi_i)}\]</span> <span class="math display">\[Var[y_t]=\sigma_\varepsilon^2+\sum_{i=1}^{p}\phi_i\gamma_i\]</span> <span class="math display">\[Cov[y_t,y_{t-1}]=\sum_{i=1}^{P}\phi_i\gamma_{j-i} \hspace{3mm} \forall j\geq 1\]</span> <span class="math display">\[Corr[y_t,y_{t-s}]=\phi_1^s\]</span></p>
-<p>Modelos MA(q) <span class="math display">\[E[y_t]=\theta_0\]</span> <span class="math display">\[Var[y_t]=\left(1+\sum_{i=1}^{q} \theta_i^2\right) \sigma_\varepsilon^2\]</span> <span class="math display">\[Cov[y_t,y_{t-s}]=\begin{cases}
-    \sigma_\varepsilon^2 \sum_{j=0}^{q-s} \theta_j \theta_{j+s} &amp; \text{si } s\leq q \hspace{3mm} donde \hspace{2mm} \theta_0=1\\
+<p>Modelos AR(P) <span
+class="math display">\[E[y_t]=\frac{\phi_0}{(1-\sum_{i=1}^{p}\phi_i)}\]</span>
+<span
+class="math display">\[Var[y_t]=\sigma_\varepsilon^2+\sum_{i=1}^{p}\phi_i\gamma_i\]</span>
+<span
+class="math display">\[Cov[y_t,y_{t-1}]=\sum_{i=1}^{P}\phi_i\gamma_{j-i}
+\hspace{3mm} \forall j\geq 1\]</span> <span
+class="math display">\[Corr[y_t,y_{t-s}]=\phi_1^s\]</span></p>
+<p>Modelos MA(q) <span class="math display">\[E[y_t]=\theta_0\]</span>
+<span class="math display">\[Var[y_t]=\left(1+\sum_{i=1}^{q}
+\theta_i^2\right) \sigma_\varepsilon^2\]</span> <span
+class="math display">\[Cov[y_t,y_{t-s}]=\begin{cases}
+    \sigma_\varepsilon^2 \sum_{j=0}^{q-s} \theta_j \theta_{j+s} &amp;
+\text{si } s\leq q \hspace{3mm} donde \hspace{2mm} \theta_0=1\\
     0 &amp; \text{si } s&gt; q \\
   \end{cases}\]</span></p>
 <p><span class="math display">\[Corr[y_t,y_{t-s}]=\begin{cases}
-\frac{\sum_{j=0}^{q-s} \theta_j \theta_{j+s}}{(1+\sum_{i=1}^{q} \theta_i^2)} &amp; \text{si } s\leq q \hspace{3mm} donde \hspace{2mm} \theta_0=1\\
+\frac{\sum_{j=0}^{q-s} \theta_j \theta_{j+s}}{(1+\sum_{i=1}^{q}
+\theta_i^2)} &amp; \text{si } s\leq q \hspace{3mm} donde \hspace{2mm}
+\theta_0=1\\
     0 &amp; \text{si } s&gt; q \\
   \end{cases}\]</span></p>
-<p>¿Ruido Blanco? <span class="math display">\[Box-Pierce \Rightarrow T \sum_{j=1}^{k}\hat{\rho_j}^2 \sim \chi_{(k-p-q)}\]</span></p>
-<p><span class="math display">\[Ljung-Box \Rightarrow T(T+2) \sum_{j=1}^{k}\frac{\hat{\rho_j}^2}{(T-k)} \sim \chi_{(k-p-q)}\]</span></p>
+<p>¿Ruido Blanco? <span class="math display">\[Box-Pierce \Rightarrow T
+\sum_{j=1}^{k}\hat{\rho_j}^2 \sim \chi_{(k-p-q)}\]</span></p>
+<p><span class="math display">\[Ljung-Box \Rightarrow T(T+2)
+\sum_{j=1}^{k}\frac{\hat{\rho_j}^2}{(T-k)} \sim
+\chi_{(k-p-q)}\]</span></p>
 <p>¿Quiebre Estructural?</p>
-<p><span class="math display">\[Chow \Rightarrow F=\frac{(SSR-SSR_1-SSR_2)/n}{(SSR_1+SSR_2)(T-2n)}\sim F_{n,(T-2n)}\]</span> ¿Raíz Unitaria? <span class="math display">\[Dickey-Fuller \Rightarrow \Delta y_t=\mu+\beta t+\gamma y_{t-1}+u_t\]</span> <span class="math display">\[Dickey-Fuller \hspace{1mm} Aumentado \Rightarrow \Delta y_t=\mu+\beta t+\gamma y_{t-1}+\rho_1\Delta y_{t-1}+\rho_2\Delta y_{t-2}+...+\rho_p\Delta y_{t-p}+u_t\]</span></p>
+<p><span class="math display">\[Chow \Rightarrow
+F=\frac{(SSR-SSR_1-SSR_2)/n}{(SSR_1+SSR_2)(T-2n)}\sim
+F_{n,(T-2n)}\]</span> ¿Raíz Unitaria? <span
+class="math display">\[Dickey-Fuller \Rightarrow \Delta y_t=\mu+\beta
+t+\gamma y_{t-1}+u_t\]</span> <span class="math display">\[Dickey-Fuller
+\hspace{1mm} Aumentado \Rightarrow \Delta y_t=\mu+\beta t+\gamma
+y_{t-1}+\rho_1\Delta y_{t-1}+\rho_2\Delta y_{t-2}+...+\rho_p\Delta
+y_{t-p}+u_t\]</span></p>
 </div>
 </div>
 

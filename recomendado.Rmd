@@ -68,19 +68,19 @@ library(vembedr)
 
 # Links de interés
 
+ [Banco Central de Chile](https://www.bcentral.cl/web/banco-central)
+ 
+ [LarrainVial - Corredora de Bolsa](https://chile.larrainvial.com/que-hacemos/corredora-de-bolsa)
+ 
+ [Manim](https://docs.manim.community/en/stable/index.html)
+
  [ChatGPT](https://openai.com/blog/chatgpt/)
 
  [Sci-Hub](https://sci-hub.se/)
 
  [Libgen](http://libgen.rs/)
  
- [Banco Central de Chile](https://www.bcentral.cl/web/banco-central)
- 
- [LarrainVial - Corredora de Bolsa](https://chile.larrainvial.com/que-hacemos/corredora-de-bolsa)
- 
  [Data-Camp](https://www.datacamp.com/)
- 
- [Manim](https://docs.manim.community/en/stable/index.html)
 
  [Rómulo Chumacero](http://rchumace.econ.uchile.cl/)
  
@@ -89,9 +89,3 @@ library(vembedr)
  [Pokerstars](https://www.pokerstars.com/es-419/)
  
  [Chess](https://www.chess.com/)
- 
- [c1](archivos/Tesis/c1.txt)
- 
- [c2](archivos/Tesis/c2.txt)
- 
- [c3](archivos/Tesis/c3.txt)

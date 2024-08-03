@@ -11,9 +11,10 @@
 
 
 
-<title>Formulario_matematica.utf8</title>
+<title>Formulario_matematica.knit</title>
 
-<script src="site_libs/jquery-1.11.3/jquery.min.js"></script>
+<script src="site_libs/header-attrs-2.27/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <meta name="viewport" content="width=device-width, initial-scale=1" />
 <link href="site_libs/bootstrap-3.3.5/css/cosmo.min.css" rel="stylesheet" />
 <script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
@@ -56,6 +57,7 @@ if (window.hljs) {
 
 
 
+
 <link rel="stylesheet" href="style1.css" type="text/css" />
 
 
@@ -80,6 +82,9 @@ button.code-folding-btn:focus {
 }
 summary {
   display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
 }
 pre code {
   padding: 0;
@@ -137,11 +142,15 @@ $(document).ready(function () {
     href = "index.html";
   var menuAnchor = $('a[href="' + href + '"]');
 
-  // mark it active
-  menuAnchor.tab('show');
-
-  // if it's got a parent navbar menu mark it active as well
-  menuAnchor.closest('li.dropdown').addClass('active');
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
 
   // Navbar adjustments
   var navHeight = $(".navbar").first().height() + 15;
@@ -170,8 +179,8 @@ $(document).ready(function () {
   border-radius: 4px;
 }
 
-.tabset-dropdown > .nav-tabs > li.active:before {
-  content: "";
+.tabset-dropdown > .nav-tabs > li.active:before, .tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "\e259";
   font-family: 'Glyphicons Halflings';
   display: inline-block;
   padding: 10px;
@@ -179,16 +188,9 @@ $(document).ready(function () {
 }
 
 .tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
-  content: "&#xe258;";
-  border: none;
-}
-
-.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
-  content: "";
+  content: "\e258";
   font-family: 'Glyphicons Halflings';
-  display: inline-block;
-  padding: 10px;
-  border-right: 1px solid #ddd;
+  border: none;
 }
 
 .tabset-dropdown > .nav-tabs > li.active {
@@ -232,7 +234,7 @@ $(document).ready(function () {
 <div class="navbar navbar-default  navbar-fixed-top" role="navigation">
   <div class="container">
     <div class="navbar-header">
-      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
         <span class="icon-bar"></span>
@@ -260,7 +262,7 @@ $(document).ready(function () {
   <a href="Tesis.html">Tesis</a>
 </li>
 <li class="dropdown">
-  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
     Formularios
      
     <span class="caret"></span>
@@ -302,58 +304,129 @@ $(document).ready(function () {
 </div>
 
 
-<div id="formulario-matemática" class="section level2 tabset tabset-pills">
-<h2>Formulario Matemática</h2>
+<div id="formulario-matemática"
+class="section level2 tabset tabset-pills">
+<h2 class="tabset tabset-pills">Formulario Matemática</h2>
 <div id="potencias" class="section level3">
 <h3>Potencias</h3>
-<p><span class="math display">\[a^{\frac{m}{n}}=\sqrt[n]{a^m}\]</span> <span class="math display">\[a^x\cdot a^y=a^{x+y}\]</span> <span class="math display">\[\frac{a^x}{a^y}=a^{x-y}\]</span> <span class="math display">\[\left(a^x \right)^y=a^{x\cdot y}\]</span> <span class="math display">\[a^0=1\]</span> <span class="math display">\[a^{-x}=\frac{1}{a^x}\]</span></p>
+<p><span class="math display">\[a^{\frac{m}{n}}=\sqrt[n]{a^m}\]</span>
+<span class="math display">\[a^x\cdot a^y=a^{x+y}\]</span> <span
+class="math display">\[\frac{a^x}{a^y}=a^{x-y}\]</span> <span
+class="math display">\[\left(a^x \right)^y=a^{x\cdot y}\]</span> <span
+class="math display">\[a^0=1\]</span> <span
+class="math display">\[a^{-x}=\frac{1}{a^x}\]</span></p>
 </div>
 <div id="logaritmos" class="section level3">
 <h3>Logaritmos</h3>
-<p><span class="math display">\[a^{log_a(x)}=x \hspace{3mm} \forall \hspace{1mm} x&gt;0\]</span> <span class="math display">\[log(1)=0\]</span> <span class="math display">\[log(0)=-\infty\]</span> <span class="math display">\[log(x \cdot y)=log(x)+log(y)\]</span> <span class="math display">\[log \left(\frac{x}{y} \right)=log(x)-log(y)\]</span> <span class="math display">\[log(x^a)=a\cdot log(x)\]</span> <span class="math display">\[log_a(x)=\frac{log_b(x)}{log_b(a)}\]</span></p>
+<p><span class="math display">\[a^{log_a(x)}=x \hspace{3mm} \forall
+\hspace{1mm} x&gt;0\]</span> <span
+class="math display">\[log(1)=0\]</span> <span
+class="math display">\[log(0)=-\infty\]</span> <span
+class="math display">\[log(x \cdot y)=log(x)+log(y)\]</span> <span
+class="math display">\[log \left(\frac{x}{y}
+\right)=log(x)-log(y)\]</span> <span
+class="math display">\[log(x^a)=a\cdot log(x)\]</span> <span
+class="math display">\[log_a(x)=\frac{log_b(x)}{log_b(a)}\]</span></p>
 </div>
 <div id="sumatorias" class="section level3">
 <h3>Sumatorias</h3>
 <p>Sean ‘’a’‘,’‘b’’ y ‘’c’’ constantes</p>
-<p><span class="math display">\[\sum_{i=1}^{N}x_i=x_1+x_2+...+x_n\]</span></p>
-<p><span class="math display">\[\frac{\sum_{i=1}^{N} x_i}{N}=\overline{x}\]</span></p>
+<p><span
+class="math display">\[\sum_{i=1}^{N}x_i=x_1+x_2+...+x_n\]</span></p>
+<p><span class="math display">\[\frac{\sum_{i=1}^{N}
+x_i}{N}=\overline{x}\]</span></p>
 <p><span class="math display">\[\sum_{i=1}^{N}c=N\cdot c\]</span></p>
-<p><span class="math display">\[\sum_{i=1}^{N} (ax_i+by_i)=a \sum_{i=1}^{N} x_i+b\sum_{i=1}^{N}y_i\]</span></p>
-<p><span class="math display">\[\sum_{i=1}^{N} (x_i y_i) \neq \left( \sum_{i=1}^{N} x_i\right) \left( \sum_{i=1}^{N} y_i\right)\]</span></p>
-<p><span class="math display">\[\sum_{i=1}^{N-1} (x_{i+1}-x_i)=x_n-x_1\]</span></p>
-<p><span class="math display">\[\sum_{i=1}^{N} i=\frac{n(n+1)}{2}\]</span> <span class="math display">\[\sum_{i=0}^{N} c^{i}=\frac{1-c^{n+1}}{1-c} \hspace{3mm} \forall \hspace{1mm}  c\neq 1 \]</span> <span class="math display">\[\sum_{i=0}^{\infty} c^{i}=lim_{n \rightarrow \infty} \frac{1-c^{n+1}}{1-c}=\frac{1}{1-c} \hspace{3mm} \forall \hspace{1mm} 0&lt;c&lt; 1 \]</span> <span class="math display">\[\sum_{i=1}^{N} \sum_{j=1}^{K}x_{ij} = \sum_{j=1}^{K} \sum_{i=1}^{N}x_{ij}\]</span></p>
-<p><span class="math display">\[\sum_{i=1}^{N} \left(\frac{x_i}{y_i}\right) \neq \frac{\sum_{i=1}^{N} x_i}{\sum_{i=1}^{N} y_i} \hspace{4mm} \forall y_i \neq 0 \]</span> <span class="math display">\[\sum_{i=1}^{N} (x_i-\overline{x})=0\]</span></p>
-<p><span class="math display">\[\sum_{i=1}^{N} (x_i-\overline{x})^2=\sum_{i=1}^{N} x_i^2-n(\overline{x})^2\]</span></p>
-<p><span class="math display">\[\sum_{i=1}^{N} (x_i-\overline{x})(y_i-\overline{y})=\sum_{i=1}^{N} y_i(x_i-\overline{x})=\sum_{i=1}^{N} x_i(y_i-\overline{y})\]</span></p>
+<p><span class="math display">\[\sum_{i=1}^{N} (ax_i+by_i)=a
+\sum_{i=1}^{N} x_i+b\sum_{i=1}^{N}y_i\]</span></p>
+<p><span class="math display">\[\sum_{i=1}^{N} (x_i y_i) \neq \left(
+\sum_{i=1}^{N} x_i\right) \left( \sum_{i=1}^{N} y_i\right)\]</span></p>
+<p><span class="math display">\[\sum_{i=1}^{N-1}
+(x_{i+1}-x_i)=x_n-x_1\]</span></p>
+<p><span class="math display">\[\sum_{i=1}^{N}
+i=\frac{n(n+1)}{2}\]</span> <span class="math display">\[\sum_{i=0}^{N}
+c^{i}=\frac{1-c^{n+1}}{1-c} \hspace{3mm} \forall \hspace{1mm}  c\neq 1
+\]</span> <span class="math display">\[\sum_{i=0}^{\infty} c^{i}=lim_{n
+\rightarrow \infty} \frac{1-c^{n+1}}{1-c}=\frac{1}{1-c} \hspace{3mm}
+\forall \hspace{1mm} 0&lt;c&lt; 1 \]</span> <span
+class="math display">\[\sum_{i=1}^{N} \sum_{j=1}^{K}x_{ij} =
+\sum_{j=1}^{K} \sum_{i=1}^{N}x_{ij}\]</span></p>
+<p><span class="math display">\[\sum_{i=1}^{N}
+\left(\frac{x_i}{y_i}\right) \neq \frac{\sum_{i=1}^{N}
+x_i}{\sum_{i=1}^{N} y_i} \hspace{4mm} \forall y_i \neq 0 \]</span> <span
+class="math display">\[\sum_{i=1}^{N} (x_i-\overline{x})=0\]</span></p>
+<p><span class="math display">\[\sum_{i=1}^{N}
+(x_i-\overline{x})^2=\sum_{i=1}^{N} x_i^2-n(\overline{x})^2\]</span></p>
+<p><span class="math display">\[\sum_{i=1}^{N}
+(x_i-\overline{x})(y_i-\overline{y})=\sum_{i=1}^{N}
+y_i(x_i-\overline{x})=\sum_{i=1}^{N} x_i(y_i-\overline{y})\]</span></p>
 </div>
 <div id="pitatorias" class="section level3">
 <h3>Pitatorias</h3>
 <p>Sea ‘’c’’ una constante</p>
-<p><span class="math display">\[\Pi_{i=1}^{N} x_i=x_1\cdot x_2\cdot x_3 \hspace{1mm}... \hspace{1mm} x_n \]</span> <span class="math display">\[\Pi_{i=1}^{N} c=c^{N} \]</span></p>
-<p><span class="math display">\[\Pi_{i=1}^{N} i=n!=1\cdot 2\hspace{1mm} ...\hspace{1mm} (n-1)n \]</span> <span class="math display">\[\Pi_{i=m}^{N} i=\frac{n!}{(m-1)!} \hspace{3mm} \forall \hspace{1mm} m\leq n \]</span></p>
-<p><span class="math display">\[\Pi_{i=1}^{N} (i+c)=\frac{(n+c)!}{c!} \]</span></p>
-<p><span class="math display">\[ln\left( \Pi_{i=1}^{N}x_i \right)=\sum_{i=1}^{N}ln(x_i)\]</span></p>
-<p><span class="math display">\[\Pi_{i=1}^{N} (x_i \cdot y_i)=\Pi_{i=1}^{N} x_i \hspace{1mm} \cdot \hspace{1mm} \Pi_{i=1}^{N}y_i \]</span></p>
-<p><span class="math display">\[\Pi_{i=1}^{N} \left(\frac{x_i}{y_i}\right)=\frac{\Pi_{i=1}^{N} x_i}{\Pi_{i=1}^{N} y_i} \hspace{4mm} \forall y_i\neq0 \]</span></p>
-<p><span class="math display">\[\Pi_{i=1}^{N} \left(\frac{x_{i+1}}{x_i}\right)=\frac{x_{n+1}}{x_1} \hspace{3mm} \forall \hspace{1mm} x_i\neq 0\]</span></p>
+<p><span class="math display">\[\Pi_{i=1}^{N} x_i=x_1\cdot x_2\cdot x_3
+\hspace{1mm}... \hspace{1mm} x_n \]</span> <span
+class="math display">\[\Pi_{i=1}^{N} c=c^{N} \]</span></p>
+<p><span class="math display">\[\Pi_{i=1}^{N} i=n!=1\cdot 2\hspace{1mm}
+...\hspace{1mm} (n-1)n \]</span> <span
+class="math display">\[\Pi_{i=m}^{N} i=\frac{n!}{(m-1)!} \hspace{3mm}
+\forall \hspace{1mm} m\leq n \]</span></p>
+<p><span class="math display">\[\Pi_{i=1}^{N} (i+c)=\frac{(n+c)!}{c!}
+\]</span></p>
+<p><span class="math display">\[ln\left( \Pi_{i=1}^{N}x_i
+\right)=\sum_{i=1}^{N}ln(x_i)\]</span></p>
+<p><span class="math display">\[\Pi_{i=1}^{N} (x_i \cdot
+y_i)=\Pi_{i=1}^{N} x_i \hspace{1mm} \cdot \hspace{1mm} \Pi_{i=1}^{N}y_i
+\]</span></p>
+<p><span class="math display">\[\Pi_{i=1}^{N}
+\left(\frac{x_i}{y_i}\right)=\frac{\Pi_{i=1}^{N} x_i}{\Pi_{i=1}^{N} y_i}
+\hspace{4mm} \forall y_i\neq0 \]</span></p>
+<p><span class="math display">\[\Pi_{i=1}^{N}
+\left(\frac{x_{i+1}}{x_i}\right)=\frac{x_{n+1}}{x_1} \hspace{3mm}
+\forall \hspace{1mm} x_i\neq 0\]</span></p>
 </div>
 <div id="derivadas" class="section level3">
 <h3>Derivadas</h3>
-<p><span class="math display">\[f(x)=x^a \hspace{2mm} \Rightarrow \hspace{2mm} f&#39;(x)=a\cdot x^{a-1}\]</span></p>
-<p><span class="math display">\[f(x)=e^x \hspace{2mm} \Rightarrow \hspace{2mm} f&#39;(x)=e^x\]</span></p>
-<p><span class="math display">\[[a\cdot f(x)]&#39;=a\cdot f&#39;(x)\]</span> <span class="math display">\[[f(x)+a\cdot g(x)]&#39;=f&#39;(x)+a\cdot g&#39;(x)\]</span> <span class="math display">\[[f(x)\cdot g(x)]&#39;=f&#39;(x)\cdot g(x)+f(x)\cdot g&#39;(x)\]</span></p>
-<p><span class="math display">\[\left(\frac{f(x)}{g(x)} \right)&#39;=\frac{f&#39;(x)\cdot g(x)-f(x)\cdot g&#39;(x)}{[g(x)]^2} \]</span></p>
-<p><span class="math display">\[h(x)=g(f(x)) \hspace{2mm} \Rightarrow \hspace{2mm} h&#39;(x)=g&#39;(f(x))\cdot f&#39;(x)\]</span> <span class="math display">\[h(x)=a^x \hspace{2mm} \Rightarrow \hspace{2mm} h&#39;(x)=ln(a)\cdot a^x\]</span> <span class="math display">\[f&#39;(f^{-1}(x))\cdot (f^{-1}(x))&#39;=1  \]</span> <span class="math display">\[f(x)=ln(x) \hspace{2mm} \Rightarrow \hspace{2mm} f&#39;(x)=\frac{1}{x}\]</span> Polinomio de Taylor (de orden k) <span class="math display">\[f(x) \approx \sum_{i=0}^{k} \frac{f^{(i)}(x_0)}{i!}\cdot (x-x_0)^{i} \]</span></p>
+<p><span class="math display">\[f(x)=x^a \hspace{2mm} \Rightarrow
+\hspace{2mm} f&#39;(x)=a\cdot x^{a-1}\]</span></p>
+<p><span class="math display">\[f(x)=e^x \hspace{2mm} \Rightarrow
+\hspace{2mm} f&#39;(x)=e^x\]</span></p>
+<p><span class="math display">\[[a\cdot f(x)]&#39;=a\cdot
+f&#39;(x)\]</span> <span class="math display">\[[f(x)+a\cdot
+g(x)]&#39;=f&#39;(x)+a\cdot g&#39;(x)\]</span> <span
+class="math display">\[[f(x)\cdot g(x)]&#39;=f&#39;(x)\cdot
+g(x)+f(x)\cdot g&#39;(x)\]</span></p>
+<p><span class="math display">\[\left(\frac{f(x)}{g(x)}
+\right)&#39;=\frac{f&#39;(x)\cdot g(x)-f(x)\cdot g&#39;(x)}{[g(x)]^2}
+\]</span></p>
+<p><span class="math display">\[h(x)=g(f(x)) \hspace{2mm} \Rightarrow
+\hspace{2mm} h&#39;(x)=g&#39;(f(x))\cdot f&#39;(x)\]</span> <span
+class="math display">\[h(x)=a^x \hspace{2mm} \Rightarrow \hspace{2mm}
+h&#39;(x)=ln(a)\cdot a^x\]</span> <span
+class="math display">\[f&#39;(f^{-1}(x))\cdot
+(f^{-1}(x))&#39;=1  \]</span> <span class="math display">\[f(x)=ln(x)
+\hspace{2mm} \Rightarrow \hspace{2mm} f&#39;(x)=\frac{1}{x}\]</span>
+Polinomio de Taylor (de orden k) <span class="math display">\[f(x)
+\approx \sum_{i=0}^{k} \frac{f^{(i)}(x_0)}{i!}\cdot (x-x_0)^{i}
+\]</span></p>
 </div>
 <div id="integrales" class="section level3">
 <h3>Integrales</h3>
-<p><span class="math display">\[\int [f(x)+a\cdot g(x)] dx = \int f(x)dx+a \int g(x)dx\]</span></p>
-<p><span class="math display">\[\int \left(\sum_{i=0}^{K} \frac{x^{i}}{i!}dx \right)=\sum_{i=0}^{K} \frac{x^{i+1}}{(i+1)!}\]</span> Teorema Fundamental del Cálculo</p>
-<p><span class="math display">\[\int_{a}^{b} f(x)dx=F(b)-F(a)\]</span></p>
+<p><span class="math display">\[\int [f(x)+a\cdot g(x)] dx = \int
+f(x)dx+a \int g(x)dx\]</span></p>
+<p><span class="math display">\[\int \left(\sum_{i=0}^{K}
+\frac{x^{i}}{i!}dx \right)=\sum_{i=0}^{K}
+\frac{x^{i+1}}{(i+1)!}\]</span> Teorema Fundamental del Cálculo</p>
+<p><span class="math display">\[\int_{a}^{b}
+f(x)dx=F(b)-F(a)\]</span></p>
 <p>Integración por partes</p>
-<p><span class="math display">\[\int u\cdot dv=u\cdot v-\int v\cdot du\]</span></p>
+<p><span class="math display">\[\int u\cdot dv=u\cdot v-\int v\cdot
+du\]</span></p>
 <p>Integración Impropia</p>
-<p><span class="math display">\[\int_{a}^{\infty}f(x)dx=lim_{n\rightarrow \infty} \left(\int_{a}^{n}f(x)dx \right) \hspace{4mm} o \hspace{4mm} \int_{-\infty}^{b}f(x)dx=lim_{n\rightarrow \infty} \left(\int_{-n}^{b}f(x)dx \right)\]</span></p>
+<p><span
+class="math display">\[\int_{a}^{\infty}f(x)dx=lim_{n\rightarrow \infty}
+\left(\int_{a}^{n}f(x)dx \right) \hspace{4mm} o \hspace{4mm}
+\int_{-\infty}^{b}f(x)dx=lim_{n\rightarrow \infty}
+\left(\int_{-n}^{b}f(x)dx \right)\]</span></p>
 </div>
 </div>
 
