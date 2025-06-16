@@ -70,7 +70,7 @@ library(vembedr)
 
  [Banco Central de Chile](https://www.bcentral.cl/web/banco-central)
  
- [LarrainVial - Corredora de Bolsa](https://chile.larrainvial.com/que-hacemos/corredora-de-bolsa)
+ [Blackjack Apprenticeship](https://www.blackjackapprenticeship.com/)
  
  [Manim](https://docs.manim.community/en/stable/index.html)
 
@@ -89,3 +89,5 @@ library(vembedr)
  [Pokerstars](https://www.pokerstars.com/es-419/)
  
  [Chess](https://www.chess.com/)
+
+ [LarrainVial - Corredora de Bolsa](https://chile.larrainvial.com/que-hacemos/corredora-de-bolsa)
