@@ -9,6 +9,7 @@ output:
 
 - [Curso 21 Blackjack - Chile](archivos/Blackjack/Curso_21_Blackjack-Chile.pdf)
 - [Demostración Jugada Óptima](archivos/Blackjack/Demostración_Juego Óptimo_v6.xlsx)
+- [Simulaciones y otras demostraciones](archivos/Blackjack/Simulaciones_y_otras_demostraciones.xlsx)
 
 “Blackjack is very scientific. There’s always a right answer and a wrong answer.” 
 Charlie Ergen
